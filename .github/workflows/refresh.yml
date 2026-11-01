@@ -70,6 +70,7 @@ jobs:
           rsync -a --delete \
             --exclude='.git/' \
             --exclude='.github/workflows/refresh.yml' \
+            --exclude='CHANGELOG.md' \
             "$TMP/source/" "$GITHUB_WORKSPACE/"
 
       - name: Remove public documentation and preserve legal notices
@@ -78,7 +79,7 @@ jobs:
           UPSTREAM_SHA: ${{ steps.upstream.outputs.sha }}
         run: |
           set -euo pipefail
-          find . -type f -iname '*.md' -not -path './.git/*' -delete
+          find . -type f -iname '*.md' -not -path './.git/*' -not -name 'CHANGELOG.md' -delete
           rm -f .github/workflows/build.yml
           rm -rf .github/ISSUE_TEMPLATE .github/dependabot.yml
           mkdir -p .github/workflows
@@ -155,8 +156,8 @@ jobs:
 
           build = Path("scripts/build.py")
           text = build.read_text(encoding="utf-8")
-          text = re.sub(r'Name: [^"]+', "Name: lesbunny-stuff", text)
-          text = re.sub(r'Description: [^"]+', "Description: Morphe patch bundle.", text)
+          text = re.sub(r'Name: [^"]+', "Name: Discord", text)
+          text = re.sub(r'Description: [^"]+', "Description: Discord patches by lesbunny.", text)
           text = re.sub(r'Source: https://github\.com/[^"]+', "Source: https://github.com/lesbunny/lesbunny-stuff", text)
           text = re.sub(r'Author: [^"]+', "Author: lesbunny", text)
           build.write_text(text, encoding="utf-8")
@@ -191,7 +192,7 @@ jobs:
           if not current:
               raise SystemExit("Missing version in gradle.properties")
           base = current.group(1).strip().split("-dev.")[0]
-          version = f"{base}-dev.{os.environ['UPSTREAM_SHA'][:8]}.2"
+          version = f"{base}-dev.{os.environ['UPSTREAM_SHA'][:8]}.3"
           replacements = {
               "version": version,
               "releaseTag": f"v{version}",
@@ -219,7 +220,10 @@ jobs:
               "### 🔧 Improvements\n\n"
               "* **Discord:** Latest development snapshot\n"
           )
-          Path("CHANGELOG.md").write_text(changelog, encoding="utf-8")
+          changelog_path = Path("CHANGELOG.md")
+          previous = changelog_path.read_text(encoding="utf-8") if changelog_path.exists() else ""
+          if not previous.startswith(f"## [{version}]("):
+              changelog_path.write_text(changelog + ("\n" + previous if previous.strip() else ""), encoding="utf-8")
           print(f"version={version}")
           print(f"tag={tag}")
           print(f"asset=patches-{version}.mpp")
@@ -259,6 +263,38 @@ jobs:
           if p.exists():
               p.write_text(re.sub(rf"\b{re.escape(old_brand)}\b", "lesbunny", p.read_text(encoding="utf-8")), encoding="utf-8")
           PY
+          python3 - <<'PY'
+          import json, re
+          from pathlib import Path
+
+          source = Path("patches/src/main/kotlin/app/venus/patches/DiscordPatches.kt").read_text(encoding="utf-8")
+          match = re.search(
+              r'internal val discord = Compatibility\([\s\S]*?targets = listOf\(AppTarget\(\s*version = "([^"]+)",\s*versionCode = (\d+)',
+              source,
+          )
+          if not match:
+              raise SystemExit("Could not read Discord AppTarget from upstream source")
+          expected_version, expected_code = match.group(1), int(match.group(2))
+
+          index = json.loads(Path("patches-list.json").read_text(encoding="utf-8"))
+          targets = [
+              target
+              for patch in index.get("patches", [])
+              for app in patch.get("compatiblePackages", [])
+              if app.get("packageName") == "com.discord"
+              for target in app.get("targets", [])
+          ]
+          if not targets:
+              raise SystemExit("Generated patch list has no Discord compatibility target")
+          for target in targets:
+              codes = set((target.get("versionCodes") or {}).values())
+              if target.get("version") != expected_version or codes != {expected_code}:
+                  raise SystemExit(
+                      f"Discord target mismatch: upstream={expected_version}/{expected_code}, "
+                      f"generated={target.get('version')}/{sorted(codes)}"
+                  )
+          print(f"Discord compatibility verified: {expected_version} (versionCode {expected_code})")
+          PY
           VERSION="${{ steps.version.outputs.version }}"
           sed 's|/\*__FEATURES__\*/|globalThis.__venusFeatures|g' patches/build/bootstrap.js > patches/build/bootstrap.precompile.js
           if [ ! -x work/tools/hermesc ]; then
@@ -270,12 +306,11 @@ jobs:
           fi
           work/tools/hermesc -emit-binary -O -g0 -w -out=patches/build/bootstrap.hbc patches/build/bootstrap.precompile.js
 
-      - name: Keep blank About-menu changelog target
+      - name: Keep Morphe changelog and remove other public docs
         shell: bash
         run: |
           set -euo pipefail
           rm -f README.md AGENTS.md
-          : > CHANGELOG.md
 
       - name: Commit synchronized source and metadata
         shell: bash

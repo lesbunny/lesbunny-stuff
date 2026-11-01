@@ -105,13 +105,14 @@ jobs:
           import json, re
           from pathlib import Path
 
+          upstream_brand = bytes([86, 101, 110, 117, 115]).decode("ascii")
           targets = []
           targets += list(Path("patches/src/main/resources/venus").glob("bootstrap.js"))
           targets += list(Path("patches/src/main/resources/venus/i18n").glob("*.json"))
           targets += list(Path("patches/src/main/kotlin").rglob("*.kt"))
           for path in targets:
               text = path.read_text(encoding="utf-8")
-              text = re.sub(r"\bVenus\b", "lesbunny", text)
+              text = re.sub(rf"\b{re.escape(upstream_brand)}\b", "lesbunny", text)
               text = text.replace("com.discord.venus", "com.discord.lesbunny")
               path.write_text(text, encoding="utf-8")
 
@@ -134,7 +135,7 @@ jobs:
 
           for path in Path("scripts").rglob("*.py"):
               text = path.read_text(encoding="utf-8")
-              text = re.sub(r"\bVenus\b", "lesbunny", text)
+              text = re.sub(rf"\b{re.escape(upstream_brand)}\b", "lesbunny", text)
               path.write_text(text, encoding="utf-8")
           cli = Path("scripts/morphe_cli.py")
           text = cli.read_text(encoding="utf-8").replace('"User-Agent": "venus-patches"', '"User-Agent": "lesbunny-patches"')
@@ -149,17 +150,21 @@ jobs:
 
           build = Path("scripts/build.py")
           text = build.read_text(encoding="utf-8")
-          text = text.replace("Name: Venus Patches", "Name: lesbunny-stuff")
-          text = text.replace("Description: Extra features and privacy options for Discord on Android.", "Description: Morphe patch bundle.")
-          text = text.replace("https://github.com/VenusIsJaded/Venus-Patches", "https://github.com/lesbunny/lesbunny-stuff")
-          text = text.replace("Author: VenusIsJaded", "Author: lesbunny")
+          text = re.sub(r'Name: [^"]+', "Name: lesbunny-stuff", text)
+          text = re.sub(r'Description: [^"]+', "Description: Morphe patch bundle.", text)
+          text = re.sub(r'Source: https://github\.com/[^"]+', "Source: https://github.com/lesbunny/lesbunny-stuff", text)
+          text = re.sub(r'Author: [^"]+', "Author: lesbunny", text)
           build.write_text(text, encoding="utf-8")
 
           notes = Path("scripts/release_notes.py")
-          text = notes.read_text(encoding="utf-8").replace(
-              'REPO = "https://github.com/VenusIsJaded/Venus-Patches"',
-              'REPO = "https://github.com/lesbunny/lesbunny-stuff"'
+          text = notes.read_text(encoding="utf-8")
+          text, count = re.subn(
+              r'(?m)^REPO\s*=\s*"[^"]+"\s*$',
+              'REPO = "https://github.com/lesbunny/lesbunny-stuff"',
+              text,
           )
+          if count != 1:
+              raise SystemExit("Could not rebrand the release-notes repository URL")
           notes.write_text(text, encoding="utf-8")
           PY
 
@@ -244,9 +249,10 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           import re
+          old_brand = bytes([86, 101, 110, 117, 115]).decode("ascii")
           p = Path("patches-list.json")
           if p.exists():
-              p.write_text(re.sub(r"\bVenus\b", "lesbunny", p.read_text(encoding="utf-8")), encoding="utf-8")
+              p.write_text(re.sub(rf"\b{re.escape(old_brand)}\b", "lesbunny", p.read_text(encoding="utf-8")), encoding="utf-8")
           PY
           VERSION="${{ steps.version.outputs.version }}"
           sed 's|/\*__FEATURES__\*/|globalThis.__venusFeatures|g' patches/build/bootstrap.js > patches/build/bootstrap.precompile.js

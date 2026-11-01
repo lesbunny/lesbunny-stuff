@@ -99,10 +99,13 @@ jobs:
 
       - name: Rebrand visible labels and bundle metadata
         shell: bash
+        env:
+          UPSTREAM_OWNER: ${{ steps.upstream.outputs.owner }}
+          UPSTREAM_REPO: ${{ steps.upstream.outputs.repo }}
         run: |
           set -euo pipefail
           python3 - <<'PY'
-          import json, re
+          import json, os, re
           from pathlib import Path
 
           upstream_brand = bytes([86, 101, 110, 117, 115]).decode("ascii")
@@ -133,8 +136,10 @@ jobs:
           text = text.replace('"venus-backup-"', '"lesbunny-backup-"')
           bootstrap.write_text(text, encoding="utf-8")
 
+          upstream_repo_url = f"https://github.com/{os.environ['UPSTREAM_OWNER']}/{os.environ['UPSTREAM_REPO']}"
           for path in Path("scripts").rglob("*.py"):
               text = path.read_text(encoding="utf-8")
+              text = text.replace(upstream_repo_url, "https://github.com/lesbunny/lesbunny-stuff")
               text = re.sub(rf"\b{re.escape(upstream_brand)}\b", "lesbunny", text)
               path.write_text(text, encoding="utf-8")
           cli = Path("scripts/morphe_cli.py")
@@ -186,7 +191,7 @@ jobs:
           if not current:
               raise SystemExit("Missing version in gradle.properties")
           base = current.group(1).strip().split("-dev.")[0]
-          version = f"{base}-dev.{os.environ['UPSTREAM_SHA'][:8]}.1"
+          version = f"{base}-dev.{os.environ['UPSTREAM_SHA'][:8]}.2"
           replacements = {
               "version": version,
               "releaseTag": f"v{version}",

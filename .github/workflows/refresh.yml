@@ -108,7 +108,7 @@ jobs:
           targets += list(Path("patches/src/main/kotlin").rglob("*.kt"))
           for path in targets:
               text = path.read_text(encoding="utf-8")
-              text = re.sub(r"\\bVenus\\b", "lesbunny", text)
+              text = re.sub(r"\bVenus\b", "lesbunny", text)
               path.write_text(text, encoding="utf-8")
 
           build = Path("scripts/build.py")
@@ -118,8 +118,8 @@ jobs:
           text = text.replace("https://github.com/VenusIsJaded/Venus-Patches", "https://github.com/lesbunny/lesbunny-stuff")
           text = text.replace("Author: VenusIsJaded", "Author: lesbunny")
           text = text.replace(
-              'not re.search(r"^\\* \\*\\*Discord", metadata["description"], re.M)',
-              'not re.search(r"^\\* \\*\\*Update:", metadata["description"], re.M)'
+              'not re.search(r"^\* \*\*Discord", metadata["description"], re.M)',
+              'not re.search(r"^\* \*\*Update:", metadata["description"], re.M)'
           )
           build.write_text(text, encoding="utf-8")
 
@@ -145,7 +145,7 @@ jobs:
 
           props = Path("gradle.properties")
           text = props.read_text(encoding="utf-8")
-          current = re.search(r"(?m)^version\\s*=\\s*(.+)$", text)
+          current = re.search(r"(?m)^version\s*=\s*(.+)$", text)
           if not current:
               raise SystemExit("Missing version in gradle.properties")
           base = current.group(1).strip().split("-dev.")[0]
@@ -156,16 +156,16 @@ jobs:
               "releaseAsset": f"patches-{version}.mpp",
           }
           for key, value in replacements.items():
-              pattern = rf"(?m)^{re.escape(key)}\\s*=.*$"
+              pattern = rf"(?m)^{re.escape(key)}\s*=.*$"
               if re.search(pattern, text):
                   text = re.sub(pattern, f"{key} = {value}", text)
               else:
-                  text += f"\\n{key} = {value}\\n"
+                  text += f"\n{key} = {value}\n"
           props.write_text(text, encoding="utf-8")
 
           bootstrap = Path("patches/src/main/resources/venus/bootstrap.js")
           source = bootstrap.read_text(encoding="utf-8")
-          source, count = re.subn(r'(const revision\\s*=\\s*")[^"]+(")', rf'\\g<1>{version}\\2', source, count=1)
+          source, count = re.subn(r'(const revision\s*=\s*")[^"]+(")', rf'\g<1>{version}\2', source, count=1)
           if count != 1:
               raise SystemExit("Could not update runtime revision")
           bootstrap.write_text(source, encoding="utf-8")
@@ -173,20 +173,20 @@ jobs:
           date = datetime.now(timezone.utc).date().isoformat()
           tag = f"v{version}"
           changelog = (
-              f"## [{version}](https://github.com/lesbunny/lesbunny-stuff/compare/v{base}...{tag}) ({date})\\n\\n"
-              "### 🔧 Improvements\\n\\n"
-              "* **Update:** Latest development snapshot\\n"
+              f"## [{version}](https://github.com/lesbunny/lesbunny-stuff/compare/v{base}...{tag}) ({date})\n\n"
+              "### 🔧 Improvements\n\n"
+              "* **Update:** Latest development snapshot\n"
           )
           Path("CHANGELOG.md").write_text(changelog, encoding="utf-8")
-          Path(".upstream-ref").write_text(os.environ["UPSTREAM_SHA"] + "\\n", encoding="utf-8")
+          Path(".upstream-ref").write_text(os.environ["UPSTREAM_SHA"] + "\n", encoding="utf-8")
           Path(".upstream-ref").chmod(0o600)
           print(f"version={version}")
           print(f"tag={tag}")
           print(f"asset=patches-{version}.mpp")
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
-              output.write(f"version={version}\\n")
-              output.write(f"tag={tag}\\n")
-              output.write(f"asset=patches-{version}.mpp\\n")
+              output.write(f"version={version}\n")
+              output.write(f"tag={tag}\n")
+              output.write(f"asset=patches-{version}.mpp\n")
           PY
 
       - name: Cache pinned build toolchains
@@ -216,10 +216,10 @@ jobs:
           import re
           p = Path("patches-list.json")
           if p.exists():
-              p.write_text(re.sub(r"\\bVenus\\b", "lesbunny", p.read_text(encoding="utf-8")), encoding="utf-8")
+              p.write_text(re.sub(r"\bVenus\b", "lesbunny", p.read_text(encoding="utf-8")), encoding="utf-8")
           PY
           VERSION="${{ steps.version.outputs.version }}"
-          sed 's|/\\*__FEATURES__\\*/|globalThis.__venusFeatures|g' patches/build/bootstrap.js > patches/build/bootstrap.precompile.js
+          sed 's|/\*__FEATURES__\*/|globalThis.__venusFeatures|g' patches/build/bootstrap.js > patches/build/bootstrap.precompile.js
           if [ ! -x work/tools/hermesc ]; then
             mkdir -p work/tools
             curl -fsSL "https://registry.npmjs.org/hermes-compiler/-/hermes-compiler-250829098.0.19.tgz" -o work/tools/hermes-compiler.tgz

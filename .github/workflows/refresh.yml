@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   refresh:
-    if: ${{ github.event_name != 'push' || !startsWith(github.event.head_commit.message, 'sync: development snapshot') }}
+    if: ${{ github.event_name != 'push' || contains(github.event.head_commit.message, 'sync: development snapshot') == false }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -119,7 +119,7 @@ jobs:
               strings = data.get("strings")
               if isinstance(strings, dict):
                   strings.setdefault("lesbunny", "lesbunny")
-                  language_file.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+                  language_file.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
           build = Path("scripts/build.py")
           text = build.read_text(encoding="utf-8")

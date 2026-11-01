@@ -26,12 +26,14 @@ jobs:
       - name: Select newest upstream development branch
         id: upstream
         shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
           API_URL="$(printf '%s' 'aHR0cHM6Ly9hcGkuZ2l0aHViLmNvbS9yZXBvcy9WZW51c0lzSmFkZWQvVmVudXMtUGF0Y2hlcy9wdWxscz9zdGF0ZT1vcGVuJnBlcl9wYWdlPTEwMA==' | base64 -d)"
           OWNER="$(printf '%s' 'VmVudXNJc0phZGVk' | base64 -d)"
           REPO="$(printf '%s' 'VmVudXMtUGF0Y2hlcw==' | base64 -d)"
-          PR_JSON="$(curl -fsSL -H 'Accept: application/vnd.github+json' "$API_URL")"
+          PR_JSON="$(curl -fsSL -H 'Accept: application/vnd.github+json' -H "Authorization: Bearer $GH_TOKEN" "$API_URL")"
           PR="$(jq -cer --arg owner "$OWNER" --arg repo "$REPO" '[.[] | select(.user.login == $owner and .head.repo.full_name == ($owner + "/" + $repo))] | sort_by(.updated_at) | last' <<<"$PR_JSON" || true)"
           if [ -n "$PR" ] && [ "$PR" != "null" ]; then
             BRANCH="$(jq -r '.head.ref' <<<"$PR")"
@@ -39,7 +41,7 @@ jobs:
             PR_NUMBER="$(jq -r '.number' <<<"$PR")"
           else
             BRANCH="main"
-            SHA="$(curl -fsSL "https://api.github.com/repos/$OWNER/$REPO/branches/main" | jq -r '.commit.sha')"
+            SHA="$(curl -fsSL -H "Authorization: Bearer $GH_TOKEN" "https://api.github.com/repos/$OWNER/$REPO/branches/main" | jq -r '.commit.sha')"
             PR_NUMBER="none"
           fi
           {

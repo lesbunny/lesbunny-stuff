@@ -16,6 +16,7 @@ concurrency:
 
 jobs:
   refresh:
+    if: ${{ github.event_name != 'push' || !startsWith(github.event.head_commit.message, 'sync: development snapshot') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -101,7 +102,7 @@ jobs:
         run: |
           set -euo pipefail
           python3 - <<'PY'
-          import re
+          import json, re
           from pathlib import Path
 
           targets = []
@@ -112,6 +113,13 @@ jobs:
               text = path.read_text(encoding="utf-8")
               text = re.sub(r"\bVenus\b", "lesbunny", text)
               path.write_text(text, encoding="utf-8")
+
+          for language_file in Path("patches/src/main/resources/venus/i18n").glob("*.json"):
+              data = json.loads(language_file.read_text(encoding="utf-8"))
+              strings = data.get("strings")
+              if isinstance(strings, dict):
+                  strings.setdefault("lesbunny", "lesbunny")
+                  language_file.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
 
           build = Path("scripts/build.py")
           text = build.read_text(encoding="utf-8")
@@ -252,7 +260,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release already exists; nothing new to publish."
+            exit 0
+          fi
           git tag -f "$TAG" HEAD
           git push origin "refs/tags/$TAG" --force
-          gh release view "$TAG" >/dev/null 2>&1 && gh release delete "$TAG" --yes || true
           gh release create "$TAG" "patches/build/libs/$ASSET" --title "$VERSION" --notes "Development snapshot."

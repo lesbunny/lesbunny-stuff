@@ -117,10 +117,6 @@ jobs:
           text = text.replace("Description: Extra features and privacy options for Discord on Android.", "Description: Morphe patch bundle.")
           text = text.replace("https://github.com/VenusIsJaded/Venus-Patches", "https://github.com/lesbunny/lesbunny-stuff")
           text = text.replace("Author: VenusIsJaded", "Author: lesbunny")
-          text = text.replace(
-              'not re.search(r"^\* \*\*Discord", metadata["description"], re.M)',
-              'not re.search(r"^\* \*\*Update:", metadata["description"], re.M)'
-          )
           build.write_text(text, encoding="utf-8")
 
           notes = Path("scripts/release_notes.py")
@@ -175,11 +171,9 @@ jobs:
           changelog = (
               f"## [{version}](https://github.com/lesbunny/lesbunny-stuff/compare/v{base}...{tag}) ({date})\n\n"
               "### 🔧 Improvements\n\n"
-              "* **Update:** Latest development snapshot\n"
+              "* **Discord:** Latest development snapshot\n"
           )
           Path("CHANGELOG.md").write_text(changelog, encoding="utf-8")
-          Path(".upstream-ref").write_text(os.environ["UPSTREAM_SHA"] + "\n", encoding="utf-8")
-          Path(".upstream-ref").chmod(0o600)
           print(f"version={version}")
           print(f"tag={tag}")
           print(f"asset=patches-{version}.mpp")

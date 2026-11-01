@@ -817,8 +817,8 @@ def build():
         "--output", dex, classes)
     # Same JVM classes + classes.dex layout and manifest keys as the official plugin.
     manifest = "\r\n".join([
-        "Manifest-Version: 1.0", "Name: lesbunny-stuff",
-        "Description: Morphe patch bundle.",
+        "Manifest-Version: 1.0", "Name: Discord",
+        "Description: Discord patches by lesbunny.",
         f"Version: {VERSION}", "Patcher-Version: 1.15.0",
         "Source: https://github.com/lesbunny/lesbunny-stuff",
         "Author: lesbunny", "License: GPL-3.0", "", "",

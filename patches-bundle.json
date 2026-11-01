@@ -1,8 +1,8 @@
 {
-  "created_at": "2026-11-01T11:20:20",
+  "created_at": "2026-11-01T11:28:00",
   "description": "### \ud83d\udd27 Improvements\n\n* **Discord:** Latest development snapshot\n",
-  "download_url": "https://github.com/lesbunny/lesbunny-stuff/releases/download/v1.20.0-dev.7aa20240.2/patches-1.20.0-dev.7aa20240.2.mpp",
-  "page_url": "https://github.com/lesbunny/lesbunny-stuff/releases/tag/v1.20.0-dev.7aa20240.2",
+  "download_url": "https://github.com/lesbunny/lesbunny-stuff/releases/download/v1.20.0-dev.7aa20240.3/patches-1.20.0-dev.7aa20240.3.mpp",
+  "page_url": "https://github.com/lesbunny/lesbunny-stuff/releases/tag/v1.20.0-dev.7aa20240.3",
   "signature_download_url": "",
-  "version": "1.20.0-dev.7aa20240.2"
+  "version": "1.20.0-dev.7aa20240.3"
 }

@@ -112,7 +112,7 @@ val customBranding = resourcePatch(
     // a dropdown, which hid that you can type anything.
     val appName = stringOption(
         key = "appName",
-        default = "Discord",
+        default = "lesbunny",
         title = "App name",
         description = "Type the name shown under the icon on your home screen and in your app list.",
         required = true,

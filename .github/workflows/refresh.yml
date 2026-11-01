@@ -77,7 +77,7 @@ jobs:
           UPSTREAM_SHA: ${{ steps.upstream.outputs.sha }}
         run: |
           set -euo pipefail
-          rm -f README.md AGENTS.md CHANGELOG.md
+          find . -type f -iname '*.md' -not -path './.git/*' -delete
           rm -f .github/workflows/build.yml
           rm -rf .github/ISSUE_TEMPLATE .github/dependabot.yml
           mkdir -p .github/workflows

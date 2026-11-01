@@ -303,7 +303,7 @@ function lazyCoreRuntime(code) {
     return '(function(global){' + eagerHeader + eagerFooter + '})(globalThis);';
 }
 // Hermes's (0, eval) eagerly compiles every FunctionDeclaration and closure inside the runtime at startup,
-// even though load_calls.cjs shows only 5 functions run at startup. The Venus Settings pages, live previews,
+// even though load_calls.cjs shows only 5 functions run at startup. The lesbunny Settings pages, live previews,
 // and preview style/sample tables (~160 KB, 155 top-level statements) are only reachable after nativeRegistry
 // (Module 14409) runs. Wrap them in an ASCII string literal and evaluate once on first nativeRegistry call,
 // avoiding parsing, bytecode compilation, and closure allocation for all settings UI components during cold boot.
@@ -567,7 +567,7 @@ function jsonLiterals(code) {
     BUILD.mkdir(parents=True, exist_ok=True)
     output = BUILD / "bootstrap.js"
     output.write_text(content)
-    # Precompile/verify the compacted Venus runtime against Hermes HBC98 (250829098.0.19).
+    # Precompile/verify the compacted lesbunny runtime against Hermes HBC98 (250829098.0.19).
     precompile = BUILD / "bootstrap.precompile.js"
     precompile.write_text(content.replace("/*__FEATURES__*/", "globalThis.__venusFeatures"))
     hbc_output = BUILD / "bootstrap.hbc"
@@ -752,7 +752,7 @@ def build():
     run("java", "-Xmx384m", "-cp", TOOLS / "r8.jar", "com.android.tools.r8.D8",
         "--release", "--min-api", "26", "--lib", TOOLS / "android.jar",
         "--classpath", stubs, "--output", audio_dex, audio_classes)
-    # Crash screen and troubleshooting logs (part of Venus settings): Java-only rules again.
+    # Crash screen and troubleshooting logs (part of lesbunny settings): Java-only rules again.
     diag_classes = BUILD / "diag-classes.jar"
     run(compiler, "-no-stdlib", "-no-reflect", "-language-version", "2.1", "-api-version", "2.1", "-Xsuppress-version-warnings",
         "-jvm-target", "11", "-Xlambdas=class", "-cp", f"{TOOLS / 'android.jar'}:{TOOLS / 'morphe.jar'}:{stubs}",
@@ -875,7 +875,7 @@ def check_languages():
             for text in (value.values() if isinstance(value, dict) else [value]):
                 if not isinstance(text, str) or set(re.findall(r"\{\w+\}", text)) != needed:
                     raise SystemExit(f"i18n/{code}.json: {english!r} must keep {sorted(needed)}")
-    # Every text Venus passes through tr()/pl() ships translated, so a new row can't appear in English only.
+    # Every text lesbunny passes through tr()/pl() ships translated, so a new row can't appear in English only.
     found = json.loads(subprocess.check_output(["node", ROOT / "scripts/i18n_strings.cjs"], cwd=ROOT, text=True))
     for code in codes:
         strings = json.loads((folder / f"{code}.json").read_text(encoding="utf-8"))["strings"]
@@ -907,7 +907,7 @@ def check_metadata(metadata):
     # Morphe Manager parses created_at as a kotlinx LocalDateTime: no UTC offset or "Z".
     if not re.fullmatch(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2}(\.\d{1,9})?)?", metadata["created_at"]):
         raise SystemExit("patches-bundle.json: created_at must be a LocalDateTime without a UTC offset")
-    if not metadata["download_url"].startswith("https://github.com/lesbunny/lesbunny-stuff/releases/download/"):
+    if not metadata["download_url"].startswith("https://github.com/VenusIsJaded/lesbunny-Patches/releases/download/"):
         raise SystemExit("patches-bundle.json: unexpected download_url")
     # The fallback release notes must split into Morphe's sections, like CHANGELOG.md does.
     if not re.search(r"^### \S", metadata["description"], re.M) or not re.search(r"^\* \*\*Discord", metadata["description"], re.M):
@@ -926,8 +926,8 @@ def release_metadata():
     metadata = {
         "created_at": created_at,
         "description": release_summary(),
-        "download_url": f"https://github.com/lesbunny/lesbunny-stuff/releases/download/{RELEASE_TAG}/{ASSET_NAME}",
-        "page_url": f"https://github.com/lesbunny/lesbunny-stuff/releases/tag/{RELEASE_TAG}",
+        "download_url": f"https://github.com/VenusIsJaded/lesbunny-Patches/releases/download/{RELEASE_TAG}/{ASSET_NAME}",
+        "page_url": f"https://github.com/VenusIsJaded/lesbunny-Patches/releases/tag/{RELEASE_TAG}",
         "signature_download_url": "",
         "version": VERSION,
     }

@@ -14,7 +14,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CHANGELOG = ROOT / "CHANGELOG.md"
 REPO = "https://github.com/lesbunny/lesbunny-stuff"
-
 # The headings Morphe Manager maps to its own icons and titles, in the order they're written. App support comes
 # first, so the Discord version a release works with is the first thing you read.
 SECTIONS = ["### 🚀 Updated App Support", "### ✨ New Features", "### 🐛 Bug Fixes", "### 🔧 Improvements",

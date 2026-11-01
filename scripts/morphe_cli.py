@@ -17,7 +17,7 @@ API = "https://api.github.com/repos/MorpheApp/morphe-desktop/releases?per_page=3
 
 
 def newest():
-    headers = {"Accept": "application/vnd.github+json", "User-Agent": "venus-patches"}
+    headers = {"Accept": "application/vnd.github+json", "User-Agent": "lesbunny-patches"}
     if os.environ.get("GITHUB_TOKEN"):
         headers["Authorization"] = "Bearer " + os.environ["GITHUB_TOKEN"]
     with urllib.request.urlopen(urllib.request.Request(API, headers=headers), timeout=30) as response:

@@ -120,9 +120,9 @@ val customBranding = resourcePatch(
 
     val packageName = stringOption(
         key = "packageName",
-        default = "com.discord.venus",
+        default = "com.discord.lesbunny",
         title = "Package name",
-        description = "Type any name made of lowercase words joined by dots, like com.discord.venus. A name other than " +
+        description = "Type any name made of lowercase words joined by dots, like com.discord.lesbunny. A name other than " +
             "com.discord installs lesbunny next to the normal Discord app. Type com.discord to replace Discord instead.",
         required = true,
     ) { it != null && it.trim().matches(PACKAGE_NAME) }
@@ -145,7 +145,7 @@ val customBranding = resourcePatch(
     finalize {
         val newPackage = packageName.value?.trim().orEmpty()
         if (!newPackage.matches(PACKAGE_NAME))
-            throw PatchException("\"$newPackage\" isn't a valid package name. Use lowercase letters, digits and dots, like com.discord.venus")
+            throw PatchException("\"$newPackage\" isn't a valid package name. Use lowercase letters, digits and dots, like com.discord.lesbunny")
         val name = appName.value?.trim().orEmpty().ifEmpty { "Discord" }
         val image = appIcon.file
         val color = iconBackground.value?.trim()?.takeIf { it.isNotEmpty() }

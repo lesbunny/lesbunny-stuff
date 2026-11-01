@@ -1,4 +1,4 @@
-name: refresh
+name: lesbunny-stuff auto-updater
 
 on:
   push:
@@ -16,6 +16,7 @@ concurrency:
 
 jobs:
   refresh:
+    name: Build and publish lesbunny patches
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -111,7 +112,33 @@ jobs:
           for path in targets:
               text = path.read_text(encoding="utf-8")
               text = re.sub(r"\bVenus\b", "lesbunny", text)
+              text = text.replace("com.discord.venus", "com.discord.lesbunny")
               path.write_text(text, encoding="utf-8")
+
+          bootstrap = Path("patches/src/main/resources/venus/bootstrap.js")
+          text = bootstrap.read_text(encoding="utf-8")
+          text, count = re.subn(
+              r'const REPO = "[^"]+";',
+              'const REPO = "https://github.com/lesbunny/lesbunny-stuff";',
+              text,
+              count=1,
+          )
+          if count != 1:
+              raise SystemExit("Could not rebrand the About-menu repository URL")
+          text = text.replace('DEBUG_LOG_FILE = "venus-log.txt"', 'DEBUG_LOG_FILE = "lesbunny-log.txt"')
+          text = re.sub(r'(dlog\("[A-Z]",\s*)"venus"(?=\s*,)', r'\1"lesbunny"', text)
+          text = text.replace('" I [venus] Debug logging off"', '" I [lesbunny] Debug logging off"')
+          text = text.replace('"venus-logs-"', '"lesbunny-logs-"')
+          text = text.replace('"venus-backup-"', '"lesbunny-backup-"')
+          bootstrap.write_text(text, encoding="utf-8")
+
+          for path in Path("scripts").rglob("*.py"):
+              text = path.read_text(encoding="utf-8")
+              text = re.sub(r"\bVenus\b", "lesbunny", text)
+              path.write_text(text, encoding="utf-8")
+          cli = Path("scripts/morphe_cli.py")
+          text = cli.read_text(encoding="utf-8").replace('"User-Agent": "venus-patches"', '"User-Agent": "lesbunny-patches"')
+          cli.write_text(text, encoding="utf-8")
 
           for language_file in Path("patches/src/main/resources/venus/i18n").glob("*.json"):
               data = json.loads(language_file.read_text(encoding="utf-8"))
@@ -154,7 +181,7 @@ jobs:
           if not current:
               raise SystemExit("Missing version in gradle.properties")
           base = current.group(1).strip().split("-dev.")[0]
-          version = f"{base}-dev.{os.environ['UPSTREAM_SHA'][:8]}"
+          version = f"{base}-dev.{os.environ['UPSTREAM_SHA'][:8]}.1"
           replacements = {
               "version": version,
               "releaseTag": f"v{version}",
@@ -232,8 +259,12 @@ jobs:
           fi
           work/tools/hermesc -emit-binary -O -g0 -w -out=patches/build/bootstrap.hbc patches/build/bootstrap.precompile.js
 
-      - name: Remove temporary notes
-        run: rm -f README.md AGENTS.md CHANGELOG.md
+      - name: Keep blank About-menu changelog target
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f README.md AGENTS.md
+          : > CHANGELOG.md
 
       - name: Commit synchronized source and metadata
         shell: bash

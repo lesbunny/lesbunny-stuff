@@ -1179,7 +1179,7 @@
         venusIcons.set(slot, VenusIcon);
         return VenusIcon;
     }
-    const REPO = "https://github.com/VenusIsJaded/lesbunny-Patches";
+    const REPO = "https://github.com/lesbunny/lesbunny-stuff";
     function openLink(url) {
         try { if (RN && RN.Linking && typeof RN.Linking.openURL === "function") RN.Linking.openURL(url).catch(() => {}); } catch (_) {}
     }
@@ -1800,7 +1800,7 @@
     // Troubleshooting (About): the crash screen and Debug logging. Neither is a feature: Debug logging is on by default, so a
     // problem someone reports already has a log behind it, and records only on this phone. The crash catcher and the screen itself are
     // native (extensions/diag, Diagnostics.kt), reached through FileModule.clearFolder with a private prefix.
-    const DIAG_PREFIX = "venus-diag-v1:", DEBUG_LOG_FILE = "venus-log.txt", DEBUG_LOG_MAX = 4000, DEBUG_LOG_EARLY = 400;
+    const DIAG_PREFIX = "venus-diag-v1:", DEBUG_LOG_FILE = "lesbunny-log.txt", DEBUG_LOG_MAX = 4000, DEBUG_LOG_EARLY = 400;
     // early: lines from Discord's start, kept in memory only until the settings are read, then kept or thrown away.
     const debugLog = {lines:[], early:[], dropped:0, dirty:false, timer:undefined, timerMs:0, installed:false, started:0,
         console:null, consoleHooks:null, fetch:null, fetchHook:null, xhr:null, xhrHooks:null, errors:null, errorHook:null, flux:false, appState:null, dimensions:null,
@@ -1919,9 +1919,9 @@
     }
     function dlogEnvironment() {
         const on = Object.keys(settings).filter(key => settings[key] === true);
-        dlog("I", "venus", "lesbunny " + revision + " for Discord " + DISCORD_VERSION + ", settings " + status.storage + ", language " + uiLanguage() + " (" + settings.language + ")");
-        dlog("I", "venus", "patched in: " + Object.keys(features).filter(key => features[key]).join(", "));
-        dlog("I", "venus", "turned on: " + (on.length ? on.join(", ") : "nothing"));
+        dlog("I", "lesbunny", "lesbunny " + revision + " for Discord " + DISCORD_VERSION + ", settings " + status.storage + ", language " + uiLanguage() + " (" + settings.language + ")");
+        dlog("I", "lesbunny", "patched in: " + Object.keys(features).filter(key => features[key]).join(", "));
+        dlog("I", "lesbunny", "turned on: " + (on.length ? on.join(", ") : "nothing"));
         try {
             const c = RN && RN.Platform && RN.Platform.constants || {};
             dlog("I", "device", (c.Manufacturer || "") + " " + (c.Model || "") + " (" + (c.Brand || "") + "), Android " + (c.Release || "?") + " API " + (RN.Platform.Version || "?") +
@@ -1946,7 +1946,7 @@
         } catch (_) {}
         try {
             const perf = global.performance;
-            if (perf && typeof perf.now === "function") dlog("I", "venus", "logging started " + dlogDuration(perf.now()) + " after Discord's JavaScript started; " + dlogHeap());
+            if (perf && typeof perf.now === "function") dlog("I", "lesbunny", "logging started " + dlogDuration(perf.now()) + " after Discord's JavaScript started; " + dlogHeap());
         } catch (_) {}
         try { dlog("I", "device", "Remove animations " + (reduceMotion ? "on" : "off") + (reduceMotionAsked ? "" : " (not asked yet)")); } catch (_) {}
         try {
@@ -1970,9 +1970,9 @@
             if (debugLog.hookFailed.size) dlog("E", "hooks", "couldn't change " + Array.from(debugLog.hookFailed).map(entry => "module " + entry[0] + " (" + entry[1].slice(0, 300) + ")").join("; "));
             if (debugLog.missing.size) dlog("I", "hooks", "Discord parts lesbunny looked for and didn't find (some are fallbacks lesbunny tries first, so not all are problems): " + Array.from(debugLog.missing).slice(0, 80).join(", "));
             const c = debugLog.counts;
-            dlog("I", "venus", "so far: " + c.E + " errors, " + c.W + " warnings, " + (c.I + c.D) + " other lines; " + dlogHeap() + "; settings " + status.storage +
+            dlog("I", "lesbunny", "so far: " + c.E + " errors, " + c.W + " warnings, " + (c.I + c.D) + " other lines; " + dlogHeap() + "; settings " + status.storage +
                 "; app " + (debugLog.state || "?") + (debugLog.stateAt ? " for " + dlogDuration(Date.now() - debugLog.stateAt) : ""));
-        } catch (error) { dlog("W", "venus", "summary failed: " + dlogText(error)); }
+        } catch (error) { dlog("W", "lesbunny", "summary failed: " + dlogText(error)); }
     }
     // The JS thread, once a second while Discord is in front: a tick that comes late means something kept the thread busy
     // (a stall users feel as a freeze). A long stall is written straight away; every minute gets one line with the worst.
@@ -2018,7 +2018,7 @@
         if (!settings.debugLog || debugLog.installed) return;
         debugLog.installed = true;
         if (!debugLog.started) debugLog.started = Date.now();
-        dlog("I", "venus", "Debug logging on");
+        dlog("I", "lesbunny", "Debug logging on");
         dlogEnvironment();
         const c = global.console;
         if (c && !debugLog.consoleHooks) {
@@ -2162,7 +2162,7 @@
         try { if (debugLog.memory && typeof debugLog.memory.remove === "function") debugLog.memory.remove(); } catch (_) {}
         debugLog.appState = null; debugLog.dimensions = null; debugLog.memory = null;
         dlogHealthStop();
-        debugLog.lines.push(dlogStamp(Date.now()) + " I [venus] Debug logging off");
+        debugLog.lines.push(dlogStamp(Date.now()) + " I [lesbunny] Debug logging off");
         debugLog.dirty = true; debugLogFlush();
     }
     // Read all on a phone where the pill's room is there but nothing is drawn in it (Poco F3, Display size larger at 461 dpi,
@@ -2239,7 +2239,7 @@
     function debugLogExport(toClipboard) {
         if (diag.busy) return;
         diagBusy(toClipboard ? "copy" : "export");
-        dlog("I", "venus", toClipboard ? "logs copied" : "logs exported");
+        dlog("I", "lesbunny", toClipboard ? "logs copied" : "logs exported");
         if (settings.debugLog) dlogSummary();
         debugLog.dirty = debugLog.dirty || settings.debugLog;
         debugLogFlush().then(() => diagCall("report")).then(text => {
@@ -2251,7 +2251,7 @@
             };
             const saveDocuments = inspectedExport(11600, "saveDocuments"), dir = cacheDir();
             if (toClipboard || !files || typeof saveDocuments !== "function" || !dir) { copy(); return undefined; }
-            const name = "venus-logs-" + backupDate(Date.now()) + ".txt";
+            const name = "lesbunny-logs-" + backupDate(Date.now()) + ".txt";
             return Promise.resolve().then(() => files.writeFile("cache", name, text, "utf8"))
                 .then(() => saveDocuments({sourceUris:["file://" + dir + "/" + name], fileName:name, mimeType:"text/plain"}))
                 .then(result => {
@@ -2519,7 +2519,7 @@
     function backupToFile() {
         const saveDocuments = inspectedExport(11600, "saveDocuments"), dir = cacheDir();
         if (!files || typeof saveDocuments !== "function" || !dir) { backupToClipboard(); return; }
-        const name = "venus-backup-" + backupDate(Date.now()) + ".json";
+        const name = "lesbunny-backup-" + backupDate(Date.now()) + ".json";
         backupBusy("save");
         Promise.resolve().then(() => files.writeFile("cache", name, backupText(), "utf8"))
             .then(() => saveDocuments({sourceUris:["file://" + dir + "/" + name], fileName:name, mimeType:"application/json"}))

@@ -16,6 +16,7 @@ concurrency:
 
 jobs:
   refresh:
+    if: ${{ github.actor != 'github-actions[bot]' }}
     name: Build and publish lesbunny patches
     runs-on: ubuntu-latest
     steps:
@@ -118,6 +119,15 @@ jobs:
               text = path.read_text(encoding="utf-8")
               text = re.sub(rf"\b{re.escape(upstream_brand)}\b", "lesbunny", text)
               text = text.replace("com.discord.venus", "com.discord.lesbunny")
+              if path.name == "BrandingPatches.kt":
+                  text, count = re.subn(
+                      r'(key = "appName",\s*default = )"[^"]+"',
+                      r'\1"Discord"',
+                      text,
+                      count=1,
+                  )
+                  if count != 1:
+                      raise SystemExit("Could not set the default Discord app name")
               path.write_text(text, encoding="utf-8")
 
           bootstrap = Path("patches/src/main/resources/venus/bootstrap.js")
@@ -192,7 +202,7 @@ jobs:
           if not current:
               raise SystemExit("Missing version in gradle.properties")
           base = current.group(1).strip().split("-dev.")[0]
-          version = f"{base}-dev.{os.environ['UPSTREAM_SHA'][:8]}.3"
+          version = f"{base}-dev.{os.environ['UPSTREAM_SHA'][:8]}.4"
           replacements = {
               "version": version,
               "releaseTag": f"v{version}",

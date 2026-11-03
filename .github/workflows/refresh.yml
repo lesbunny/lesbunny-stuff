@@ -28,8 +28,6 @@ jobs:
       - name: Check stable release and development updates
         id: upstream
         shell: bash
-        env:
-          GH_TOKEN: \${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
           OWNER="$(printf '%s' 'VmVudXNJc0phZGVk' | base64 -d)"
@@ -125,11 +123,11 @@ jobs:
         if: steps.upstream.outputs.changed == 'true'
         shell: bash
         env:
-          UPSTREAM_OWNER: \${{ steps.upstream.outputs.owner }}
-          UPSTREAM_REPO: \${{ steps.upstream.outputs.repo }}
-          UPSTREAM_BRANCH: \${{ steps.upstream.outputs.branch }}
-          UPSTREAM_SHA: \${{ steps.upstream.outputs.sha }}
-          UPSTREAM_MODE: \${{ steps.upstream.outputs.mode }}
+          UPSTREAM_OWNER: ${{ steps.upstream.outputs.owner }}
+          UPSTREAM_REPO: ${{ steps.upstream.outputs.repo }}
+          UPSTREAM_BRANCH: ${{ steps.upstream.outputs.branch }}
+          UPSTREAM_SHA: ${{ steps.upstream.outputs.sha }}
+          UPSTREAM_MODE: ${{ steps.upstream.outputs.mode }}
         run: |
           set -euo pipefail
           TMP="$(mktemp -d)"
@@ -145,7 +143,7 @@ jobs:
           if [ "$UPSTREAM_MODE" = "development" ]; then
             RSYNC_ARGS+=(--exclude='CHANGELOG.md')
           fi
-          rsync "\${RSYNC_ARGS[@]}" "$TMP/source/" "$GITHUB_WORKSPACE/"
+          rsync "${RSYNC_ARGS[@]}" "$TMP/source/" "$GITHUB_WORKSPACE/"
 
       - name: Remove public documentation and preserve legal notices
         if: steps.upstream.outputs.changed == 'true'
@@ -257,8 +255,8 @@ jobs:
         id: version
         shell: bash
         env:
-          UPSTREAM_SHA: \${{ steps.upstream.outputs.sha }}
-          UPSTREAM_MODE: \${{ steps.upstream.outputs.mode }}
+          UPSTREAM_SHA: ${{ steps.upstream.outputs.sha }}
+          UPSTREAM_MODE: ${{ steps.upstream.outputs.mode }}
         run: |
           set -euo pipefail
           python3 - <<'PY'
@@ -410,8 +408,8 @@ jobs:
         if: steps.upstream.outputs.changed == 'true'
         shell: bash
         env:
-          UPSTREAM_MODE: \${{ steps.upstream.outputs.mode }}
-          VERSION: \${{ steps.version.outputs.version }}
+          UPSTREAM_MODE: ${{ steps.upstream.outputs.mode }}
+          VERSION: ${{ steps.version.outputs.version }}
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
@@ -430,11 +428,11 @@ jobs:
       - name: Publish Morphe bundle release
         if: steps.upstream.outputs.changed == 'true'
         env:
-          GH_TOKEN: \${{ secrets.GITHUB_TOKEN }}
-          VERSION: \${{ steps.version.outputs.version }}
-          TAG: \${{ steps.version.outputs.tag }}
-          ASSET: \${{ steps.version.outputs.asset }}
-          UPSTREAM_MODE: \${{ steps.upstream.outputs.mode }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.version.outputs.version }}
+          TAG: ${{ steps.version.outputs.tag }}
+          ASSET: ${{ steps.version.outputs.asset }}
+          UPSTREAM_MODE: ${{ steps.upstream.outputs.mode }}
         shell: bash
         run: |
           set -euo pipefail
@@ -456,9 +454,9 @@ jobs:
         if: steps.upstream.outputs.changed == 'true'
         shell: bash
         env:
-          UPSTREAM_MODE: \${{ steps.upstream.outputs.mode }}
-          UPSTREAM_SHA: \${{ steps.upstream.outputs.sha }}
-          UPSTREAM_REF: \${{ steps.upstream.outputs.branch }}
+          UPSTREAM_MODE: ${{ steps.upstream.outputs.mode }}
+          UPSTREAM_SHA: ${{ steps.upstream.outputs.sha }}
+          UPSTREAM_REF: ${{ steps.upstream.outputs.branch }}
         run: |
           set -euo pipefail
           python3 - <<'PY'

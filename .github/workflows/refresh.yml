@@ -175,8 +175,8 @@ jobs:
         if: steps.upstream.outputs.changed == 'true'
         shell: bash
         env:
-          UPSTREAM_OWNER: ${{ steps.upstream.outputs.owner }}
-          UPSTREAM_REPO: ${{ steps.upstream.outputs.repo }}
+          UPSTREAM_OWNER: \${{ steps.upstream.outputs.owner }}
+          UPSTREAM_REPO: \${{ steps.upstream.outputs.repo }}
         run: |
           set -euo pipefail
           python3 - <<'PY'
@@ -248,7 +248,20 @@ jobs:
           notes = Path("scripts/release_notes.py")
           text = notes.read_text(encoding="utf-8")
           text, count = re.subn(
-              r'(?m)^REPO\s*=\s*"[^"]+"\s*
+              r'(?m)^REPO\s*=\s*"[^"]+"\s*$',
+              'REPO = "https://github.com/lesbunny/lesbunny-stuff"',
+              text,
+          )
+          if count != 1:
+              raise SystemExit("Could not rebrand the release-notes repository URL")
+          notes.write_text(text, encoding="utf-8")
+
+          changelog = Path("CHANGELOG.md")
+          if changelog.exists():
+              text = changelog.read_text(encoding="utf-8")
+              text = text.replace(upstream_repo_url, "https://github.com/lesbunny/lesbunny-stuff")
+              changelog.write_text(text, encoding="utf-8")
+          PY
 
       - name: Stamp stable or development version and release notes
         if: steps.upstream.outputs.changed == 'true'

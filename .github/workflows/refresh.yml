@@ -175,8 +175,8 @@ jobs:
         if: steps.upstream.outputs.changed == 'true'
         shell: bash
         env:
-          UPSTREAM_OWNER: \${{ steps.upstream.outputs.owner }}
-          UPSTREAM_REPO: \${{ steps.upstream.outputs.repo }}
+          UPSTREAM_OWNER: ${{ steps.upstream.outputs.owner }}
+          UPSTREAM_REPO: ${{ steps.upstream.outputs.repo }}
         run: |
           set -euo pipefail
           python3 - <<'PY'

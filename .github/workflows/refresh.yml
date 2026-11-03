@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: "17 5 */2 * *"
+    - cron: "17 12 * * *"
   workflow_dispatch:
 
 permissions:
@@ -25,55 +25,111 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Select newest upstream development branch
+      - name: Check stable release and development updates
         id: upstream
         shell: bash
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: \${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
-          API_URL="$(printf '%s' 'aHR0cHM6Ly9hcGkuZ2l0aHViLmNvbS9yZXBvcy9WZW51c0lzSmFkZWQvVmVudXMtUGF0Y2hlcy9wdWxscz9zdGF0ZT1vcGVuJnBlcl9wYWdlPTEwMA==' | base64 -d)"
           OWNER="$(printf '%s' 'VmVudXNJc0phZGVk' | base64 -d)"
           REPO="$(printf '%s' 'VmVudXMtUGF0Y2hlcw==' | base64 -d)"
-          PR_JSON="$(curl -fsSL -H 'Accept: application/vnd.github+json' -H "Authorization: Bearer $GH_TOKEN" "$API_URL")"
-          PR="$(jq -cer --arg owner "$OWNER" --arg repo "$REPO" '[.[] | select(.user.login == $owner and .head.repo.full_name == ($owner + "/" + $repo))] | sort_by(.updated_at) | last' <<<"$PR_JSON" || true)"
-          if [ -n "$PR" ] && [ "$PR" != "null" ]; then
-            BRANCH="$(jq -r '.head.ref' <<<"$PR")"
-            SHA="$(jq -r '.head.sha' <<<"$PR")"
-            PR_NUMBER="$(jq -r '.number' <<<"$PR")"
+          STATE_FILE=".github/upstream-state"
+
+          RELEASE_JSON=""
+          if RELEASE_JSON="$(curl -fsSL -H 'Accept: application/vnd.github+json' -H "Authorization: Bearer $GH_TOKEN" "https://api.github.com/repos/$OWNER/$REPO/releases/latest")"; then
+            STABLE_TAG="$(jq -r '.tag_name // empty' <<<"$RELEASE_JSON")"
           else
-            BRANCH="main"
-            SHA="$(curl -fsSL -H "Authorization: Bearer $GH_TOKEN" "https://api.github.com/repos/$OWNER/$REPO/branches/main" | jq -r '.commit.sha')"
-            PR_NUMBER="none"
+            STABLE_TAG=""
           fi
-          LAST_SHA=""
-          if [ -f .github/upstream-state ]; then
-            LAST_SHA="$(tr -d '[:space:]' < .github/upstream-state)"
-          fi
-          if [ "$SHA" = "$LAST_SHA" ]; then
-            CHANGED=false
-            echo "Upstream is unchanged at $SHA; skipping the build."
+
+          if [ -f "$STATE_FILE" ] && jq -e 'type == "object"' "$STATE_FILE" >/dev/null 2>&1; then
+            STATE_JSON="$(cat "$STATE_FILE")"
           else
-            CHANGED=true
-            echo "Upstream changed: ${LAST_SHA:-<none>} -> $SHA"
+            LEGACY_SHA=""
+            if [ -f "$STATE_FILE" ]; then
+              LEGACY_SHA="$(tr -d '[:space:]' < "$STATE_FILE")"
+            fi
+            if [ -n "$LEGACY_SHA" ]; then
+              STATE_JSON="$(jq -n --arg sha "$LEGACY_SHA" --arg built_at "2026-11-01T11:30:52Z" '{development:{sha:$sha,built_at:$built_at}}')"
+            else
+              STATE_JSON='{}'
+            fi
           fi
+
+          LAST_STABLE_TAG="$(jq -r '.stable_tag // empty' <<<"$STATE_JSON")"
+          LAST_DEV_SHA="$(jq -r '.development.sha // empty' <<<"$STATE_JSON")"
+          LAST_DEV_BUILT_AT="$(jq -r '.development.built_at // empty' <<<"$STATE_JSON")"
+
+          MODE="skip"
+          CHANGED="false"
+          BRANCH=""
+          SHA=""
+          PR_NUMBER="none"
+
+          if [ -n "$STABLE_TAG" ] && [ "$STABLE_TAG" != "$LAST_STABLE_TAG" ]; then
+            MODE="stable"
+            BRANCH="$STABLE_TAG"
+            TAG_SHA="$(git ls-remote "https://github.com/$OWNER/$REPO.git" "refs/tags/$STABLE_TAG^{}" "refs/tags/$STABLE_TAG" | awk -v tag="refs/tags/$STABLE_TAG" '$2 == tag "^{}" { peeled = $1 } $2 == tag { direct = $1 } END { if (peeled != "") print peeled; else print direct }')"
+            if [ -z "$TAG_SHA" ]; then
+              echo "Could not resolve upstream release tag $STABLE_TAG"
+              exit 1
+            fi
+            SHA="$TAG_SHA"
+            CHANGED="true"
+            mkdir -p .git
+            jq -r '.body // ""' <<<"$RELEASE_JSON" > .git/upstream-release-notes.md
+            echo "New stable release detected: $STABLE_TAG ($SHA)"
+          else
+            API_URL="https://api.github.com/repos/$OWNER/$REPO/pulls?state=open&per_page=100"
+            PR_JSON="$(curl -fsSL -H 'Accept: application/vnd.github+json' -H "Authorization: Bearer $GH_TOKEN" "$API_URL")"
+            PR="$(jq -cer --arg owner "$OWNER" --arg repo "$REPO" '[.[] | select(.user.login == $owner and .head.repo.full_name == ($owner + "/" + $repo))] | sort_by(.updated_at) | last' <<<"$PR_JSON" || true)"
+            if [ -n "$PR" ] && [ "$PR" != "null" ]; then
+              BRANCH="$(jq -r '.head.ref' <<<"$PR")"
+              SHA="$(jq -r '.head.sha' <<<"$PR")"
+              PR_NUMBER="$(jq -r '.number' <<<"$PR")"
+            else
+              BRANCH="main"
+              SHA="$(curl -fsSL -H "Authorization: Bearer $GH_TOKEN" "https://api.github.com/repos/$OWNER/$REPO/branches/main" | jq -r '.commit.sha')"
+            fi
+
+            LAST_DEV_TS=0
+            if [ -n "$LAST_DEV_BUILT_AT" ]; then
+              LAST_DEV_TS="$(date -u -d "$LAST_DEV_BUILT_AT" +%s 2>/dev/null || echo 0)"
+            fi
+            NOW_TS="$(date -u +%s)"
+            ELAPSED="$((NOW_TS - LAST_DEV_TS))"
+
+            if [ "$SHA" != "$LAST_DEV_SHA" ] && [ "$ELAPSED" -ge 172800 ]; then
+              MODE="development"
+              CHANGED="true"
+              echo "Development snapshot is due and changed: \${LAST_DEV_SHA:-<none>} -> $SHA"
+            elif [ "$SHA" = "$LAST_DEV_SHA" ]; then
+              echo "Development source is unchanged at $SHA; skipping."
+            else
+              echo "Development source changed, but its 48-hour build interval has not elapsed (\${ELAPSED}s)."
+            fi
+          fi
+
           {
             echo "owner=$OWNER"
             echo "repo=$REPO"
             echo "branch=$BRANCH"
             echo "sha=$SHA"
             echo "pr_number=$PR_NUMBER"
+            echo "mode=$MODE"
             echo "changed=$CHANGED"
           } >> "$GITHUB_OUTPUT"
 
-      - name: Mirror upstream source
+      - name: Mirror selected upstream release or development source
         if: steps.upstream.outputs.changed == 'true'
         shell: bash
         env:
-          UPSTREAM_OWNER: ${{ steps.upstream.outputs.owner }}
-          UPSTREAM_REPO: ${{ steps.upstream.outputs.repo }}
-          UPSTREAM_BRANCH: ${{ steps.upstream.outputs.branch }}
-          UPSTREAM_SHA: ${{ steps.upstream.outputs.sha }}
+          UPSTREAM_OWNER: \${{ steps.upstream.outputs.owner }}
+          UPSTREAM_REPO: \${{ steps.upstream.outputs.repo }}
+          UPSTREAM_BRANCH: \${{ steps.upstream.outputs.branch }}
+          UPSTREAM_SHA: \${{ steps.upstream.outputs.sha }}
+          UPSTREAM_MODE: \${{ steps.upstream.outputs.mode }}
         run: |
           set -euo pipefail
           TMP="$(mktemp -d)"
@@ -81,12 +137,15 @@ jobs:
           git clone --depth 1 --single-branch --branch "$UPSTREAM_BRANCH" "https://github.com/$UPSTREAM_OWNER/$UPSTREAM_REPO.git" "$TMP/source"
           ACTUAL_SHA="$(git -C "$TMP/source" rev-parse HEAD)"
           test "$ACTUAL_SHA" = "$UPSTREAM_SHA"
-          rsync -a --delete \
-            --exclude='.git/' \
-            --exclude='.github/workflows/refresh.yml' \
-            --exclude='.github/upstream-state' \
-            --exclude='CHANGELOG.md' \
-            "$TMP/source/" "$GITHUB_WORKSPACE/"
+          RSYNC_ARGS=(-a --delete
+            --exclude='.git/'
+            --exclude='.github/workflows/refresh.yml'
+            --exclude='.github/upstream-state'
+          )
+          if [ "$UPSTREAM_MODE" = "development" ]; then
+            RSYNC_ARGS+=(--exclude='CHANGELOG.md')
+          fi
+          rsync "\${RSYNC_ARGS[@]}" "$TMP/source/" "$GITHUB_WORKSPACE/"
 
       - name: Remove public documentation and preserve legal notices
         if: steps.upstream.outputs.changed == 'true'
@@ -191,21 +250,15 @@ jobs:
           notes = Path("scripts/release_notes.py")
           text = notes.read_text(encoding="utf-8")
           text, count = re.subn(
-              r'(?m)^REPO\s*=\s*"[^"]+"\s*$',
-              'REPO = "https://github.com/lesbunny/lesbunny-stuff"',
-              text,
-          )
-          if count != 1:
-              raise SystemExit("Could not rebrand the release-notes repository URL")
-          notes.write_text(text, encoding="utf-8")
-          PY
+              r'(?m)^REPO\s*=\s*"[^"]+"\s*
 
-      - name: Stamp development version and private build notes
+      - name: Stamp stable or development version and release notes
         if: steps.upstream.outputs.changed == 'true'
         id: version
         shell: bash
         env:
-          UPSTREAM_SHA: ${{ steps.upstream.outputs.sha }}
+          UPSTREAM_SHA: \${{ steps.upstream.outputs.sha }}
+          UPSTREAM_MODE: \${{ steps.upstream.outputs.mode }}
         run: |
           set -euo pipefail
           python3 - <<'PY'
@@ -219,7 +272,10 @@ jobs:
           if not current:
               raise SystemExit("Missing version in gradle.properties")
           base = current.group(1).strip().split("-dev.")[0]
-          version = f"{base}-dev.{os.environ['UPSTREAM_SHA'][:8]}.4"
+          if os.environ["UPSTREAM_MODE"] == "stable":
+              version = base
+          else:
+              version = f"{base}-dev.{os.environ['UPSTREAM_SHA'][:8]}.4"
           replacements = {
               "version": version,
               "releaseTag": f"v{version}",
@@ -240,23 +296,29 @@ jobs:
               raise SystemExit("Could not update runtime revision")
           bootstrap.write_text(source, encoding="utf-8")
 
-          date = datetime.now(timezone.utc).date().isoformat()
-          tag = f"v{version}"
-          changelog = (
-              f"## [{version}](https://github.com/lesbunny/lesbunny-stuff/compare/v{base}...{tag}) ({date})\n\n"
-              "### 🔧 Improvements\n\n"
-              "* **Discord:** Latest development snapshot\n"
-          )
-          changelog_path = Path("CHANGELOG.md")
-          previous = changelog_path.read_text(encoding="utf-8") if changelog_path.exists() else ""
-          if not previous.startswith(f"## [{version}]("):
-              changelog_path.write_text(changelog + ("\n" + previous if previous.strip() else ""), encoding="utf-8")
+          if os.environ["UPSTREAM_MODE"] == "development":
+              date = datetime.now(timezone.utc).date().isoformat()
+              tag = f"v{version}"
+              changelog = (
+                  f"## [{version}](https://github.com/lesbunny/lesbunny-stuff/compare/v{base}...{tag}) ({date})\n\n"
+                  "### 🔧 Improvements\n\n"
+                  "* **Discord:** Latest development snapshot\n"
+              )
+              changelog_path = Path("CHANGELOG.md")
+              previous = changelog_path.read_text(encoding="utf-8") if changelog_path.exists() else ""
+              if not previous.startswith(f"## [{version}]("):
+                  changelog_path.write_text(changelog + ("\n" + previous if previous.strip() else ""), encoding="utf-8")
+          else:
+              changelog_path = Path("CHANGELOG.md")
+              if not changelog_path.exists() or not changelog_path.read_text(encoding="utf-8").startswith(f"## [{version}]("):
+                  raise SystemExit(f"Stable upstream changelog does not start with version {version}")
+
           print(f"version={version}")
-          print(f"tag={tag}")
+          print(f"tag=v{version}")
           print(f"asset=patches-{version}.mpp")
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
               output.write(f"version={version}\n")
-              output.write(f"tag={tag}\n")
+              output.write(f"tag=v{version}\n")
               output.write(f"asset=patches-{version}.mpp\n")
           PY
 
@@ -348,35 +410,92 @@ jobs:
         if: steps.upstream.outputs.changed == 'true'
         shell: bash
         env:
-          UPSTREAM_SHA: ${{ steps.upstream.outputs.sha }}
-          VERSION: ${{ steps.version.outputs.version }}
+          UPSTREAM_MODE: \${{ steps.upstream.outputs.mode }}
+          VERSION: \${{ steps.version.outputs.version }}
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          mkdir -p .github
-          printf '%s' "$UPSTREAM_SHA" > .github/upstream-state
-          printf '\n' >> .github/upstream-state
           git add -A
           if ! git diff --cached --quiet; then
-            git commit -m "sync: development snapshot $VERSION"
+            if [ "$UPSTREAM_MODE" = "stable" ]; then
+              MESSAGE="sync: stable release $VERSION"
+            else
+              MESSAGE="sync: development snapshot $VERSION"
+            fi
+            git commit -m "$MESSAGE"
             git push origin HEAD:main
           fi
 
       - name: Publish Morphe bundle release
         if: steps.upstream.outputs.changed == 'true'
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VERSION: ${{ steps.version.outputs.version }}
-          TAG: ${{ steps.version.outputs.tag }}
-          ASSET: ${{ steps.version.outputs.asset }}
+          GH_TOKEN: \${{ secrets.GITHUB_TOKEN }}
+          VERSION: \${{ steps.version.outputs.version }}
+          TAG: \${{ steps.version.outputs.tag }}
+          ASSET: \${{ steps.version.outputs.asset }}
+          UPSTREAM_MODE: \${{ steps.upstream.outputs.mode }}
         shell: bash
         run: |
           set -euo pipefail
           if gh release view "$TAG" >/dev/null 2>&1; then
             echo "Release already exists; nothing new to publish."
-            exit 0
+          else
+            git tag -f "$TAG" HEAD
+            git push origin "refs/tags/$TAG" --force
+            if [ "$UPSTREAM_MODE" = "stable" ] && [ -s .git/upstream-release-notes.md ]; then
+              gh release create "$TAG" "patches/build/libs/$ASSET" --title "$VERSION" --notes-file .git/upstream-release-notes.md
+            elif [ "$UPSTREAM_MODE" = "stable" ]; then
+              gh release create "$TAG" "patches/build/libs/$ASSET" --title "$VERSION" --notes "Stable release."
+            else
+              gh release create "$TAG" "patches/build/libs/$ASSET" --title "$VERSION" --notes "Development snapshot."
+            fi
           fi
-          git tag -f "$TAG" HEAD
-          git push origin "refs/tags/$TAG" --force
-          gh release create "$TAG" "patches/build/libs/$ASSET" --title "$VERSION" --notes "Development snapshot."
+
+      - name: Record successfully published upstream state
+        if: steps.upstream.outputs.changed == 'true'
+        shell: bash
+        env:
+          UPSTREAM_MODE: \${{ steps.upstream.outputs.mode }}
+          UPSTREAM_SHA: \${{ steps.upstream.outputs.sha }}
+          UPSTREAM_REF: \${{ steps.upstream.outputs.branch }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, os
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          path = Path(".github/upstream-state")
+          try:
+              state = json.loads(path.read_text(encoding="utf-8"))
+              if not isinstance(state, dict):
+                  state = {}
+          except (FileNotFoundError, json.JSONDecodeError):
+              state = {}
+
+          if "development" not in state and path.exists():
+              old_sha = path.read_text(encoding="utf-8").strip()
+              if old_sha and len(old_sha) >= 7:
+                  state["development"] = {
+                      "sha": old_sha,
+                      "built_at": "2026-11-01T11:30:52Z",
+                  }
+
+          if os.environ["UPSTREAM_MODE"] == "stable":
+              state["stable_tag"] = os.environ["UPSTREAM_REF"]
+          else:
+              state["development"] = {
+                  "sha": os.environ["UPSTREAM_SHA"],
+                  "built_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
+              }
+
+          path.write_text(json.dumps(state, indent=2) + "\n", encoding="utf-8")
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/upstream-state
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: record successful upstream state"
+            git push origin HEAD:main
+          fi

@@ -37,7 +37,7 @@ jobs:
           STATE_FILE=".github/upstream-state"
 
           RELEASE_JSON=""
-          if RELEASE_JSON="$(curl -fsSL -H 'Accept: application/vnd.github+json' -H "Authorization: Bearer $GH_TOKEN" "https://api.github.com/repos/$OWNER/$REPO/releases/latest")"; then
+          if RELEASE_JSON="$(curl -fsSL -H 'Accept: application/vnd.github+json' "https://api.github.com/repos/$OWNER/$REPO/releases/latest")"; then
             STABLE_TAG="$(jq -r '.tag_name // empty' <<<"$RELEASE_JSON")"
           else
             STABLE_TAG=""
@@ -82,7 +82,7 @@ jobs:
             echo "New stable release detected: $STABLE_TAG ($SHA)"
           else
             API_URL="https://api.github.com/repos/$OWNER/$REPO/pulls?state=open&per_page=100"
-            PR_JSON="$(curl -fsSL -H 'Accept: application/vnd.github+json' -H "Authorization: Bearer $GH_TOKEN" "$API_URL")"
+            PR_JSON="$(curl -fsSL -H 'Accept: application/vnd.github+json' "$API_URL")"
             PR="$(jq -cer --arg owner "$OWNER" --arg repo "$REPO" '[.[] | select(.user.login == $owner and .head.repo.full_name == ($owner + "/" + $repo))] | sort_by(.updated_at) | last' <<<"$PR_JSON" || true)"
             if [ -n "$PR" ] && [ "$PR" != "null" ]; then
               BRANCH="$(jq -r '.head.ref' <<<"$PR")"
@@ -90,7 +90,7 @@ jobs:
               PR_NUMBER="$(jq -r '.number' <<<"$PR")"
             else
               BRANCH="main"
-              SHA="$(curl -fsSL -H "Authorization: Bearer $GH_TOKEN" "https://api.github.com/repos/$OWNER/$REPO/branches/main" | jq -r '.commit.sha')"
+              SHA="$(curl -fsSL "https://api.github.com/repos/$OWNER/$REPO/branches/main" | jq -r '.commit.sha')"
             fi
 
             LAST_DEV_TS=0
@@ -103,11 +103,11 @@ jobs:
             if [ "$SHA" != "$LAST_DEV_SHA" ] && [ "$ELAPSED" -ge 172800 ]; then
               MODE="development"
               CHANGED="true"
-              echo "Development snapshot is due and changed: \${LAST_DEV_SHA:-<none>} -> $SHA"
+              echo "Development snapshot is due and changed: ${LAST_DEV_SHA:-<none>} -> $SHA"
             elif [ "$SHA" = "$LAST_DEV_SHA" ]; then
               echo "Development source is unchanged at $SHA; skipping."
             else
-              echo "Development source changed, but its 48-hour build interval has not elapsed (\${ELAPSED}s)."
+              echo "Development source changed, but its 48-hour build interval has not elapsed (${ELAPSED}s)."
             fi
           fi
 

@@ -47,6 +47,8 @@ private var freeNitroSelected = false
 private var questAgentGuarded = false
 private var messageGutterGuarded = false
 private val additionalSelections = mutableSetOf<String>()
+/** Turns on a runtime feature from a patch kept in another file. */
+internal fun selectRuntimeFeature(key: String) { additionalSelections += key }
 internal val discordBundleGuard = rawResourcePatch {
     execute { HbcPrivacy.verifyOriginal(get("assets/index.android.bundle")) }
 }
@@ -74,7 +76,7 @@ private val runtimeAssets = rawResourcePatch {
             "{picker:$pickerSelected,voice:$voiceSelected,copyBios:$copyBiosSelected," +
                 "favouriteAnything:$favouriteAnythingSelected,freeNitro:$freeNitroSelected," +
                 listOf("noTyping", "quickDelete", "noDelete", "jumpToTop", "hiddenChannels", "pastelize", "platformIndicators", "reviewDB", "readAll", "quests", "badges", "systemFont",
-                    "systemEmoji", "gestures", "validUser", "youBarSettings", "splitMessages", "translate", "userNotif", "accountSwitcher", "appIcons", "nitroThemes", "customThemes", "materialYou", "iconPacks", "messageHighlight", "serverInfo", "serverEdit", "fixEmbeds", "tenorGifs", "hideBlocked", "bulkDelete", "experiments", "cleanChannels", "noHandsfree", "voiceOptions", "anonFiles", "staffTag", "removedAlerts", "fullImages", "hideAnything", "alwaysTrust", "noConfirmPin", "clickableMentions", "quietReplies", "silentLeave", "guildLurk", "compressUploads", "timeoutDuration", "dndBanners", "voiceDownload", "cloneExpressions", "listenAlong")
+                    "systemEmoji", "gestures", "validUser", "youBarSettings", "splitMessages", "translate", "userNotif", "accountSwitcher", "appIcons", "nitroThemes", "customThemes", "materialYou", "iconPacks", "messageHighlight", "serverInfo", "serverEdit", "fixEmbeds", "tenorGifs", "hideBlocked", "bulkDelete", "experiments", "cleanChannels", "noHandsfree", "voiceOptions", "anonFiles", "staffTag", "removedAlerts", "fullImages", "hideAnything", "alwaysTrust", "noConfirmPin", "clickableMentions", "expandBar", "quietReplies", "silentLeave", "guildLurk", "compressUploads", "timeoutDuration", "dndBanners", "landscapeFull", "voiceDownload", "cloneExpressions", "listenAlong", "silentEdit", "silentDelete", "localEdit", "hypeSquad", "customIdle", "mutualGroupDMs", "fastDeleteChannels", "pauseInvites", "platformSpoof", "backgroundMedia", "viewRaw", "fakeDeafen")
                     .joinToString(",") { "$it:${it in additionalSelections}" } + "}"
         )
         asset.writeText(selected)
@@ -332,8 +334,48 @@ val clickableMentions = bundledPlugin("clickableMentions", "Tap mentions to open
     "Tap an @mention in the message bar to see who it is. Based on ClickableMentions by mwittrien.")
 
 @Suppress("unused")
+val expandBar = bundledPlugin("expandBar", "Expand the message bar",
+    "Adds a button to the top right of the message bar that opens it up tall, so you can see much more of what you're typing.")
+
+@Suppress("unused")
 val silentLeave = bundledPlugin("silentLeave", "Leave group DMs silently",
     "Leave group DMs without the \"left the group\" message. Based on SilentLeave by coder.gg.")
+
+@Suppress("unused")
+val silentEdit = bundledPlugin("silentEdit", "Edit without \"(edited)\"",
+    "Edit a message without the \"(edited)\" tag. Only works while your message is the latest one in the chat: lesbunny sends the new text as a new message and deletes the old one. Older messages are edited the normal way.")
+
+@Suppress("unused")
+val silentDelete = bundledPlugin("silentDelete", "Delete without a trace",
+    "Blanks your message before deleting it, so message loggers on other clients keep nothing.")
+
+@Suppress("unused")
+val localEdit = bundledPlugin("localEdit", "Edit messages on this phone",
+    "Hold any message and change how it reads to you. Only you see the change.")
+
+@Suppress("unused")
+val hypeSquad = bundledPlugin("hypeSquad", "HypeSquad house",
+    "Join or leave a HypeSquad house (Bravery, Brilliance or Balance) from lesbunny settings. Discord limits how often you can change house.")
+
+@Suppress("unused")
+val customIdle = bundledPlugin("customIdle", "Custom idle time",
+    "Choose how long Discord waits before setting you to Idle, or never. Discord's own time is 10 minutes.")
+
+@Suppress("unused")
+val mutualGroupDMs = bundledPlugin("mutualGroupDMs", "Mutual group DMs",
+    "Profiles show the group DMs you share with that person.")
+
+@Suppress("unused")
+val fastDeleteChannels = bundledPlugin("fastDeleteChannels", "Fast delete channels",
+    "Delete a channel without the confirmation, or hold it and tap Delete channel in its menu. Needs Manage Channels. There is no undo.")
+
+@Suppress("unused")
+val pauseInvites = bundledPlugin("pauseInvites", "Pause invites",
+    "Hold a server's icon to pause or resume its invites for a while, to stop a raid. Needs Manage Server.")
+
+@Suppress("unused")
+val platformSpoof = bundledPlugin("platformSpoof", "Platform spoof",
+    "Show as desktop, web or console instead of mobile. Discord doesn't allow this and it could put your account at risk. Use at your own risk.")
 
 @Suppress("unused")
 val guildLurk = bundledPlugin("guildLurk", "Preview servers without joining",
@@ -342,6 +384,10 @@ val guildLurk = bundledPlugin("guildLurk", "Preview servers without joining",
 @Suppress("unused")
 val quietReplies = bundledPlugin("quietReplies", "Reply without pinging",
     "Replies start with the ping off, so nobody gets pinged unless you turn it on.")
+
+@Suppress("unused")
+val viewRaw = bundledPlugin("viewRaw", "View raw data",
+    "Hold a message, channel, server, person or role to read its raw data as JSON and copy it. Email and phone number are left out.")
 
 @Suppress("unused")
 val showTimeoutDuration = bundledPlugin("timeoutDuration", "Show timeout duration",
@@ -358,6 +404,10 @@ val cloneExpressions = bundledPlugin("cloneExpressions", "Clone emojis and stick
 @Suppress("unused")
 val dndBanners = bundledPlugin("dndBanners", "Banners in Do Not Disturb",
     "New messages still pop up at the top while you're on Do Not Disturb, without a sound.")
+
+@Suppress("unused")
+val landscapeFull = bundledPlugin("landscapeFull", "Full-screen chat in landscape",
+    "Chat fills the screen sideways. Swipe from the left for servers and channels.")
 
 @Suppress("unused")
 val copyBios = rawResourcePatch(
@@ -526,6 +576,9 @@ val compressUploads = bytecodePatch(
 
 @Suppress("unused")
 val noTyping = bundledPlugin("noTyping", "Hide typing indicator", "Others won't see when you're typing. You still see when they are.")
+
+@Suppress("unused")
+val fakeDeafen = bundledPlugin("fakeDeafen", "Fake deafen", "Look deafened in a call while you can still hear. Choose whether your mic stays muted.")
 
 @Suppress("unused")
 val quickDelete = bundledPlugin("quickDelete", "Skip delete confirmation", "Messages and link previews are removed right away, with no \"Are you sure?\". It can't be undone.")
@@ -1199,7 +1252,7 @@ val unlockExperiments = bundledPlugin("experiments", "Unlock Discord experiments
 @Suppress("unused")
 val bulkDelete = bytecodePatch(
     name = "Bulk delete messages",
-    description = "Select multiple messages in chat and delete them all at once."
+    description = "Select multiple messages and delete them all at once, in one chat or across channels, servers and DMs."
 ) {
     compatibleWith(discord)
     section(PLUGINS)

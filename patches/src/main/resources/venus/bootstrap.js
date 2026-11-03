@@ -18,6 +18,7 @@
     if (features.favouriteAnything) selectModules([13989, 10035, 10038]);
     if (features.freeNitro) selectModules([1392, 2068, 6243, 6286, 4864, 15066, 7323, 7445]);
     if (features.noTyping) targetModules[12849] = 1;
+    if (features.fakeDeafen) selectModules([14755, 18341]);
     if (features.quickDelete) selectModules([5400, 1128]);
     if (features.noDelete) selectModules([584, 5532, 5534, 1392, 2068, 7445, 8013, 9978, 11114]);
     if (features.jumpToTop) selectModules([12920, 12921, 12922, 9683, 7445, 5532]);
@@ -53,12 +54,22 @@
     if (features.noConfirmPin) selectModules([5400, 1128]);
     if (features.listenAlong) targetModules[14082] = 1;
     if (features.clickableMentions) selectModules([1392, 2068, 2119, 12337]);
+    if (features.expandBar) selectModules([584, 1392, 12337, 12338, 12887, 12818]);
     if (features.silentLeave) selectModules([2068, 7290]);
+    if (features.silentEdit || features.silentDelete) selectModules([584, 1392, 5532, 7445]);
+    if (features.localEdit) selectModules([584, 1392, 5532, 8013, 9978]);
+    if (features.customIdle) selectModules([1087]);
+    if (features.pauseInvites) selectModules([17433, 2090, 4845, 1087]);
+    if (features.fastDeleteChannels) selectModules([10596, 5400, 1128, 2068, 4845, 1087]);
+    if (features.mutualGroupDMs) selectModules([14197, 2068, 1392, 1114]);
+    if (features.platformSpoof) selectModules([14713]);
     if (features.guildLurk) targetModules[13422] = 1;
     if (features.quietReplies) selectModules([1392, 5532, 9990]);
+    if (features.viewRaw) selectModules([9978, 10596, 17245, 10780, 17433, 14015, 7158, 7167]);
     if (features.compressUploads) selectModules([8023, 8046, 10006]);
     if (features.timeoutDuration) selectModules([2119, 2128, 8013]);
     if (features.dndBanners) selectModules([6015, 13511, 13523]);
+    if (features.landscapeFull) targetModules[5075] = 1;
     if (features.voiceDownload) selectModules([1447, 5532, 8013, 11114]);
     if (features.cloneExpressions) selectModules([9839, 10078]);
     if (features.removedAlerts) selectModules([584, 1392, 6377, 7293, 8910, 10002, 14713, 14748]);
@@ -66,7 +77,7 @@
     if (features.experiments) selectModules([584, 1392, 1403]);
     if (features.hideAnything) selectModules([14015, 15735, 15736, 9419, 10331, 16133, 16225, 12892, 12897, 12901, 12908, 12909, 13780, 14204, 15590, 17157, 15046, 8805, 9052, 10858, 12942, 14988, 14994, 14925, 14998, 11678, 11679, 14197, 10939, 7158, 14182, 14101, 17156, 17263, 13151, 12000, 10838, 17949, 16773, 17265, 17881, 17869, 11164, 9978, 13759, 12696, 10650, 13769, 8494, 9873]);
     if (features.voiceOptions) { targetModules[584] = 1; targetModules[11372] = 1; targetModules[6145] = 1; }
-    const revision = "1.20.0-dev.7aa20240.4";
+    const revision = "1.21.0";
     // The Discord build these patches are pinned to (DiscordPatches.kt compatibleWith); shown on the About page.
     const DISCORD_VERSION = "351.11";
     // Module 120 owns setUpDefaltReactNativeEnvironment in this exact asset.
@@ -87,7 +98,8 @@
         accountSwitcher:false, accountSwitcherYouBar:true, accountSwitcherShare:false, accountSwitcherNotify:true, appIcons:false, nitroThemes:false, customThemes:false, customThemesBackground:true, materialYou:false, materialYouColor:"wallpaper", materialYouTint:"balanced",
         iconPacks:false, iconPacksTheme:true,
         messageHighlight:false, messageHighlightThickness:2, messageHighlightBrightness:50, messageHighlightPingColor:"default", serverInfo:false, serverInfoFriends:true, serverEdit:false,
-        fixEmbeds:false, fixEmbedsSites:"", fixEmbedsOptions:"", tenorGifs:false, tenorGifsSource:"both", hideBlocked:false, hideBlockedBlocked:true, hideBlockedIgnored:true, hideBlockedReplies:false, hideBlockedCloseDms:false, bulkDelete:false, bulkDeleteConfirm:true, bulkDeleteIncludeCached:true, experiments:false, noHandsfree:false, voiceOptions:false, voiceOptionsVolume:false, voiceOptionsVolumeLevel:50, voiceOptionsOutput:"default", voiceOptionsJoinSound:true, voiceOptionsLeaveSound:true, voiceOptionsSoundVolume:100, voiceOptionsExit:false, voiceOptionsExitSound:"", cleanChannels:false, cleanChannelsEmoji:true, cleanChannelsSymbols:true, cleanChannelsFonts:true, cleanChannelsSpaces:false, anonFiles:false, staffTag:false, staffTagOwner:true, staffTagAdmin:true, staffTagManager:true, staffTagMod:true, staffTagCrown:true, removedAlerts:false, removedAlertsFriends:true, removedAlertsServers:true, removedAlertsClosed:true, removedAlertsPush:false, fullImages:false, fullImagesChat:true, fullImagesViewer:true, fullImagesGifs:false, fullImagesAvatars:true, alwaysTrust:false, alwaysTrustLinks:true, alwaysTrustFiles:true, noConfirmPin:false, clickableMentions:false, silentLeave:false, guildLurk:false, guildLurkIds:"", quietReplies:false, timeoutDuration:false, dndBanners:false, voiceDownload:false, cloneExpressions:false, listenAlong:false, listenAlongOffset:0, quietRepliesGuilds:true, quietRepliesGroups:true, quietRepliesMentioned:false, compressUploads:false, compressUploadsPhotos:true, compressUploadsVideos:true, compressUploadsAudio:true, hideAnything:false, hideAnythingSpots:"", language:"auto", hiddenFeatures:"" };
+        fixEmbeds:false, fixEmbedsSites:"", fixEmbedsOptions:"", tenorGifs:false, tenorGifsSource:"both", hideBlocked:false, hideBlockedBlocked:true, hideBlockedIgnored:true, hideBlockedReplies:false, hideBlockedCloseDms:false, bulkDelete:false, bulkDeleteConfirm:true, bulkDeleteIncludeCached:true, experiments:false, noHandsfree:false, voiceOptions:false, voiceOptionsVolume:false, voiceOptionsVolumeLevel:50, voiceOptionsOutput:"default", voiceOptionsJoinSound:true, voiceOptionsLeaveSound:true, voiceOptionsSoundVolume:100, voiceOptionsExit:false, voiceOptionsExitSound:"", cleanChannels:false, cleanChannelsEmoji:true, cleanChannelsSymbols:true, cleanChannelsFonts:true, cleanChannelsSpaces:false, anonFiles:false, staffTag:false, staffTagOwner:true, staffTagAdmin:true, staffTagManager:true, staffTagMod:true, staffTagCrown:true, removedAlerts:false, removedAlertsFriends:true, removedAlertsServers:true, removedAlertsClosed:true, removedAlertsPush:false, fullImages:false, fullImagesChat:true, fullImagesViewer:true, fullImagesGifs:false, fullImagesAvatars:true, alwaysTrust:false, alwaysTrustLinks:true, alwaysTrustFiles:true, noConfirmPin:false, clickableMentions:false, expandBar:false, expandBarSending:true, expandBarChats:true, silentLeave:false, silentEdit:false, silentEditNotice:true, silentDelete:false, localEdit:false, localEditMark:true, guildLurk:false, guildLurkIds:"", quietReplies:false, viewRaw:false, viewRawMessages:true, viewRawChannels:true, viewRawServers:true, viewRawPeople:true, viewRawRoles:true, viewRawHideContact:true, viewRawWrap:true, timeoutDuration:false, dndBanners:false, voiceDownload:false, cloneExpressions:false, listenAlong:false, listenAlongOffset:0, backgroundMedia:false, backgroundMediaAudio:true, backgroundMediaVideo:true, backgroundMediaSkip:10, landscapeFull:false, quietRepliesGuilds:true, quietRepliesGroups:true, quietRepliesMentioned:false, compressUploads:false, compressUploadsPhotos:true, compressUploadsVideos:true, compressUploadsAudio:true, hideAnything:false, hideAnythingSpots:"", fakeDeafen:false, fakeDeafenMuteMic:true, language:"auto", hiddenFeatures:"",
+        hypeSquad:false, customIdle:false, customIdleMinutes:10, pauseInvites:false, fastDeleteChannels:false, fastDeleteChannelsConfirm:true, fastDeleteChannelsMenu:true, mutualGroupDMs:false, platformSpoof:false, platformSpoofDevice:"desktop" };
     // The settings every feature starts from, for Reset to defaults on the Backup page.
     let DEFAULT_SETTINGS = null;
     function defaultSettings() {
@@ -104,7 +116,8 @@
             accountSwitcher: false, accountSwitcherYouBar: true, accountSwitcherShare: false, accountSwitcherNotify: true, appIcons: false, nitroThemes: false, customThemes: false, customThemesBackground: true, materialYou: false, materialYouColor: "wallpaper", materialYouTint: "balanced",
             iconPacks: false, iconPacksTheme: true,
             messageHighlight: false, messageHighlightThickness: 2, messageHighlightBrightness: 50, messageHighlightPingColor: "default", serverInfo: false, serverInfoFriends: true, serverEdit: false,
-            fixEmbeds: false, fixEmbedsSites: "", fixEmbedsOptions: "", tenorGifs: false, tenorGifsSource: "both", hideBlocked: false, hideBlockedBlocked: true, hideBlockedIgnored: true, hideBlockedReplies: false, hideBlockedCloseDms: false, bulkDelete: false, bulkDeleteConfirm: true, bulkDeleteIncludeCached: true, experiments: false, noHandsfree: false, voiceOptions: false, voiceOptionsVolume: false, voiceOptionsVolumeLevel: 50, voiceOptionsOutput: "default", voiceOptionsJoinSound: true, voiceOptionsLeaveSound: true, voiceOptionsSoundVolume: 100, voiceOptionsExit: false, voiceOptionsExitSound: "", cleanChannels: false, cleanChannelsEmoji: true, cleanChannelsSymbols: true, cleanChannelsFonts: true, cleanChannelsSpaces: false, anonFiles: false, staffTag: false, staffTagOwner: true, staffTagAdmin: true, staffTagManager: true, staffTagMod: true, staffTagCrown: true, removedAlerts: false, removedAlertsFriends: true, removedAlertsServers: true, removedAlertsClosed: true, removedAlertsPush: false, fullImages: false, fullImagesChat: true, fullImagesViewer: true, fullImagesGifs: false, fullImagesAvatars: true, alwaysTrust: false, alwaysTrustLinks: true, alwaysTrustFiles: true, noConfirmPin: false, clickableMentions: false, silentLeave: false, guildLurk: false, guildLurkIds: "", quietReplies: false, timeoutDuration: false, dndBanners: false, voiceDownload: false, cloneExpressions: false, listenAlong: false, listenAlongOffset: 0, quietRepliesGuilds: true, quietRepliesGroups: true, quietRepliesMentioned: false, compressUploads: false, compressUploadsPhotos: true, compressUploadsVideos: true, compressUploadsAudio: true, hideAnything: false, hideAnythingSpots: "", language: "auto", hiddenFeatures: ""
+            fixEmbeds: false, fixEmbedsSites: "", fixEmbedsOptions: "", tenorGifs: false, tenorGifsSource: "both", hideBlocked: false, hideBlockedBlocked: true, hideBlockedIgnored: true, hideBlockedReplies: false, hideBlockedCloseDms: false, bulkDelete: false, bulkDeleteConfirm: true, bulkDeleteIncludeCached: true, experiments: false, noHandsfree: false, voiceOptions: false, voiceOptionsVolume: false, voiceOptionsVolumeLevel: 50, voiceOptionsOutput: "default", voiceOptionsJoinSound: true, voiceOptionsLeaveSound: true, voiceOptionsSoundVolume: 100, voiceOptionsExit: false, voiceOptionsExitSound: "", cleanChannels: false, cleanChannelsEmoji: true, cleanChannelsSymbols: true, cleanChannelsFonts: true, cleanChannelsSpaces: false, anonFiles: false, staffTag: false, staffTagOwner: true, staffTagAdmin: true, staffTagManager: true, staffTagMod: true, staffTagCrown: true, removedAlerts: false, removedAlertsFriends: true, removedAlertsServers: true, removedAlertsClosed: true, removedAlertsPush: false, fullImages: false, fullImagesChat: true, fullImagesViewer: true, fullImagesGifs: false, fullImagesAvatars: true, alwaysTrust: false, alwaysTrustLinks: true, alwaysTrustFiles: true, noConfirmPin: false, clickableMentions: false, expandBar: false, expandBarSending: true, expandBarChats: true, silentLeave: false, silentEdit: false, silentEditNotice: true, silentDelete: false, localEdit: false, localEditMark: true, guildLurk: false, guildLurkIds: "", quietReplies: false, viewRaw: false, viewRawMessages: true, viewRawChannels: true, viewRawServers: true, viewRawPeople: true, viewRawRoles: true, viewRawHideContact: true, viewRawWrap: true, timeoutDuration: false, dndBanners: false, voiceDownload: false, cloneExpressions: false, listenAlong: false, listenAlongOffset: 0, backgroundMedia: false, backgroundMediaAudio: true, backgroundMediaVideo: true, backgroundMediaSkip: 10, landscapeFull: false, quietRepliesGuilds: true, quietRepliesGroups: true, quietRepliesMentioned: false, compressUploads: false, compressUploadsPhotos: true, compressUploadsVideos: true, compressUploadsAudio: true, hideAnything: false, hideAnythingSpots: "", fakeDeafen: false, fakeDeafenMuteMic: true, language: "auto", hiddenFeatures: "",
+            hypeSquad: false, customIdle: false, customIdleMinutes: 10, pauseInvites: false, fastDeleteChannels: false, fastDeleteChannelsConfirm: true, fastDeleteChannelsMenu: true, mutualGroupDMs: false, platformSpoof: false, platformSpoofDevice: "desktop"
         }));
     }
     // Backup and restore (#68): when you last saved a backup, and whether a restore is being applied right now.
@@ -139,6 +152,8 @@
     const MAX_DELETED = 999999, ARCHIVE_BYTES = 64 * 1024 * 1024;
     // What the Read all button clears: servers, DMs, or both.
     const READ_ALL_MODES = ["guilds", "dms", "both"];
+    // The devices Platform spoof can show, and Discord's own time before it sets you to Idle (minutes).
+    const SPOOF_DEVICES = ["desktop", "web", "console"], CUSTOM_IDLE_DEFAULT = 10;
     // What double-tapping your own message does: edit it, or reply like anyone else's.
     const GESTURE_OWN_MODES = ["edit", "reply"];
     // Which language Translate messages translates into: Discord's own language, the phone's, or one you pick (#79).
@@ -292,6 +307,7 @@
     function languageChanged() {
         i18n.version++; i18n.shownIn = uiLanguage();
         diagSendStrings();
+        if (features.backgroundMedia) backgroundMediaLabels();
         notify("*");
         // Only the "Translated from ..." line under a translation is in lesbunny's language: redraw just those rows,
         // not every message on screen, and nothing while the feature is off or that line isn't shown.
@@ -354,6 +370,7 @@
         if (features.hideAnything && settings.hideAnythingSpots) { const labels = hideRowLabels(); if (labels) extra.hideAnythingLabels = labels; }
         if (features.materialYou && materialYou.system) extra.materialYouSystem = materialYou.system;
         if (features.serverEdit && serverEdits.size) extra.serverEdits = serverEditData(false);
+        if (features.localEdit && localEdits.size) extra.localEdits = localEditData();
         if ((features.nitroThemes || features.accountSwitcher) && nitroThemeHasAny()) extra.nitroThemes = nitroThemeData();
         return JSON.stringify(Object.keys(extra).length ? Object.assign({}, settings, extra) : settings);
     }
@@ -444,6 +461,9 @@
         if (key === "fixEmbedsOptions") return fixOptionsClean(value);
         if (key === "translateSkip") return translateSkipText(value);
         if (key === "guildLurkIds") return guildLurkText(value);
+        if (key === "customIdleMinutes") return customIdleValue(value);
+        if (key === "platformSpoofDevice") return SPOOF_DEVICES.includes(value) ? value : undefined;
+        if (key === "backgroundMediaSkip") return [5, 10, 15, 30].includes(value) ? value : undefined;
         if (key === "hiddenFeatures") return hiddenFeaturesText(value);
         if (key === "hideAnythingSpots") return hideSpotsText(value);
         if (key === "materialYouColor") return myIsColor(value) ? value.toLowerCase() : undefined;
@@ -573,6 +593,18 @@
             if (limit === settings.noDeleteLimit && status.storage !== "loading" && status.storage !== "waiting") return true;
             settings.noDeleteLimit = limit; dirty.add(key); trimDeleted(); save(); notify(key); return true;
         }
+        if (key === "customIdleMinutes") {
+            const mins = customIdleValue(value);
+            if (mins === settings.customIdleMinutes && status.storage !== "loading" && status.storage !== "waiting") return true;
+            settings.customIdleMinutes = mins; dirty.add(key); save(); notify(key); return true;
+        }
+        if (key === "platformSpoofDevice") {
+            if (!SPOOF_DEVICES.includes(value)) return false;
+            if (settings.platformSpoofDevice === value && status.storage !== "loading" && status.storage !== "waiting") return true;
+            settings.platformSpoofDevice = value; dirty.add(key); save(); notify(key);
+            if (features.platformSpoof && !backup.restoring && status.storage !== "loading" && status.storage !== "waiting") later(platformSpoofAsk, 0);
+            return true;
+        }
         if (key === "badgesCycleMinutes") {
             const mins = badgeCycleMinutes(value);
             if (mins === settings.badgesCycleMinutes && status.storage !== "loading" && status.storage !== "waiting") return true;
@@ -637,6 +669,7 @@
         }
         if (features.quests && featureFor(key) === "quests") questsSettingChanged(key, value);
         if (features.badges && featureFor(key) === "badges") badgesSettingChanged(key, value);
+        if (key === "platformSpoof" && features.platformSpoof && !backup.restoring && status.storage !== "loading" && status.storage !== "waiting") later(platformSpoofAsk, 0);
         if (key === "systemFont" && features.systemFont && !backup.restoring && status.storage !== "loading" && status.storage !== "waiting" && value !== fontInUse) later(() => askRestart("font"), 0);
         if (key === "systemEmoji" && features.systemEmoji && !backup.restoring && status.storage !== "loading" && status.storage !== "waiting" && value !== emojiInUse) later(() => askRestart("emoji"), 0);
         save();
@@ -661,7 +694,7 @@
         if (features.hideBlocked && featureFor(key) === "hideBlocked") hideBlockedChanged();
         if (features.staffTag && featureFor(key) === "staffTag") later(staffTagChanged, 0);
         if (features.bulkDelete && key === "bulkDelete" && !value) bulkDeleteCancel();
-        if (features.bulkDelete && (key === "bulkDeleteIncludeCached" || key === "noDelete") && bulkDelete.active) { bulkDeletePruneKept(); bulkDeleteRedrawChannel(bulkDelete.channelId); }
+        if (features.bulkDelete && (key === "bulkDeleteIncludeCached" || key === "noDelete") && bulkDelete.active) { bulkDeletePruneKept(); bulkDeleteRedrawAll(); }
         if (features.experiments && key === "experiments") { if (value) experimentsEnable(); else if (experiments.unlocked && !backup.restoring) later(experimentsAskReopen, 0); }
         if (features.quests || features.badges || features.userNotif || features.removedAlerts) backgroundSync();
         return true;
@@ -718,6 +751,7 @@
                 }
                 if (features.removedAlerts) removedLoad(loaded.removedSeen);
                 if (features.serverEdit && !serverEdit.dirty) serverEditLoad(serverEditClean(loaded.serverEdits, false));
+                if (features.localEdit) localEditLoad(loaded.localEdits);
                 if (features.badges) {
                     const accounts = loaded.badgesAccounts, played = loaded.badgesPlayed, snowflake = id => typeof id === "string" && /^\d{17,20}$/.test(id);
                     if (Array.isArray(accounts)) accounts.slice(0, 50).forEach(id => { if (snowflake(id)) badges.accounts.add(id); });
@@ -739,6 +773,7 @@
             }
             status.storage = "ready";
             debugLogReady();
+            if (features.backgroundMedia) backgroundMediaStart();
             if (features.nitroThemes && settings.nitroThemes) nitroThemeRecheck();
             if ((features.nitroThemes || features.accountSwitcher) && nitroThemeHasAny()) later(nitroThemeReapply, 0);
             if (!starter.done && Object.keys(FEATURE_ICONS).some(key => features[key] && settings[key])) starter.done = true;
@@ -835,7 +870,14 @@
         drainSizes();
         return entry.promise;
     }
-    function el() { return React.createElement.apply(React,arguments); }
+    // Every element lesbunny draws goes through here with two to four arguments: those skip the arguments object and apply, and
+    // keep the same argument count for createElement (Hermes HBC98: 15.6 -> 11.7 us per 100 el(type, props) calls, 1.33x;
+    // 16.1 -> 12.7 us with one child, 1.23x; 16.4 -> 14.2 us with two, 1.10x).
+    function el(type, props, a, b) {
+        const n = arguments.length;
+        return n === 2 ? React.createElement(type, props) : n === 3 ? React.createElement(type, props, a) :
+            n === 4 ? React.createElement(type, props, a, b) : React.createElement.apply(React, arguments);
+    }
     // React subscribes only after the first commit, so a change between rendering and subscribing was lost. On a cold
     // start Discord reopens the last chat while the saved theme is still being read, and its "loaded" notify landed in
     // that gap: chat stayed without the theme background until something else redrew it (#84).
@@ -1131,7 +1173,7 @@
     const featureFor = key => {
         const cached = featureTable[key];
         if (cached !== undefined) return cached;
-        return featureTable[key] = key === "reviewWarning" ? "reviewDB" : key === "emojis" || key === "stickers" || key === "hyperlinks" ? "freeNitro" : /^noDelete[A-Z]/.test(key) ? "noDelete" : /^pi[A-Z]/.test(key) ? "platformIndicators" : key === "pastelAll" || key === "pastelContent" ? "pastelize" : key === "readAllMode" ? "readAll" : /^compressUploads[A-Z]/.test(key) ? "compressUploads" : /^quests[A-Z]/.test(key) ? "quests" : /^badges[A-Z]/.test(key) ? "badges" : /^gesture[A-Z]/.test(key) ? "gestures" : /^translate[A-Z]/.test(key) ? "translate" : /^removedAlerts[A-Z]/.test(key) ? "removedAlerts" : /^userNotif[A-Z]/.test(key) ? "userNotif" : /^accountSwitcher[A-Z]/.test(key) ? "accountSwitcher" : /^hiddenChannels[A-Z]/.test(key) ? "hiddenChannels" : /^customThemes[A-Z]/.test(key) ? "customThemes" : /^materialYou[A-Z]/.test(key) ? "materialYou" : /^iconPacks[A-Z]/.test(key) ? "iconPacks" : /^messageHighlight[A-Z]/.test(key) ? "messageHighlight" : /^serverInfo[A-Z]/.test(key) ? "serverInfo" : /^fixEmbeds[A-Z]/.test(key) ? "fixEmbeds" : /^tenorGifs[A-Z]/.test(key) ? "tenorGifs" : /^hideBlocked[A-Z]/.test(key) ? "hideBlocked" : /^bulkDelete[A-Z]/.test(key) ? "bulkDelete" : key === "systemFontSource" ? "systemFont" : key === "systemEmojiSource" ? "systemEmoji" : /^cleanChannels[A-Z]/.test(key) ? "cleanChannels" : /^voiceOptions[A-Z]/.test(key) ? "voiceOptions" : /^anonFiles[A-Z]/.test(key) ? "anonFiles" : /^staffTag[A-Z]/.test(key) ? "staffTag" : /^fullImages[A-Z]/.test(key) ? "fullImages" : /^alwaysTrust[A-Z]/.test(key) ? "alwaysTrust" : /^quietReplies[A-Z]/.test(key) ? "quietReplies" : /^hideAnything[A-Z]/.test(key) ? "hideAnything" : /^guildLurk[A-Z]/.test(key) ? "guildLurk" : /^listenAlong[A-Z]/.test(key) ? "listenAlong" : key;
+        return featureTable[key] = key === "reviewWarning" ? "reviewDB" : key === "emojis" || key === "stickers" || key === "hyperlinks" ? "freeNitro" : /^noDelete[A-Z]/.test(key) ? "noDelete" : /^pi[A-Z]/.test(key) ? "platformIndicators" : key === "pastelAll" || key === "pastelContent" ? "pastelize" : key === "readAllMode" ? "readAll" : /^compressUploads[A-Z]/.test(key) ? "compressUploads" : /^quests[A-Z]/.test(key) ? "quests" : /^badges[A-Z]/.test(key) ? "badges" : /^gesture[A-Z]/.test(key) ? "gestures" : /^translate[A-Z]/.test(key) ? "translate" : /^removedAlerts[A-Z]/.test(key) ? "removedAlerts" : /^userNotif[A-Z]/.test(key) ? "userNotif" : /^accountSwitcher[A-Z]/.test(key) ? "accountSwitcher" : /^hiddenChannels[A-Z]/.test(key) ? "hiddenChannels" : /^customThemes[A-Z]/.test(key) ? "customThemes" : /^materialYou[A-Z]/.test(key) ? "materialYou" : /^iconPacks[A-Z]/.test(key) ? "iconPacks" : /^messageHighlight[A-Z]/.test(key) ? "messageHighlight" : /^serverInfo[A-Z]/.test(key) ? "serverInfo" : /^fixEmbeds[A-Z]/.test(key) ? "fixEmbeds" : /^tenorGifs[A-Z]/.test(key) ? "tenorGifs" : /^hideBlocked[A-Z]/.test(key) ? "hideBlocked" : /^bulkDelete[A-Z]/.test(key) ? "bulkDelete" : /^expandBar[A-Z]/.test(key) ? "expandBar" : key === "systemFontSource" ? "systemFont" : key === "systemEmojiSource" ? "systemEmoji" : /^cleanChannels[A-Z]/.test(key) ? "cleanChannels" : /^voiceOptions[A-Z]/.test(key) ? "voiceOptions" : /^anonFiles[A-Z]/.test(key) ? "anonFiles" : /^staffTag[A-Z]/.test(key) ? "staffTag" : /^fullImages[A-Z]/.test(key) ? "fullImages" : /^alwaysTrust[A-Z]/.test(key) ? "alwaysTrust" : /^quietReplies[A-Z]/.test(key) ? "quietReplies" : /^viewRaw[A-Z]/.test(key) ? "viewRaw" : /^hideAnything[A-Z]/.test(key) ? "hideAnything" : /^guildLurk[A-Z]/.test(key) ? "guildLurk" : /^customIdle[A-Z]/.test(key) ? "customIdle" : /^fastDeleteChannels[A-Z]/.test(key) ? "fastDeleteChannels" : /^platformSpoof[A-Z]/.test(key) ? "platformSpoof" : /^silentEdit[A-Z]/.test(key) ? "silentEdit" : /^localEdit[A-Z]/.test(key) ? "localEdit" : /^listenAlong[A-Z]/.test(key) ? "listenAlong" : /^backgroundMedia[A-Z]/.test(key) ? "backgroundMedia" : /^fakeDeafen[A-Z]/.test(key) ? "fakeDeafen" : key;
     };
     // Section titles are read whenever Discord draws the list, so they follow the language too. "lesbunny" is a name.
     function section(label, keys) {
@@ -1158,7 +1200,7 @@
     }
     // Discord's own icon for each feature row, from its design system. Resolved when a row first draws, never
     // while Discord builds its settings, and the Account icon stands in if one ever goes missing.
-    const FEATURE_ICONS = {noDelete:[5148, "TrashIcon"], translate:[9415, "LanguageIcon"], gestures:[9252, "ReactionIcon"],
+    const FEATURE_ICONS = {noDelete:[5148, "TrashIcon"], fakeDeafen:[9074, "HeadphonesSlashIcon"], translate:[9415, "LanguageIcon"], gestures:[9252, "ReactionIcon"],
         quickDelete:[6573, "CircleXIcon"], jumpToTop:[10796, "ArrowLargeUpIcon"], favouriteAnything:[9851, "StarIcon"],
         freeNitro:[9327, "NitroWheelIcon"], voice:[13531, "WaveformIcon"], splitMessages:[9641, "PaperIcon"], noTyping:[13747, "KeyboardIcon"],
         picker:[10327, "AttachmentIcon"], anonFiles:[6927, "EyeSlashIcon"], pastelize:[16320, "PaintPaletteIcon"], platformIndicators:[15994, "LaptopPhoneIcon"],
@@ -1166,7 +1208,8 @@
         hiddenChannels:[8495, "LockIcon"], systemFont:[16730, "LettersIcon"], systemEmoji:[13827, "ChatSmileIcon"],
         youBarSettings:[7368, "SettingsIcon"], quests:[13929, "QuestsIcon"],
         badges:[9211, "TrophyIcon"], userNotif:[9045, "BellIcon"], accountSwitcher:[8489, "GroupIcon"], appIcons:[8506, "AppsIcon"],
-        compressUploads:[11636, "FileUpIcon"], customThemes:[16412, "EyeDropperIcon"], iconPacks:[11449, "ImageSparkleIcon"], messageHighlight:[17627, "PaintbrushThinIcon"], serverInfo:[5145, "CircleInformationIcon"], serverEdit:[10023, "PencilIcon"], fixEmbeds:[13836, "EmbedIcon"], tenorGifs:[10051, "GifIcon"], nitroThemes:[11733, "SparklesIcon"], materialYou:[16320, "PaintPaletteIcon"], hideBlocked:[11619, "ChatShieldIcon"], bulkDelete:[7144, "CircleCheckIcon"], experiments:[16650, "BeakerIcon"], cleanChannels:[12158, "MagicWandIcon"], noHandsfree:[13214, "HeadphonesIcon"], voiceOptions:[8501, "VoiceNormalIcon"], staffTag:[10563, "CrownIcon"], removedAlerts:[5135, "UserMinusIcon"], hideAnything:[10561, "XLargeIcon"], fullImages:[12328, "ImagesIcon"], alwaysTrust:[10733, "ShieldIcon"], noConfirmPin:[10641, "PinIcon"], clickableMentions:[8490, "AtIcon"], quietReplies:[10654, "BellSlashIcon"], timeoutDuration:[5150, "ClockIcon"], dndBanners:[13603, "BellZIcon"], voiceDownload:[5143, "DownloadIcon"], cloneExpressions:[11657, "ImagePlusIcon"], listenAlong:[13214, "HeadphonesIcon"], silentLeave:[11384, "DoorExitIcon"], guildLurk:[6929, "EyeIcon"]};
+        compressUploads:[11636, "FileUpIcon"], customThemes:[16412, "EyeDropperIcon"], iconPacks:[11449, "ImageSparkleIcon"], messageHighlight:[17627, "PaintbrushThinIcon"], serverInfo:[5145, "CircleInformationIcon"], serverEdit:[10023, "PencilIcon"], fixEmbeds:[13836, "EmbedIcon"], tenorGifs:[10051, "GifIcon"], nitroThemes:[11733, "SparklesIcon"], materialYou:[16320, "PaintPaletteIcon"], hideBlocked:[11619, "ChatShieldIcon"], bulkDelete:[7144, "CircleCheckIcon"], experiments:[16650, "BeakerIcon"], cleanChannels:[12158, "MagicWandIcon"], noHandsfree:[13214, "HeadphonesIcon"], voiceOptions:[8501, "VoiceNormalIcon"], staffTag:[10563, "CrownIcon"], removedAlerts:[5135, "UserMinusIcon"], hideAnything:[10561, "XLargeIcon"], fullImages:[12328, "ImagesIcon"], alwaysTrust:[10733, "ShieldIcon"], noConfirmPin:[10641, "PinIcon"], clickableMentions:[8490, "AtIcon"], expandBar:[16089, "FullscreenEnterIcon"], quietReplies:[10654, "BellSlashIcon"], viewRaw:[12003, "FileIcon"], timeoutDuration:[5150, "ClockIcon"], dndBanners:[13603, "BellZIcon"], voiceDownload:[5143, "DownloadIcon"], cloneExpressions:[11657, "ImagePlusIcon"], listenAlong:[13214, "HeadphonesIcon"], backgroundMedia:[8674, "PlayIcon"], landscapeFull:[16089, "FullscreenEnterIcon"], silentLeave:[11384, "DoorExitIcon"], guildLurk:[6929, "EyeIcon"], silentEdit:[13745, "PencilSparkleIcon"], silentDelete:[5148, "TrashIcon"], localEdit:[10023, "PencilIcon"],
+        hypeSquad:[18747, "HomeIcon"], customIdle:[14205, "UserClockIcon"], pauseInvites:[8676, "PauseIcon"], fastDeleteChannels:[18679, "ChannelListIcon"], mutualGroupDMs:[8489, "GroupIcon"], platformSpoof:[5133, "UserPlatformIcon"]};
     const venusIcons = new Map();
     function venusIcon(id, name, fallback) {
         const slot = id + ":" + name;
@@ -1214,13 +1257,26 @@
         noConfirmPin:["NoConfirmPin", "Pin", "Unpin", "Pinned messages"],
         listenAlong:["Listen along", "Spotify", "Music", "Friends", "Profile", "Sync"],
         clickableMentions:["ClickableMentions", "Mentions", "Profile", "Message bar"],
+        expandBar:["Expand", "Collapse", "Message bar", "Composer", "Text box", "Text field", "Tall", "Bigger", "Resize", "Long message", "Arrows"],
         silentLeave:["SilentLeave", "Silent leave", "Group DM", "Leave group"],
+        silentEdit:["Silent edit", "Edited", "(edited)", "Edit message", "No edit mark"],
+        silentDelete:["Silent delete", "Anti log", "Message logger", "Delete without logs"],
+        localEdit:["Local edit", "Edit locally", "Fake message", "Edit other people's messages"],
+        hypeSquad:["HypeSquad", "House", "Bravery", "Brilliance", "Balance", "Badge"],
+        customIdle:["Custom idle", "Idle", "AFK", "Away", "Idle timeout", "Status"],
+        pauseInvites:["Pause invites", "Invites", "Lock invites", "Raid", "Security"],
+        fastDeleteChannels:["Delete channel", "Fast delete", "Remove channel", "Skip confirmation"],
+        mutualGroupDMs:["Mutual group DMs", "Shared groups", "Mutual groups", "Group chats"],
+        backgroundMedia:["Background", "Picture in picture", "PiP", "Voice messages", "Audio", "Videos", "Lock screen", "Notification", "Screen off", "Skip buttons", "Bluetooth"],
+        platformSpoof:["Platform spoof", "Device", "Mobile", "Desktop", "Web", "Console", "Fake platform"],
         guildLurk:["GuildLurk", "Guild lurk", "Lurk", "Lurker", "Preview", "Invite link", "Server ID"],
         timeoutDuration:["Timeout", "Timed out", "Muted", "Mute", "Communication disabled", "Moderation", "ShowTimeoutDuration"],
         cloneExpressions:["Clone", "Copy", "Steal", "Emoji", "Emojis", "Sticker", "Stickers", "Expressions", "ExpressionCloner", "Add to a server"],
         voiceDownload:["Voice message", "Voice messages", "Download", "Save", "Audio", "Recording", "VoiceDownload"],
         dndBanners:["Do Not Disturb", "DND", "Banner", "Banners", "In-app notifications", "Pop-up", "Focus"],
+        landscapeFull:["Landscape", "Sideways", "Rotate", "Full screen", "Sidebar", "Channel list"],
         compressUploads:["Compress", "Compression", "Shrink", "Smaller", "Resize", "File size", "Too big", "Too large", "Upload limit", "Size limit", "Nitro", "Video", "Photo", "Audio", "Attachments"],
+        viewRaw:["Raw", "JSON", "Data", "Developer", "Inspect", "Debug", "ID", "IDs", "Message", "Channel", "Thread", "Forum", "Server", "User", "Role", "Copy", "ViewRaw"],
         quietReplies:["Ping", "Pings", "Mention", "Mentions", "Reply", "Replies", "@ ON", "@ OFF", "Notification", "Servers", "Group DMs", "When they mentioned you", "Silent replies", "No ping"],
         fullImages:["High-res profile pictures", "HighResProfileImages", "Avatars", "Profile pictures", "Banners", "Uncompressed", "Uncompressed images", "Original", "Full quality", "Lossless", "Compression", "Blurry", "Thumbnail", "Resolution", "Pictures", "Photos"],
         removedAlerts:["Removed", "Unfriend", "Friend", "Kicked", "Banned", "Server", "Left", "Alert", "Notifier", "Relationship", "Connection", "Removed connection alerts", "Relationship notifier", "Notify"],
@@ -1228,6 +1284,7 @@
         experiments:["Dev Tools", "Experiments", "Experiment", "Developer", "Staff"],
         noHandsfree:["Bluetooth", "Headphones", "Hands-free", "Calls", "Voice channels", "Microphone"],
         voiceOptions:["Soundboard", "Goodbye sound", "Call volume", "Chime volume", "Mute everyone", "Speaker", "Earpiece", "Bluetooth", "Wired headset", "Headphones", "Output", "Join chime", "Leave chime", "Voice channels", "Notification", "Mute"],
+        fakeDeafen:["Deafen", "Fake deafen", "Headphones", "Calls", "Voice channels", "Microphone"],
         bulkDelete:["Select Messages", "Select all", "Delete", "Clear kept deleted messages", "Include kept deleted messages", "Ask before deleting"],
         badges:["Game time", "Unique games", "Switch games every", "Games at once", "Add hours now", "Advanced", "Hours Played", "Unique Games Played", "Years Active", "Personalization"]};
     function searchFold(text) {
@@ -1696,8 +1753,10 @@
         withOptions("sending", "compressUploads", "VENUS_COMPRESSUPLOADS", "Compress big files", "Photos, videos and audio over Discord's file size limit are made smaller to fit as you send them, instead of being refused.", "Compress big files", CompressUploadsSettings);
         withOptions("sending", "quietReplies", "VENUS_QUIETREPLIES", "Reply without pinging", "Replies start with the ping off, so nobody gets pinged unless you turn it on.", "Reply without pinging", QuietRepliesSettings);
         toggle("messages", "voiceDownload", "Download voice messages", "A Download button under each voice message saves it to your phone.");
+        withOptions("messages", "backgroundMedia", "VENUS_BACKGROUNDMEDIA", "Keep media playing", "Voice messages and audio keep playing when you leave Discord or turn off the screen, and videos pop out into a small window.", "Keep media playing", BackgroundMediaSettings);
         toggle("messages", "dndBanners", "Banners in Do Not Disturb", "New messages still pop up at the top while you're on Do Not Disturb, without a sound.");
         toggle("sending", "clickableMentions", "Tap mentions to open profiles", "Tap an @mention in the message bar to see who it is.");
+        withOptions("sending", "expandBar", "VENUS_EXPANDBAR", "Expand the message bar", "A button in the corner of the message bar opens it up tall, so you can see more of what you type.", "Expand message bar", ExpandBarSettings);
         // People
         withOptions("people", "pastelize", "VENUS_PASTELIZE", "Pastel name colors", "Names without a role color get a soft pastel one.", "Pastel names",
             () => ({page:PastelSettings, sections:[section("Colors", [option("pastelAll", "Replace role colors", "Every name uses its pastel color, even with a role color.", "VENUS_PASTELIZE"),
@@ -1711,7 +1770,14 @@
         toggle("people", "copyBios", "Copy profile bios", "Hold a bio to select and copy it.");
         toggle("servers", "cloneExpressions", "Clone emojis and stickers", "Tap a custom emoji or sticker in chat to add it to one of your servers.");
         toggle("people", "timeoutDuration", "Show timeout duration", "A tag next to timed-out people says how long until they can talk again.");
+        withOptions("people", "hypeSquad", "VENUS_HYPESQUAD", "HypeSquad house", "Join or leave a HypeSquad house from here.", "HypeSquad", HypeSquadSettings);
+        withOptions("people", "customIdle", "VENUS_CUSTOMIDLE", "Custom idle time", "Choose when Discord sets you to Idle, or never.", "Idle time", CustomIdleSettings);
+        withOptions("people", "platformSpoof", "VENUS_PLATFORMSPOOF", "Platform spoof", "Show as desktop, web or console instead of mobile. Discord doesn't allow this.", "Platform spoof", PlatformSpoofSettings);
+        toggle("people", "mutualGroupDMs", "Mutual group DMs", "Profiles show the group DMs you share with that person.");
         toggle("people", "silentLeave", "Leave group DMs silently", "Leave group DMs without the \"left the group\" message.");
+        withOptions("messages", "silentEdit", "VENUS_SILENTEDIT", "Edit without the (edited) mark", "Only works when your message is the latest in the chat. Others see a new message, not an edit.", "Silent edit", SilentEditSettings);
+        toggle("messages", "silentDelete", "Delete without a trace", "Blanks your message before deleting it, so message loggers have nothing to keep.");
+        withOptions("messages", "localEdit", "VENUS_LOCALEDIT", "Edit messages locally", "Change how any message reads on this phone. Only you see it.", "Edit locally", LocalEditSettings);
         withOptions("people", "reviewDB", "VENUS_REVIEWDB", "User and server reviews", "Read and write ReviewDB reviews on profiles and servers.", "Reviews", ReviewSettings);
         withOptions("people", "userNotif", "VENUS_USERNOTIF", "User activity notifications", "Get notified when chosen people change status, type or message.", "Activity notifications", UserNotifSettings);
         // The two logs open from their feature's page, one level below it, like Discord's own nested settings.
@@ -1721,9 +1787,12 @@
         // Servers
         withOptions("servers", "readAll", "VENUS_READALL", "Read all button", "A button that marks servers and DMs as read.", "Read all", ReadAllSettings);
         withOptions("servers", "hiddenChannels", "VENUS_HIDDENCHANNELS", "Show hidden channels", "Channels you can't open show with a lock. Messages stay hidden.", "Hidden channels", HiddenChannelsSettings);
+        withOptions("advanced", "viewRaw", "VENUS_VIEWRAW", "View raw data", "Hold a message, channel, server, person or role to see its raw data and copy it.", "View raw data", ViewRawSettings);
         withOptions("servers", "serverInfo", "VENUS_SERVERINFO", "Server info", "Hold a server's icon to see its details, boosts and friends there.", "Server info", ServerInfoSettings);
         withOptions("servers", "serverEdit", "VENUS_SERVEREDIT", "Edit servers locally", "Give any server your own name and icon. Only you see them.", "Edit servers", ServerEditSettings);
         withOptions("servers", "cleanChannels", "VENUS_CLEANCHANNELS", "Clean channel names", "Removes emoji and symbols from channel names, and can show spaces instead of dashes.", "Clean names", CleanChannelsSettings);
+        toggle("servers", "pauseInvites", "Pause invites", "Hold a server's icon to pause or resume its invites. Needs Manage Server.");
+        withOptions("servers", "fastDeleteChannels", "VENUS_FASTDELETECHANNELS", "Fast delete channels", "Delete channels without the confirmation, or from the channel menu. There is no undo.", "Fast delete", FastDeleteChannelsSettings);
         withOptions("servers", "guildLurk", "VENUS_GUILDLURK", "Preview servers without joining", "Open a server from its ID or invite link and read it without joining.", "Preview servers", GuildLurkSettings);
         // Appearance
         withOptions("appearance", "systemFont", "VENUS_SYSTEMFONT", "Use your phone's font", "Replaces Discord's font everywhere with your phone's or one you import. Android 9 or newer.", "Font", SystemFontSettings);
@@ -1731,6 +1800,7 @@
         withOptions("appearance", "hideAnything", "VENUS_HIDEANYTHING", "Remove anything", "Tap a button you never use to remove it, right where it is.", "Remove anything", HideAnythingSettings);
         toggle("appearance", "youBarSettings", "lesbunny button on profile bar", "A shortcut to lesbunny next to the notifications bell.");
         toggle("appearance", "appIcons", "Unlock app icons", "Use any Discord app icon without Nitro.");
+        toggle("appearance", "landscapeFull", "Full-screen chat in landscape", "Chat fills the screen sideways. Swipe from the left for servers and channels.");
         toggle("appearance", "nitroThemes", "Unlock Nitro themes", "Use Discord's gradient themes without Nitro, on this phone.");
         withOptions("appearance", "materialYou", "VENUS_MATERIALYOU", "Material You colors", "Colors Discord to match your wallpaper, in light and dark.", "Material You", MaterialYouSettings);
         withOptions("appearance", "customThemes", "VENUS_CUSTOMTHEMES", "Custom themes", "Install Revenge and Vendetta color themes from a link.", "Custom themes", CustomThemesSettings);
@@ -1741,6 +1811,7 @@
         toggle("advanced", "experiments", "Unlock Discord experiments", "Adds Dev Tools to Settings, to try features Discord is still testing.");
         withOptions("advanced", "voiceOptions", "VENUS_VOICEOPTIONS", "Voice channel options", "Choose the volume, audio output and sounds for voice channels.", "Voice channel options", VoiceOptionsSettings);
         toggle("advanced", "noHandsfree", "Keep Bluetooth audio clear in calls", "Headphones stay in music quality in calls. Your phone's mic picks up your voice.");
+        withOptions("advanced", "fakeDeafen", "VENUS_FAKEDEAFEN", "Fake deafen", "Look deafened in a call while you can still hear. Choose whether your mic stays muted.", "Fake deafen", FakeDeafenSettings);
         withOptions("quests", "badges", "VENUS_BADGES", "Complete badges automatically", "Plays real PC games in the background for game time and unique games.", "Badges", BadgeSettings);
         const listed = [["Messages", groups.messages], ["Sending", groups.sending], ["People", groups.people],
             ["Servers", groups.servers], ["Appearance", groups.appearance], ["Quests", groups.quests], ["Advanced", groups.advanced]];
@@ -1818,8 +1889,19 @@
         "connectionState", "idle", "afk", "optimistic", "isPushNotification", "authorizationStatus", "feedId", "enabled", "platform", "appState",
         "isBackground", "code", "errorCode", "readStateType", "mode", "kind", "count", "index", "version", "force", "silent", "local"]);
     const DLOG_HIDDEN = /token|authori[sz]ation|password|secret|cookie|session|fingerprint|email|phone|ticket|nonce|captcha|mfa|^content$|^message$/i;
+    // JSON.stringify calls this for every key of every logged object, and the same few dozen key names repeat, so each
+    // name is tested against DLOG_HIDDEN once (5.54x faster on Hermes for a channel-sized object). Capped so odd keys can't grow it.
+    const dlogHiddenKeys = Object.create(null);
+    let dlogHiddenKeyCount = 0;
     function dlogReplacer(key, value) {
-        if (key && DLOG_HIDDEN.test(key)) return "[hidden]";
+        if (key) {
+            let hidden = dlogHiddenKeys[key];
+            if (hidden === undefined) {
+                hidden = DLOG_HIDDEN.test(key);
+                if (dlogHiddenKeyCount < 2000) { dlogHiddenKeys[key] = hidden; dlogHiddenKeyCount++; }
+            }
+            if (hidden) return "[hidden]";
+        }
         return typeof value === "string" && value.length > 300 ? value.slice(0, 300) + "..." : value;
     }
     function dlogText(value) {
@@ -1876,9 +1958,19 @@
             return bits.length ? "; Discord says " + bits.join(", ") : "";
         } catch (_) { return ""; }
     }
+    // Every log line starts with this. The "hh:mm:ss." part only changes once a second, so it is built once per second
+    // and a line adds just its milliseconds (4.38x faster on Hermes than building a Date and padding four numbers).
+    const DLOG_TWO_DIGITS = [];
+    for (let i = 0; i < 60; i++) DLOG_TWO_DIGITS.push(i < 10 ? "0" + i : "" + i);
+    let dlogStampSecond = -1, dlogStampPrefix = "";
     function dlogStamp(ms) {
-        const d = new Date(ms), pad = (n, w) => { let t = String(n); while (t.length < w) t = "0" + t; return t; };
-        return pad(d.getHours(), 2) + ":" + pad(d.getMinutes(), 2) + ":" + pad(d.getSeconds(), 2) + "." + pad(d.getMilliseconds(), 3);
+        const second = Math.floor(ms / 1000), milli = ms - second * 1000;
+        if (second !== dlogStampSecond) {
+            const d = new Date(ms);
+            dlogStampSecond = second;
+            dlogStampPrefix = DLOG_TWO_DIGITS[d.getHours()] + ":" + DLOG_TWO_DIGITS[d.getMinutes()] + ":" + DLOG_TWO_DIGITS[d.getSeconds()] + ".";
+        }
+        return dlogStampPrefix + (milli < 10 ? "00" : milli < 100 ? "0" : "") + milli;
     }
     // One line: time, level (E error, W warning, I info, D detail), where it came from and what happened.
     function dlog(level, tag) {
@@ -1945,8 +2037,15 @@
             if (bits.length) dlog("I", "device", bits.join(", "));
         } catch (_) {}
         try {
-            const perf = global.performance;
-            if (perf && typeof perf.now === "function") dlog("I", "lesbunny", "logging started " + dlogDuration(perf.now()) + " after Discord's JavaScript started; " + dlogHeap());
+            // performance.now() counts from when the phone booted, not from when Discord started, so on its own it said
+            // "34 h after Discord's JavaScript started" in a report taken 13 s after opening Discord. Metro records the
+            // bundle's start on the same clock in __BUNDLE_START_TIME__; without it the line leaves the time out.
+            const perf = global.performance, start = global.__BUNDLE_START_TIME__;
+            if (perf && typeof perf.now === "function") {
+                const now = perf.now(), known = typeof start === "number" && start > 0 && start <= now;
+                dlog("I", "lesbunny", "logging started " + (known ? dlogDuration(now - start) + " after Discord's JavaScript started; " :
+                    "(Discord's start time unknown); ") + dlogHeap());
+            }
         } catch (_) {}
         try { dlog("I", "device", "Remove animations " + (reduceMotion ? "on" : "off") + (reduceMotionAsked ? "" : " (not asked yet)")); } catch (_) {}
         try {
@@ -1997,20 +2096,29 @@
         if (debugLog.healthTimer !== undefined && typeof global.clearInterval === "function") global.clearInterval(debugLog.healthTimer);
         debugLog.healthTimer = undefined; debugLog.health = null;
     }
+    // Runs for every Flux action while the log is on (the default). What a key may show depends only on its name, so that is
+    // decided once per key name (0 = never, 1 = a Discord id, 2 = a small value, 3 = either) instead of a Set lookup and the
+    // privacy regex per key per action, and the line is built by concatenation. 2.38x faster on Hermes than the per-key tests.
+    const dlogKeyKinds = Object.create(null);
+    function dlogKeyKind(key) {
+        let kind = dlogKeyKinds[key];
+        if (kind === undefined) dlogKeyKinds[key] = kind = DLOG_HIDDEN.test(key) ? 0 : (/Id$/.test(key) ? 1 : 0) | (DLOG_ACTION_VALUES.has(key) ? 2 : 0);
+        return kind;
+    }
     function dlogAction(action) {
-        const bits = [action.type], rest = [];
+        let text = action.type, rest = "", restCount = 0, shown = 1;
         const keys = Object.keys(action);
         for (let i = 0; i < keys.length; i++) {
             const key = keys[i];
             if (key === "type") continue;
-            const value = action[key];
-            if (bits.length < 9 && !DLOG_HIDDEN.test(key) && (typeof value === "string" && /Id$/.test(key) && /^\d{15,21}$/.test(value) ||
-                DLOG_ACTION_VALUES.has(key) && (typeof value === "boolean" || typeof value === "number" || typeof value === "string" && value.length <= 40)))
-                bits.push(key + "=" + value);
-            else rest.push(key + (Array.isArray(value) ? "[" + value.length + "]" : ""));
+            const value = action[key], kind = dlogKeyKind(key), type = typeof value;
+            if (shown < 9 && kind !== 0 && (kind & 1 && type === "string" && /^\d{15,21}$/.test(value) ||
+                kind & 2 && (type === "boolean" || type === "number" || type === "string" && value.length <= 40))) {
+                text += " " + key + "=" + value; shown++;
+            } else if (restCount++ < 12) rest += (restCount > 1 ? "," : "") + key + (Array.isArray(value) ? "[" + value.length + "]" : "");
         }
-        if (rest.length) bits.push("{" + rest.slice(0, 12).join(",") + (rest.length > 12 ? ",+" + (rest.length - 12) : "") + "}");
-        return bits.join(" ");
+        if (restCount) text += " {" + rest + (restCount > 12 ? ",+" + (restCount - 12) : "") + "}";
+        return text;
     }
     // Everything Discord does that lesbunny can see: console output, JavaScript errors, every request and how it ended,
     // every Flux action (types and ids, never their contents), the app going to the background, screen size changes.
@@ -2026,9 +2134,17 @@
             ["log", "info", "warn", "error", "debug", "trace"].forEach(name => {
                 const original = c[name];
                 if (typeof original !== "function") return;
-                const level = name === "error" ? "E" : name === "warn" ? "W" : name === "debug" || name === "trace" ? "D" : "I";
+                const level = name === "error" ? "E" : name === "warn" ? "W" : name === "debug" || name === "trace" ? "D" : "I", tag = "console." + name;
                 const hook = function () {
-                    try { if (settings.debugLog) dlog.apply(null, [level, "console." + name].concat(Array.prototype.slice.call(arguments))); } catch (_) {}
+                    // One or two arguments (nearly every call) go straight to dlog: no array, concat or apply (1.25x on Hermes).
+                    try {
+                        if (settings.debugLog) {
+                            const count = arguments.length;
+                            if (count === 1) dlog(level, tag, arguments[0]);
+                            else if (count === 2) dlog(level, tag, arguments[0], arguments[1]);
+                            else dlog.apply(null, [level, tag].concat(Array.prototype.slice.call(arguments)));
+                        }
+                    } catch (_) {}
                     return original.apply(this, arguments);
                 };
                 debugLog.console[name] = original; debugLog.consoleHooks[name] = hook; c[name] = hook;
@@ -2399,6 +2515,7 @@
             out.iconPacks = {active:iconPacks.active || "", custom:iconPacks.custom.slice(0, ICONPACKS_MAX_CUSTOM)};
         // Pictures from this phone stay on it: a backup keeps the names and the icons that are links.
         if (features.serverEdit && serverEdits.size) { const servers = serverEditData(true); if (Object.keys(servers).length) out.servers = servers; }
+        if (features.localEdit && localEdits.size) out.localEdits = localEditData();
         return JSON.stringify(out, null, 1);
     }
     // A backup, or a plain venus-patches.json settings file, read back. Throws a message you can show when it isn't one.
@@ -2441,7 +2558,15 @@
         }
         const created = wrapped && typeof data.created === "string" ? Date.parse(data.created) : NaN;
         const servers = wrapped && data.servers ? serverEditClean(data.servers, true) : null;
-        return {values, people, themes, iconPacks:packs, servers, version:wrapped && typeof data.version === "string" ? data.version.slice(0, 24) : "", created:Number.isFinite(created) ? created : 0};
+        let edited = null;
+        if (wrapped && data.localEdits && typeof data.localEdits === "object" && !Array.isArray(data.localEdits)) {
+            edited = new Map();
+            Object.keys(data.localEdits).slice(-LOCAL_EDIT_MAX).forEach(key => {
+                const text = data.localEdits[key];
+                if (/^\d{17,20}:\d{17,20}$/.test(key) && typeof text === "string" && text.length <= LOCAL_EDIT_TEXT) edited.set(key, text);
+            });
+        }
+        return {values, people, themes, iconPacks:packs, servers, localEdits:edited, version:wrapped && typeof data.version === "string" ? data.version.slice(0, 24) : "", created:Number.isFinite(created) ? created : 0};
     }
     // Puts a backup in place: every setting it has, the rest back to how lesbunny starts. Switches go through setSetting,
     // so everything they start or stop (Quests, themes, kept messages) happens as if you'd flipped them yourself.
@@ -2470,6 +2595,12 @@
                 serverEdits.forEach((edit, id) => { if (serverEditFile(edit.icon) && !parsed.servers.has(id)) next.set(id, edit); });
                 parsed.servers.forEach((edit, id) => { const old = serverEdits.get(id); next.set(id, old && serverEditFile(old.icon) && !edit.icon ? {name:edit.name, icon:old.icon} : edit); });
                 serverEditLoad(next); serverEdit.dirty = true; serverEditChanged();
+            }
+            if (features.localEdit && parsed.localEdits) {
+                const before = Array.from(localEdits.keys());
+                localEdits.clear(); parsed.localEdits.forEach((text, key) => localEdits.set(key, text));
+                save(); notify("localEdit");
+                before.concat(Array.from(localEdits.keys())).forEach(key => { const at = key.indexOf(":"); localEditRedraw(key.slice(0, at), key.slice(at + 1)); });
             }
             if (features.iconPacks && parsed.iconPacks) {
                 iconPacks.loaded = true; iconPacks.custom = parsed.iconPacks.custom; iconPacks.active = parsed.iconPacks.active; iconPacks.error = "";
@@ -2835,8 +2966,11 @@
         return mentionChannelFormat(orig.apply(self, args));
     }
     mentionChannelInfo.call1 = (orig, self, id) => mentionChannelFormat(orig.call(self, id));
-    function parserStateChannels(orig, self, args) {
-        const state = orig.apply(self, args);
+    // createParserState(a, b) runs once per parsed message and nearly always has nothing to add: the two-argument call
+    // skips the arguments object and apply (Hermes HBC98: 43.0 -> 23.4 us per 100 calls, 1.83x).
+    function parserStateChannels(orig, self, args) { return parserStateExtras(orig.apply(self, args)); }
+    parserStateChannels.call2 = (orig, self, a, b) => parserStateExtras(orig.call(self, a, b));
+    function parserStateExtras(state) {
         const clean = features.cleanChannels && enabled("cleanChannels");
         if (!clean || !state || !Array.isArray(state.channels) || !channelStore || typeof channelStore.getChannel !== "function") return state;
         let extras = null;
@@ -2915,20 +3049,27 @@
         try { return typeof premiumOriginal[key] === "function" && premiumOriginal[key](user); }
         finally { nativeCapabilities--; }
     }
-    function catalogEligibility(orig, self, args) {
-        const user = currentUser(), feature = args[0];
-        if (!nativeCapabilities && user && args[1] && args[1].id === user.id && emojiCatalog) {
-            if (enabled("emojis") && (feature === emojiCatalog.EMOJIS_EVERYWHERE || feature === emojiCatalog.ANIMATED_EMOJIS)) return true;
-            if (enabled("appIcons") && feature === emojiCatalog.APP_ICONS) return true;
-            if (enabled("nitroThemes") && feature === emojiCatalog.CLIENT_THEMES) return true;
-        }
-        return orig.apply(self, args);
+    // canUserUse(feature, user) and the capability checks run on every render that asks about Nitro. The usual
+    // calls skip the arguments object, and the current user is only read once there is a target to compare it with.
+    function catalogGrants(feature, target) {
+        if (nativeCapabilities || !target || !emojiCatalog) return false;
+        const user = currentUser();
+        if (!user || target.id !== user.id) return false;
+        if (enabled("emojis") && (feature === emojiCatalog.EMOJIS_EVERYWHERE || feature === emojiCatalog.ANIMATED_EMOJIS)) return true;
+        if (enabled("appIcons") && feature === emojiCatalog.APP_ICONS) return true;
+        return enabled("nitroThemes") && feature === emojiCatalog.CLIENT_THEMES;
     }
+    function catalogEligibility(orig, self, args) { return catalogGrants(args[0], args[1]) || orig.apply(self, args); }
+    catalogEligibility.call2 = (orig, self, feature, target) => catalogGrants(feature, target) || orig.call(self, feature, target);
     function premiumOverride(key, setting) {
-        return function (orig, self, args) {
+        const grants = target => {
+            if (!target || !enabled(setting)) return false;
             const user = currentUser();
-            return enabled(setting) && user && args[0] && args[0].id === user.id ? true : orig.apply(self, args);
+            return !!user && target.id === user.id;
         };
+        const operation = (orig, self, args) => grants(args[0]) || orig.apply(self, args);
+        operation.call1 = (orig, self, target) => grants(target) || orig.call(self, target);
+        return operation;
     }
     function shareLink(name, uri) {
         // Escape Markdown without permitting forged mentions or link syntax in sticker names.
@@ -2997,16 +3138,24 @@
         // Original sendStickers preserves replies, TTS, nonce, permissions and native stickers in one message.
         return orig.apply(self, next);
     }
-    function sendability(orig, self, args) {
-        const result = orig.apply(self, args), sticker = args[0];
+    // Both run once per sticker the picker and message list draw, with (sticker, user, channel): the three-argument call
+    // skips the arguments object and apply (Hermes HBC98: 72.3 -> 32.2 us per 100 calls of both, 2.24x).
+    function sendabilityFinish(result, sticker) {
         return enabled("stickers") && stickerRules && result === stickerRules.StickerSendability.SENDABLE_WITH_PREMIUM && stickerLink(sticker) ? stickerRules.StickerSendability.SENDABLE : result;
     }
+    function sendability(orig, self, args) { return sendabilityFinish(orig.apply(self, args), args[0]); }
+    sendability.call3 = (orig, self, sticker, user, channel) => sendabilityFinish(orig.call(self, sticker, user, channel), sticker);
     function sendableSticker(orig, self, args) {
         const result = orig.apply(self, args);
         if (result || !enabled("stickers") || !stickerRules) return result;
         const code = stickerRules.getStickerSendability.apply(stickerRules, args);
         return code === stickerRules.StickerSendability.SENDABLE;
     }
+    sendableSticker.call3 = (orig, self, sticker, user, channel) => {
+        const result = orig.call(self, sticker, user, channel);
+        if (result || !enabled("stickers") || !stickerRules) return result;
+        return stickerRules.getStickerSendability(sticker, user, channel) === stickerRules.StickerSendability.SENDABLE;
+    };
     let msgStore, msgActions, permissions, viewPermission, locale, dispatcher, messageRecords, chatHeight, jumpPill, jumpIcon;
     let permissionsCanOrig = null, permissionsBasicOrig = null, guildChannelsGetOrig = null, permissionsVersion = null;
     let deletedRevision = 0, archiveRestored = false, archiveLoading = false, archiveWriting = false, archivePending;
@@ -3151,8 +3300,138 @@
             if (mentions) mentions.forEach(channel => rememberChannelName(channel, owner));
         }
     }
+    // startTyping(channelId) and stopTyping(channelId) take one argument: the one-argument call skips the arguments
+    // object and apply (Hermes HBC98: 35.6 -> 16.4 us per 100 calls, 1.97x).
     function typing(orig, self, args) {
         return enabled("noTyping") ? undefined : orig.apply(self, args);
+    }
+    typing.call1 = (orig, self, channelId) => enabled("noTyping") ? undefined : orig.call(self, channelId);
+    // Fake deafen: look deafened to everyone else while you can still hear. The mic is really muted, and the voice state
+    // Discord sends (LocalVoiceStateManager 14755, didCommit) says muted and deafened. It lasts only while the mic stays
+    // muted, so nothing you do can leave you talking while you look deafened. It's switched from the voice controls
+    // (VoicePanelVoiceControlsButtons 18341): hold Deafen, or use the row added under it.
+    const fakeDeaf = {on:false, muted:true, wasMuted:false, grace:0, manager:null, real:null, listeners:new Set()};
+    function fakeDeafNotify() { fakeDeaf.listeners.forEach(fn => { try { fn(); } catch (_) {} }); }
+    // The voice state last sent, or the manager's own copy when none has passed through the hook yet (joined before it ran).
+    function fakeDeafState() {
+        if (fakeDeaf.real) return fakeDeaf.real;
+        const manager = fakeDeaf.manager;
+        try { if (manager && typeof manager.getState === "function") return manager.getState() || null; } catch (_) {}
+        return null;
+    }
+    function fakeDeafMuted() {
+        const media = inspectedExport(2014, "default");
+        return !!(media && typeof media.isSelfMute === "function" && media.isSelfMute());
+    }
+    // Discord's mute action toggles, so it only runs when the mic isn't already how we want it. True when it ran.
+    function fakeDeafMic(muted) {
+        try {
+            const actions = inspectedExport(5343, "default");
+            if (actions && typeof actions.toggleSelfMute === "function" && fakeDeafMuted() !== muted) {
+                actions.toggleSelfMute({playSoundEffect:false});
+                return true;
+            }
+        } catch (_) {}
+        return false;
+    }
+    function fakeDeafSet(on) {
+        const known = fakeDeafState();
+        if (on === fakeDeaf.on) return;
+        let toggled = false;
+        if (on) {
+            const media = inspectedExport(2014, "default");
+            // Needs a call to be in, and means nothing when you're really deafened already.
+            if (!known || known.channelId == null || (media && typeof media.isSelfDeaf === "function" && media.isSelfDeaf())) return;
+            if (!fakeDeaf.real) fakeDeaf.real = known;
+            fakeDeaf.wasMuted = fakeDeafMuted();
+            fakeDeaf.muted = settings.fakeDeafenMuteMic !== false;
+            // The mute below sends the new state itself; this stops a commit that lands first from ending it early.
+            fakeDeaf.grace = Date.now() + 400;
+            fakeDeaf.on = true;
+            toggled = fakeDeaf.muted && fakeDeafMic(true);
+        } else {
+            fakeDeaf.on = false;
+            toggled = fakeDeaf.muted && !fakeDeaf.wasMuted && fakeDeafMic(false);
+        }
+        // When the mic was already how we want it nothing changes, so nothing is sent: send the last state again.
+        if (!toggled) try { if (fakeDeaf.manager && fakeDeaf.real) fakeDeaf.manager.didCommit(fakeDeaf.real); } catch (_) {}
+        fakeDeafNotify();
+    }
+    function fakeDeafToggle() { if (enabled("fakeDeafen")) fakeDeafSet(!fakeDeaf.on); }
+    function fakeDeafRowChange(value) {
+        if (enabled("fakeDeafen")) fakeDeafSet(typeof value === "boolean" ? value : !fakeDeaf.on);
+    }
+    // Keeps Discord's own manager (always the one this hook belongs to) so the state can be read without waiting for a commit.
+    function fakeDeafAttach(exports) {
+        // Discord exports the manager class, not an instance, and the live one is made elsewhere. So the class prototype is
+        // hooked, which covers whichever instance Discord uses, and the instance is learned from its calls.
+        const target = exports.default;
+        const proto = typeof target === "function" ? target.prototype :
+            target && typeof target.didCommit === "function" ? target : target && typeof target === "object" ? Object.getPrototypeOf(target) : null;
+        if (!proto || typeof proto.didCommit !== "function") return exports;
+        for (const name of ["shouldCommit", "getNextState", "getInitialState"]) hookExport(proto, name, fakeDeafSeen);
+        hookExport(proto, "didCommit", fakeDeafCommit);
+        return exports;
+    }
+    function fakeDeafSeen(orig, self, args) {
+        if (self && fakeDeaf.manager !== self) fakeDeaf.manager = self;
+        return orig.apply(self, args);
+    }
+    function fakeDeafCommit(orig, self, args) {
+        const state = args[0];
+        if (!state || typeof state !== "object") return orig.apply(self, args);
+        fakeDeaf.manager = self; fakeDeaf.real = state;
+        if (!fakeDeaf.on) return orig.apply(self, args);
+        const left = state.channelId == null;
+        // Leaving the call, switching the feature off, or unmuting the mic by any route ends it.
+        if (!enabled("fakeDeafen") || left || (fakeDeaf.muted && !state.selfMute && Date.now() > fakeDeaf.grace)) {
+            fakeDeaf.on = false;
+            // You didn't start out muted, so don't stay muted after the call.
+            if (left && fakeDeaf.muted && !fakeDeaf.wasMuted) later(() => fakeDeafMic(false), 0);
+            fakeDeafNotify();
+            return orig.apply(self, args);
+        }
+        const sent = Array.prototype.slice.call(args);
+        sent[0] = Object.assign({}, state, fakeDeaf.muted ? {selfMute:true, selfDeaf:true} : {selfDeaf:true});
+        return orig.apply(self, sent);
+    }
+    // The row's own icon: a 72x72 PNG shipped inside lesbunny, drawn through Discord's icon image so it takes the theme's icon color.
+    const FAKE_DEAF_ICON = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAYAAABV7bNHAAAICklEQVR4Xu2caYgcRRTH/293w8RrZvGLwRuV6AdFibd+EMUoisYDNCqZRDQxEfGIB+hsNL05JqI5iCgGL5LMEtwIxgM1HrhKiFdA8ESDijeLX9xZFbK4O0/epmbp6anqru6ubojsD/ZDprurq/793qvqV69Dl926GJOY6ZgUJ5xJgSLoijrBNbVq73SATwZwIjOfRESHAzgCQDeAqep+ewAMAfiFmX8lop8B7ATos3Jl6W5XfXrlibVT6vXhmwGcJfdjxqNze7zf/O1T1jFIdeJ8AJcCuATA9JQDHATwJoAtpVJxYNZtd/+bpD3p19BQvZ+IrvJdP8iM0/wiZSbQ5pXeYUS4D8BsANOSDMICEatf9+TDMIjTZH254t3V/IdzF1MuVFHCNF0mK0T4O4mwsFb1+pnH7pzbs7yeQhxBXH0CZwJtXvlgiaizF+CFvliSF/Ig5hF1/gRgqemmEZbT5CPnAtWq3jUAHsvQlWz5Mo04zLytu7v0rDOBVAB+Wp6e7QgUuwB8AOAbAD8w4ytg7G85Ji6y1xq7DgH4aADHqFnm7IgAv6xc8V7Q9cPGcpQ4s4NBP3GQVkF4G4DTLcXZDuBlZrwanEptUW58PYCbAvcVcbSulUYcIZFAKhC/b+FSsp7pB6jqcv0iqD5cIBZYrnhvubacJrEFqlU9sZhXLMTZxIyepNaSlrSW0yTWLKbEeRtAKWQAstK93fRU88BGHADbu7vbY04Qa4E2r1x6GICXIsTZVCoVFyRd3brARhxTQNZhJdCmFUsOIiJxq0NDBmEMlHlhI46t5cRysY6OrkcAzNANlJlHiegG0xSbFzbixLGcJpHpjlrVk5fMRSHizN8XxIlrOVYCiWsBkIWgFiK6v1zxNpmO54Gt5ZRKxVlJYmOoBSnXMsWdreWKtyYPEUzYimMzW5kwBum+Vd6xjQbPJyLdtbsLheKcfV0c9Q55IvPYWlMWwCgQM+4lItPxxdfekyxR5QIXllOrer0AHpL+EHUeBeBGXd+0LibWw8zzDYPZUK54r7sYaBJsxIkKyH5xFLPl3dJaIGaIa7VZj0zpzLxC11Ae2IgjU3lYQK5VvYualuNjKhFusRJo65q1UyTroDuZiJ6Z29PbktTOC1txLAKypE903CL3CB5oc7GRkeGZuhXz3gUhVucliB+H4kjEedcwhmn1+vjmQgu6GHS5wXp2zHnA+z5vgWzEiYo5flTaRRJ2OmRRHCmQ5Fh05L4gtBEnKuYYeM7wu+zAmAVSb+xt+1YqOL9julsW2IpjEXPakKymoc/TgrNZi4sR0YUG9/o8z+BsI04ctwqiknjaHVoinOM/PxiDTjAoq01pZoGNOAndKsiHhv6fGyaQaQqU3YfMsRUniVtpaNn/asLMR4YJdJxBha8NvzvDRpw0bqXhB0M4kWKKCYIupt1DZ+bfnSlhQFNI0IIjt/JBPxq6IpUmRoEO0F3EPDas+90lc3t6rw5pzyrBHgdm/sdwfsvefIsFMbNWoP32O1j2tzKnXPHacivuLWcv3d3FP2wGFJlylTVQnqkNv0hJcsi2DA39ub/h3JaKlOA6qM3s5K1epV5zQ4nk3K1a6TzQMKAWbwmmNESgtk1Bos4igL8MDWZCueJJNVpmENEBAOval3K/CYICScVWWw6aiH6tVT1dY1KsJKJ+C+BjAC+WK57pRTAX+lZ5ZzKPv3SeAeCUQO2jD604QksBVlCg70z7XwbE2uRPRJVUwf21qidL+GqhUNySV+zyFWMuZk5XAylFo/6xBoO0dvEUE3nZ3TgyMvyR2svPFLGYen14J4AnHRSIird8ESbQDoejmcHMH9SqXtziKmtqVW8RM96LUaNkQ0uVWmAWG48lzlB57Y21qnePs0YVIo6yGqeFoszjlW8TtAikMobOCrV9rHZpSWo/S1zKNbuD9Uy6haIpZ5uW9bKdlLYR1YZxOzwlbwSv1wlkyralpcSMrWrXJBFyrbQRUaOUhrb9vjaB1KZgVm/vM0ZGhpclHYG6VluG44BBXVWc6V1ss4MbamHme5NM/3KNXJtVvwA8pWtbKxAzPy4vqVl0Rs1sfXHe79S5fSG1AmnZwxxDIEnQyy5q2ruGMF2V1lihzk37lVAY/aZqXJOLSXZ/dVZWpFikqtdCCatwc8QeqeM2tWUUSNZERJT1VvO6sFlNHVvnSAgTj4QVuRsFEhqNUVE2qxlNmK5qAbSoY1m61qAUT4U9gFCB5i1ZITmgBRk/QW0tgCLsmAvmRX1fFiqQoNZFG1z0xsDxIW2HHUuLfFkYuSEaKZBQKBTvAPBp2h4ZCPusQVv15YBdpVJRPheNxEogSXwx86yM45GO8W/IHCMf7l5lWxJsJZCgiheuDKYkHSBZTBNhx5IwCNB5pjWPDmuBBJVvlgq00A9nYxJWEBp2LC7S51lxv1uLJVBTJCKc6sjd6o3G6IumkapjLh6GLFVmJtlQiC2QIItIZpZdg7SBe7laSmhRx5bHNZUAn0pfk4gjJBKoGZMKhaL8lw5JlwADNp8yqHMGEoq0QfqYpvjL6nsxE2pb59Za1ZMkm2T5wr4n8zPQaIxeYTtoObejo+tltbVkg7jUAhcF74ktyI90pNEYleq0h8NecNWxhwuF4sVhrhVEzpVrAEg+yBiTmu1LX1yII8T+qDcKKQQlouvUzmazIEum60+Y+fk05i5Ibqijo0uq4ps7p7JWEtFec9F+EOcC/d9w4mL/ZyYFimBSoEmB0jFpQRH8B5kI7yv7UOJwAAAAAElFTkSuQmCC";
+    function FakeDeafIcon(props) {
+        const Base = inspectedExport(4912, "BaseIconImage");
+        if (!Base) return null;
+        const tokens = inspectedExport(587, "default");
+        const color = (props && props.color) || (tokens && tokens.colors && tokens.colors.INTERACTIVE_ICON_DEFAULT);
+        return el(Base, Object.assign({}, props, {source:{uri:FAKE_DEAF_ICON, width:72, height:72}, color}));
+    }
+    // The Deafen row in the voice controls. A row of our own goes under it. The copy keeps the row's style and wiring.
+    function fakeDeafSwitch(orig, self, args) {
+        const [, redraw] = React.useState(0);
+        React.useEffect(() => {
+            const fn = () => redraw(n => n + 1);
+            fakeDeaf.listeners.add(fn);
+            return () => { fakeDeaf.listeners.delete(fn); };
+        }, []);
+        const row = orig.apply(self, args);
+        if (!enabled("fakeDeafen") || !row || typeof row !== "object" || !row.props || !row.type) return row;
+        const props = Object.assign({}, row.props, {value:fakeDeaf.on, key:"venus-fake-deafen"});
+        // The small line under the label, like Deafen's "Disables all sound".
+        const hint = tr("Others see you deafened. You can still hear.");
+        if ("description" in props) props.description = undefined;
+        props.subLabel = hint; props.accessibilityHint = hint;
+        // Whichever prop the row uses to toggle, it now reaches fakeDeafRowChange.
+        const handlers = [];
+        for (const name of Object.keys(props)) if (/^on[A-Z]/.test(name) && typeof props[name] === "function") { props[name] = fakeDeafRowChange; handlers.push(name); }
+        if (!handlers.length) props.onValueChange = fakeDeafRowChange;
+        const label = tr("Fake deafen");
+        props.label = label; props.accessibilityLabel = label;
+        // Our own icon in place of Discord's. If the row isn't shaped as expected it keeps the one it was copied with.
+        try {
+            const icon = props.icon;
+            const slot = icon && icon.props ? Object.keys(icon.props).find(name => typeof icon.props[name] === "function") : null;
+            if (slot) props.icon = React.cloneElement(icon, {[slot]:FakeDeafIcon});
+        } catch (_) {}
+        return el(React.Fragment, null, row, el(row.type, props));
     }
     function quickConfirm(orig, self, args) {
         const popup = args[0];
@@ -3169,6 +3448,7 @@
         }
         if (enabled("quickDelete") && (matches("AMvpS4") || matches("vXZ+Fo")))
             return popup.onConfirm();
+        if (enabled("fastDeleteChannels") && settings.fastDeleteChannelsConfirm && fastDeleteAlert(popup)) return popup.onConfirm();
         // Skip pin confirmation (based on NoConfirmPin by Skamt): LongPressMessageActionSheetUtils (9988) asks "Are you sure you
         // want to pin this message?" (WG5dyo) inside the alert's children, and "You sure you want to remove this pinned message?"
         // (NjEPp7) as the unpin alert's body. Only those two exact texts in Discord's language skip the alert.
@@ -3422,18 +3702,18 @@
         // Native merge appends cache-missing records without sorting. Re-sort only
         // our private view's array, via native immutable mutate, never the live store.
         if (typeof value.mutate === "function" && Array.isArray(value._array)) value = value.mutate(copy => {
-            // Check each id once instead of running two regexes per comparison.
-            const ids = new Map();
-            const idOf = message => {
-                let id = ids.get(message);
-                if (id === undefined) { const text = String(message.id); id = /^\d+$/.test(text) ? text : null; ids.set(message, id); }
-                return id;
-            };
-            copy._array.sort((a,b) => {
-                const left = idOf(a), right = idOf(b);
+            // Check each id once, up front: the comparator then only reads a field (Map lookups per comparison cost 1.36x).
+            const array = copy._array, count = array.length, items = new Array(count);
+            for (let i = 0; i < count; i++) {
+                const text = String(array[i].id);
+                items[i] = {message:array[i], id:/^\d+$/.test(text) ? text : null};
+            }
+            items.sort((a,b) => {
+                const left = a.id, right = b.id;
                 if (left === null || right === null) return 0;
                 return left.length - right.length || (left === right ? 0 : left < right ? -1 : 1);
             });
+            for (let i = 0; i < count; i++) array[i] = items[i].message;
         },true);
         if (deletedViews.size >= 16) deletedViews.delete(deletedViews.keys().next().value);
         deletedViews.set(channelId,{orig:result,revision:deletedRevision,value});
@@ -3450,6 +3730,7 @@
         // A bulk delete is meant to clear messages for real: keeping each one first flashed it red, saved the archive and
         // took a second removal right after.
         if (features.bulkDelete && bulkDelete.removing.size && bulkDelete.removing.has(key)) return false;
+        if (silentRemoving.size && silentRemoving.has(key)) return false;
         const message = msgStore && msgStore.getMessage(event.channelId,event.id);
         if (!retainable(message, event)) return false;
         logMessage("d", message, event.channelId, message.content || "");
@@ -4138,10 +4419,14 @@
     // picked there; with no server given it is the current channel, which Discord restores when the app opens.
     // Opening a server or the app never lands on a locked channel: a remembered locked channel gives way to the
     // server's first real channel. Only a locked channel you opened yourself with View Anyway is kept.
-    function hiddenSelectedChannel(orig, self, args) {
-        const id = orig.apply(self, args);
+    // getChannelId() is read on nearly every chat render, so the no-argument and one-argument calls skip the arguments
+    // object and apply (Hermes HBC98: 35.2 -> 18.3 us per 100 calls, 1.92x).
+    function hiddenSelectedChannel(orig, self, args) { return hiddenSelected(orig.apply(self, args), args[0]); }
+    hiddenSelectedChannel.call0 = (orig, self) => hiddenSelected(orig.call(self), undefined);
+    hiddenSelectedChannel.call1 = (orig, self, guildId) => hiddenSelected(orig.call(self, guildId), guildId);
+    function hiddenSelected(id, requested) {
         if (!enabled("hiddenChannels") || typeof id !== "string" || hiddenConfirmed.has(id) || !hiddenChannel(id)) return id;
-        const channel = receivedChannel(id), guild = args[0] != null ? args[0] : channel && channel.guild_id;
+        const channel = receivedChannel(id), guild = requested != null ? requested : channel && channel.guild_id;
         let real = null;
         try { real = guildChannels && guild ? guildChannels.getDefaultChannel(guild) : null; } catch (_) { real = null; }
         return real && real.id && !hiddenChannel(real) ? real.id : null;
@@ -4349,11 +4634,19 @@
         }
         return next || content;
     }
+    // Discord sends a bot's application-command reply (and its follow-ups) through the interaction webhook, so those
+    // rows carry a webhookId even though the author is a server member with a role color (#144). Only a webhook
+    // that isn't a member of the server is a real one; its color comes from its name.
+    function pastelWebhook(message, source) {
+        if (!source || !source.webhookId) return false;
+        return !(message.guildId && guildMembers && guildMembers.getMember(message.guildId,message.authorId));
+    }
     function pastelMessage(message, source) {
         if (!message || !message.authorId) return message;
-        if (message.guildId && (!guildMembers || !guildMembers.getMember(message.guildId,message.authorId)) && !(source && source.webhookId)) return message;
+        const webhook = pastelWebhook(message,source);
+        if (message.guildId && (!guildMembers || !guildMembers.getMember(message.guildId,message.authorId)) && !webhook) return message;
         let seed;
-        if (source && source.webhookId) seed = message.username || source.webhookId;
+        if (webhook) seed = message.username || source.webhookId;
         else if (!(source && source.colorString != null ? source.colorString : message.roleColor) || settings.pastelAll) seed = message.authorId;
         const color = seed && pastelColor(seed,0.75,0.6);
         const content = pastelMentions(message.content,message.guildId);
@@ -4800,10 +5093,16 @@
             // chat: the editor opened on a message you could no longer see, in the box of the chat you'd left.
             if (waiting === message && enabled("gestures") && gestureStillInChat(waitingChannel)) gestureAct(message, waitingChannel, waitingRef, react); }, GESTURE_TRIPLE_MS);
     }
+    // The double-tap banners and reminder components render with one props argument: the one-argument call skips the
+    // arguments object and apply (Hermes HBC98: 37.1 -> 17.1 us per 100 renders, 2.11x). The hook count is unchanged.
     function hideWhenGestures(orig, self, args) {
         if (React) useSettings("gestures");
         return enabled("gestures") ? null : orig.apply(self, args);
     }
+    hideWhenGestures.call1 = (orig, self, props) => {
+        if (React) useSettings("gestures");
+        return enabled("gestures") ? null : orig.call(self, props);
+    };
     // While on, it plays: Sam asks, you double-tap to reply and say you're in, Sam says it's at 6 AM, you regret it and
     // triple-tap your message away. It follows your choices below.
     function GesturePreview(props) {
@@ -6085,9 +6384,13 @@
             const missing = badgeEntries().filter(entry => !arr.some(a => a && a.application_id === entry.game.id));
             return missing.length ? arr.concat(missing.map(entry => ({name:entry.game.name, application_id:entry.game.id, type:0, timestamps:{start:entry.startedAt}, flags:0}))) : arr;
         };
-        let patched = hookExport(store, "getActivities", (orig, self, args) => inject(orig.apply(self, args)));
+        // getActivities(userId) and getUnfilteredActivities(userId) are read for every presence row: the one-argument call
+        // skips the arguments object and apply (Hermes HBC98: 109.4 -> 91.8 us per 100 calls, 1.19x).
+        const presence = (orig, self, args) => inject(orig.apply(self, args));
+        presence.call1 = (orig, self, id) => inject(orig.call(self, id));
+        let patched = hookExport(store, "getActivities", presence);
         if (typeof store.getUnfilteredActivities === "function")
-            patched = hookExport(patched, "getUnfilteredActivities", (orig, self, args) => inject(orig.apply(self, args)));
+            patched = hookExport(patched, "getUnfilteredActivities", presence);
         return replaceValue(exports, "default", patched);
     }
     // Add hours now (advanced, behind its warning). Discord only sees play sessions, so each one is sent the way the
@@ -7969,6 +8272,19 @@
             footnote("how", tr("If your song is behind your friend's, move the slider right. If it is ahead, move it left."))];
         return settingsBody(ui, groups);
     }
+    // Fake deafen's page: whether the mic stays muted while you look deafened.
+    function FakeDeafenSettings() {
+        useSettings("fakeDeafen");
+        const ui = reviewUI();
+        if (!React || !RN) return null;
+        const on = enabled("fakeDeafen"), Group = ui.TableRowGroup || RN.View, Switch = ui.TableSwitchRow;
+        const groups = [
+            on ? null : offCard("status", venusIcon(9074, "HeadphonesSlashIcon"), "fakeDeafen"),
+            el(Group, {key:"mic", title:tr("Microphone")},
+                switchRow(Switch, "fakeDeafenMuteMic", "Keep my microphone muted", "You can't talk while you look deafened, and unmuting ends it. Turn this off to keep your mic working.", rowIcon(11492, "MicrophoneIcon"))),
+            footnote("how", "In a call, open the voice controls and use the Fake deafen switch under Deafen.")];
+        return settingsBody(ui, groups);
+    }
     function TenorSettings() {
         useSettings("tenorGifs");
         const ui = reviewUI();
@@ -8256,9 +8572,9 @@
             }
         });
     }
-    function messageRow(orig, self, args) { return messageRowResult(orig.apply(self, args), args[0]); }
+    function messageRow(orig, self, args) { const row = features.localEdit ? localEditRow(args[0]) : args[0]; return messageRowResult(orig.call(self, row), row); }
     // generate(row) is called once per chat row as you scroll: skip the arguments object (2.3x).
-    messageRow.call1 = (orig, self, row) => messageRowResult(orig.call(self, row), row);
+    messageRow.call1 = (orig, self, row) => { if (features.localEdit) row = localEditRow(row); return messageRowResult(orig.call(self, row), row); };
     function messageRowResult(result, row) {
         if (!result || !row || row.rowType !== 1 || !result.message) return result;
         const pastelOn = enabled("pastelize"), translateOn = enabled("translate"), noDeleteOn = enabled("noDelete"), highlightOn = enabled("messageHighlight"), bulkOn = features.bulkDelete && bulkDelete.active;
@@ -8312,7 +8628,7 @@
                 next = Object.assign({},next,{backgroundHighlight:Object.assign({},existing,{gutterColor:highlightEncodeGutter(existing.gutterColor, mult)})});
             }
         }
-        if (bulkOn && String(channelId) === String(bulkDelete.channelId) && RN && typeof RN.processColor === "function" &&
+        if (bulkOn && RN && typeof RN.processColor === "function" &&
             bulkDeleteCanSelect(source, channelId, isDeletedRow, bulkDeleteManageCached(channelId))) {
             const isSelected = bulkDelete.selected.has(String(id));
             const existing = next.backgroundHighlight;
@@ -8426,12 +8742,19 @@
                 el(PlatformPng,{platform:key,color:colors[clients[key]]})));
         return icons.length ? el(RN.View,{key:"venus-platforms",style:{flexDirection:"row",gap:2,alignItems:"center"}},icons) : null;
     }
-    function platformName(orig, self, args) {
-        if (React) useSettings("platformIndicators");
-        const tree = orig.apply(self,args), user = args[0] && args[0].user;
+    // DisplayName renders for every name on screen as (props) or (props, ref): those calls skip the arguments object and
+    // apply (Hermes HBC98: 82.0 -> 62.5 us per 100 renders, 1.31x). wrapProfileTree still calls it with arguments.
+    function platformNameFinish(tree, props) {
+        const user = props && props.user;
         if (!enabled("platformIndicators") || !settings.piProfile || !React || !RN || !tree || !user) return tree;
         return el(RN.View,{style:{flexDirection:"row",flexWrap:"wrap",gap:6,alignItems:"center"}},tree,el(PlatformBadges,{userId:user.id}));
     }
+    function platformName(orig, self, args) {
+        if (React) useSettings("platformIndicators");
+        return platformNameFinish(orig.apply(self,args), args[0]);
+    }
+    platformName.call1 = (orig, self, a) => { if (React) useSettings("platformIndicators"); return platformNameFinish(orig.call(self, a), a); };
+    platformName.call2 = (orig, self, a, b) => { if (React) useSettings("platformIndicators"); return platformNameFinish(orig.call(self, a, b), a); };
     // DM header (HBC fn58674 PrivateChannelHeader) renders its name inside a separate
     // ChannelTitle component (fn58681, props title/accessibleTitle/userId), so the badge
     // goes inside ChannelTitle's own output: right after the name, before the arrow.
@@ -8466,9 +8789,13 @@
     // DM list rows (MessagesItemChannelContent, fn65485): the name shares its line with the
     // server tag, so icons go in the right-side channelIcons row beside the muted/favorite
     // icon (props muted/selected/blocked), above the timestamp.
-    function platformDmRow(orig,self,args) {
-        if (React) useSettings("platformIndicators");
-        const tree = orig.apply(self,args), channel = args[0] && args[0].channel;
+    // Every DM row in the list renders through this as (props) or (props, ref): those calls skip the arguments object and
+    // apply (Hermes HBC98: 51.8 -> 32.7 us per 100 rows with the placement off, 1.58x).
+    function platformDmRow(orig,self,args) { if (React) useSettings("platformIndicators"); return platformDmRowDone(orig.apply(self,args),args[0]); }
+    platformDmRow.call1 = (orig,self,props) => { if (React) useSettings("platformIndicators"); return platformDmRowDone(orig.call(self,props),props); };
+    platformDmRow.call2 = (orig,self,props,ref) => { if (React) useSettings("platformIndicators"); return platformDmRowDone(orig.call(self,props,ref),props); };
+    function platformDmRowDone(tree,props) {
+        const channel = props && props.channel;
         if (!enabled("platformIndicators") || !settings.piUserList || !React || !RN || !tree || !channel) return tree;
         const userId = channel.type === 1 && Array.isArray(channel.recipients) && channel.recipients.length === 1 && channel.recipients[0];
         if (!userId) return tree;
@@ -8481,11 +8808,19 @@
             added = true;
             return Object.assign({},p,{children:children.concat(el(RN.View,{key:"venus-platform-dm",style:{marginRight:4}},el(PlatformBadges,{userId})))});
         },0,() => added);
-        return added ? next : placePlatformTree(tree,args[0] || {},"piUserList");
+        return added ? next : placePlatformTree(tree,props || {},"piUserList");
     }
     function platformPlacement(orig,self,args,option) {
         if (React) useSettings("platformIndicators");
         return placePlatformTree(orig.apply(self,args),args[0] || {},option);
+    }
+    // The member list's rows (10531, MemberRowItem 9069): same (props) / (props, ref) fast paths
+    // (Hermes HBC98: 60.6 -> 37.1 us per 100 rows with the placement off, 1.63x).
+    function platformPlacementHook(option) {
+        const operation = (orig,self,args) => platformPlacement(orig,self,args,option);
+        operation.call1 = (orig,self,props) => { if (React) useSettings("platformIndicators"); return placePlatformTree(orig.call(self,props),props || {},option); };
+        operation.call2 = (orig,self,props,ref) => { if (React) useSettings("platformIndicators"); return placePlatformTree(orig.call(self,props,ref),props || {},option); };
+        return operation;
     }
     // Pure tree transform: header/DM fallbacks MUST NOT subscribe a second time.
     // Their chosen placement changes while loading, changing channels or toggling
@@ -8541,14 +8876,21 @@
         }
         return visit(tree,0);
     }
-    function hiddenInfo(orig,self,args) {
-        if (React) useSettings("hiddenChannels");
-        const tree = orig.apply(self,args), channel = args[0] && args[0].channel;
+    // ChannelInfo renders for every channel row as (props) or (props, ref): those calls skip the arguments object and apply
+    // (Hermes HBC98: 89.8 -> 69.3 us per 100 renders, 1.30x).
+    function hiddenInfoFinish(tree, props) {
+        const channel = props && props.channel;
         if (!tree || !React || !RN || !hiddenMetadata(channel)) return tree;
         // Discord already draws its own locked-channel icon (TextLockIcon, the # with a small lock) for these rows,
         // so a second lock beside the name only doubled it. Screen readers still hear that the channel is locked.
         return el(RN.View,{style:{flexDirection:"row",alignItems:"center"},accessible:true,accessibilityLabel:hiddenName(channel)+", "+tr("locked")},tree);
     }
+    function hiddenInfo(orig,self,args) {
+        if (React) useSettings("hiddenChannels");
+        return hiddenInfoFinish(orig.apply(self,args), args[0]);
+    }
+    hiddenInfo.call1 = (orig, self, a) => { if (React) useSettings("hiddenChannels"); return hiddenInfoFinish(orig.call(self, a), a); };
+    hiddenInfo.call2 = (orig, self, a, b) => { if (React) useSettings("hiddenChannels"); return hiddenInfoFinish(orig.call(self, a, b), a); };
     function authorizationUrl(result) {
         // Do not depend on a browser-complete global URL / URLSearchParams in RN.
         // Rebuild ONLY our fixed HTTPS endpoint; untrusted query keys cannot add
@@ -9658,8 +10000,13 @@
     function serverEditGetGuild(orig, self, args) { const guild = orig.apply(self, args); return serverEditOn() ? serverEditDisplay(guild) : guild; }
     serverEditGetGuild.call1 = (orig, self, id) => { const guild = orig.call(self, id); return serverEditOn() ? serverEditDisplay(guild) : guild; };
     // getGuilds (servers by ID) and getGuildsArray: one swapped list per list Discord hands out, until it or an edit changes.
-    function serverEditList(orig, self, args, array) {
-        const list = orig.apply(self, args);
+    // getGuilds() and getGuildsArray() take no argument and are read all over the server list: the no-argument call skips
+    // the arguments object and apply (Hermes HBC98: 39.1 -> 19.0 us per 100 calls, 2.05x).
+    const serverEditMapHook = (orig, self, args) => serverEditSwap(orig.apply(self, args), false);
+    serverEditMapHook.call0 = (orig, self) => serverEditSwap(orig.call(self), false);
+    const serverEditArrayHook = (orig, self, args) => serverEditSwap(orig.apply(self, args), true);
+    serverEditArrayHook.call0 = (orig, self) => serverEditSwap(orig.call(self), true);
+    function serverEditSwap(list, array) {
         if (!list || typeof list !== "object" || !serverEditOn()) return list;
         const cache = serverEdit.lists || (serverEdit.lists = {}), slot = array ? "array" : "map", hit = cache[slot];
         if (hit && hit.source === list && hit.v === serverEdit.version) return hit.out;
@@ -9674,8 +10021,8 @@
         if (!store || typeof store.getGuild !== "function" || serverEdit.store) return exports;
         serverEdit.orig = {getGuild:store.getGuild, getGuilds:store.getGuilds, getGuildsArray:store.getGuildsArray};
         let hooked = hookExport(store, "getGuild", serverEditGetGuild);
-        hooked = hookExport(hooked, "getGuilds", (orig, self, args) => serverEditList(orig, self, args, false));
-        hooked = hookExport(hooked, "getGuildsArray", (orig, self, args) => serverEditList(orig, self, args, true));
+        hooked = hookExport(hooked, "getGuilds", serverEditMapHook);
+        hooked = hookExport(hooked, "getGuildsArray", serverEditArrayHook);
         serverEdit.store = hooked;
         return hooked === store ? exports : replaceValue(exports, "default", hooked);
     }
@@ -9700,17 +10047,16 @@
         // getGuildIconSource (used by GuildIcon, the server bar and the drawer) builds its own CDN
         // link without calling getGuildIconURL. Both have to turn the token into the picture,
         // otherwise the token becomes a broken CDN link and the tile shows up blank.
-        const token = args => { const icon = args[0] && args[0].icon; return typeof icon === "string" && icon.indexOf(SERVER_EDIT_ICON) === 0 ? icon : null; };
-        let hooked = hookExport(utils, "getGuildIconURL", (orig, self, args) => {
-            const icon = token(args);
-            return icon ? serverEdit.icons.get(icon) || null : orig.apply(self, args);
-        });
-        if (typeof hooked.getGuildIconSource === "function") hooked = hookExport(hooked, "getGuildIconSource", (orig, self, args) => {
-            const icon = token(args);
-            if (!icon) return orig.apply(self, args);
-            const uri = serverEdit.icons.get(icon);
-            return uri ? {uri} : null;
-        });
+        const tokenOf = guild => { const icon = guild && guild.icon; return typeof icon === "string" && icon.indexOf(SERVER_EDIT_ICON) === 0 ? icon : null; };
+        // Every server icon drawn goes through these with one argument: it skips the arguments object and apply
+        // (Hermes HBC98: 62.5 -> 42.0 us per 100 getGuildIconURL calls, 1.49x; 66.4 -> 45.9 us for getGuildIconSource, 1.36x).
+        const urlHook = (orig, self, args) => { const icon = tokenOf(args[0]); return icon ? serverEdit.icons.get(icon) || null : orig.apply(self, args); };
+        urlHook.call1 = (orig, self, guild) => { const icon = tokenOf(guild); return icon ? serverEdit.icons.get(icon) || null : orig.call(self, guild); };
+        const sourceFor = icon => { const uri = serverEdit.icons.get(icon); return uri ? {uri} : null; };
+        const sourceHook = (orig, self, args) => { const icon = tokenOf(args[0]); return icon ? sourceFor(icon) : orig.apply(self, args); };
+        sourceHook.call1 = (orig, self, guild) => { const icon = tokenOf(guild); return icon ? sourceFor(icon) : orig.call(self, guild); };
+        let hooked = hookExport(utils, "getGuildIconURL", urlHook);
+        if (typeof hooked.getGuildIconSource === "function") hooked = hookExport(hooked, "getGuildIconSource", sourceHook);
         return hooked === utils ? exports : replaceValue(exports, "default", hooked);
     }
     function serverEditReal(id) {
@@ -10262,7 +10608,7 @@
         ["guild.reviews", "guild", 9851, "StarIcon"], ["guild.serverTag", "guild", 9365, "TagIcon"],
         ["you.status", "you", 8471, "ChatIcon"], ["you.friends", "you", 8489, "GroupIcon"], ["you.orbs", "you", 9331, "OrbsIcon"],
         ["message.reactions", "message", 9252, "ReactionIcon"], ["message.edit", "message", 10023, "PencilIcon"], ["message.reply", "message", 12274, "ArrowAngleLeftUpIcon"],
-        ["message.forward", "message", 12696, "ArrowAngleRightUpIcon"], ["message.thread", "message", 8473, "ThreadIcon"], ["message.translate", "message", 9415, "LanguageIcon"],
+        ["message.forward", "message", 12696, "ArrowAngleRightUpIcon"], ["message.thread", "message", 8473, "ThreadIcon"], ["message.translate", "message", 9415, "LanguageIcon"], ["message.localEdit", "message", 10023, "PencilIcon"], ["message.viewRaw", "message", 12003, "FileIcon"],
         ["message.copyText", "message", 5141, "CopyIcon"], ["message.markUnread", "message", 10650, "ChatMarkUnreadIcon"], ["message.pin", "message", 10641, "PinIcon"],
         ["message.bookmark", "message", 13769, "BookmarkOutlineIcon"], ["message.reminder", "message", 5150, "ClockIcon"], ["message.apps", "message", 8506, "AppsIcon"],
         ["message.mention", "message", 8490, "AtIcon"], ["message.copyLink", "message", 5137, "LinkIcon"], ["message.copyId", "message", 10316, "IdIcon"],
@@ -10307,7 +10653,7 @@
         "message.save":"Save Image", "message.copyMedia":"Copy Media Link", "message.publish":"Publish", "message.removeEmbeds":"Remove Embeds",
         "message.removeReactions":"Remove All Reactions", "message.report":"Report to Discord", "message.delete":"Delete Message"};
     // Rows lesbunny adds to that menu, by the key it gives them.
-    const MESSAGE_VENUS_ROWS = {"venus-translate":"message.translate", "venus-bulk-delete":"message.select"};
+    const MESSAGE_VENUS_ROWS = {"venus-translate":"message.translate", "venus-local-edit":"message.localEdit", "venus-bulk-delete":"message.select", "venus-view-raw":"message.viewRaw"};
     // A message in Discord's language (intl 1126), or "" when it isn't there.
     function discordText(hash) {
         try { const m = global.__r(1128), msg = m && m.t && m.t[hash]; return msg != null && m.intl ? String(m.intl.string(msg) || "") : ""; } catch (_) { return ""; }
@@ -10374,6 +10720,8 @@
             case "guild.reviews": return tr("Reviews");
             case "message.reactions": return tr("Quick reactions");
             case "message.translate": return tr("Translate");
+            case "message.localEdit": return tr("Edit locally");
+            case "message.viewRaw": return tr("View raw data");
             case "message.select": return tr("Select Messages");
         }
         return key;
@@ -10506,6 +10854,13 @@
             if (state && typeof store.setState === "function") store.setState({blocklist:new Set(state.blocklist || [])});
         } catch (_) {}
     }
+    // toSettingListItems(node, b) runs for every settings screen render and nearly always passes straight through: the
+    // two-argument call (Discord 351.11) skips the arguments object and apply when nothing is removed
+    // (Hermes HBC98: 33.7 -> 13.7 us per 100 calls, 2.46x).
+    settingListItems.call2 = (orig, self, node, b) => {
+        if (!node || !Array.isArray(node.sections) || !settings.hideAnythingSpots || !enabled("hideAnything")) return orig.call(self, node, b);
+        return settingListItems(orig, self, [node, b]);
+    };
     function settingListItems(orig, self, args) {
         const node = args[0];
         if (!node || !Array.isArray(node.sections) || !settings.hideAnythingSpots || !enabled("hideAnything")) return orig.apply(self, args);
@@ -10523,10 +10878,14 @@
         return orig.apply(self, next);
     }
     // Each row Discord draws (renderSettingItem 15735) gets the mark in removal mode.
-    function settingItemMark(orig, self, args) {
-        const rendered = orig.apply(self, args), props = args[0], key = props && props.setting;
+    function settingMarked(rendered, props) {
+        const key = props && props.setting;
         return rendered && hideEditing() && settingRemovable(key) ? hideMarkedRow(rendered, "settings." + key) : rendered;
     }
+    // renderSettingItem runs once per settings row and takes one argument: the one-argument call skips the arguments
+    // object and apply (Hermes HBC98: 32.2 -> 15.4 us per 100 calls, 2.10x).
+    function settingItemMark(orig, self, args) { return settingMarked(orig.apply(self, args), args[0]); }
+    settingItemMark.call1 = (orig, self, props) => settingMarked(orig.call(self, props), props);
     // The profile's ⋯ menu: removed items are left out (an empty group goes too); in removal mode each removable item gets
     // the same dashed outline and red X as every other button (drawn by menuItemMark); the item itself still does what it does.
     function menuItems(items, labels, edit) {
@@ -10549,6 +10908,17 @@
         }
         return changed ? out : items;
     }
+    // The profile menu's labels in Discord's language, built once and rebuilt only when that language changes (one probe
+    // lookup per render instead of 21): Hermes HBC98 13.67 -> 0.39 us per render (35x).
+    let profileLabels = null;
+    function profileMenuLabels() {
+        const probe = discordText("GISTta");
+        if (profileLabels && profileLabels.probe === probe) return profileLabels.map;
+        const map = new Map();
+        Object.keys(MENU_SPOTS).forEach(key => MENU_SPOTS[key].forEach(hash => { const text = discordText(hash); if (text) map.set(text, key); }));
+        profileLabels = {probe, map};
+        return map;
+    }
     function profileMenu(orig, self, args) {
         useSettings("hideAnything");
         const rendered = orig.apply(self, args);
@@ -10558,8 +10928,7 @@
         if (!edit && !settings.hideAnythingSpots) return rendered;
         const Menu = inspectedExport(9662, "ContextMenu");
         if (!Menu) return rendered;
-        const labels = new Map();
-        Object.keys(MENU_SPOTS).forEach(key => MENU_SPOTS[key].forEach(hash => { const text = discordText(hash); if (text) labels.set(text, key); }));
+        const labels = profileMenuLabels();
         if (edit) hideMenuLabels.clear();
         let empty = false;
         const tree = cloneTree(rendered, (node, props) => {
@@ -10583,22 +10952,32 @@
     // A component that is one spot: gone when removed, marked in removal mode. Discord's render always runs, so its hooks
     // never change between renders.
     function hideWhole(key) {
-        return function (orig, self, args) {
-            useSettings("hideAnything");
-            const rendered = orig.apply(self, args);
+        const finish = rendered => {
             if (!rendered || !enabled("hideAnything")) return rendered;
             if (spotHidden(key)) return null;
             return hideEditing() ? hideMarked(rendered, key) : rendered;
         };
+        // React calls a component as (props) or (props, ref): those calls skip the arguments object and apply
+        // (Hermes HBC98: 84.0 -> 63.5 us per 100 renders, 1.32x).
+        const operation = function (orig, self, args) { useSettings("hideAnything"); return finish(orig.apply(self, args)); };
+        operation.call1 = (orig, self, a) => { useSettings("hideAnything"); return finish(orig.call(self, a)); };
+        operation.call2 = (orig, self, a, b) => { useSettings("hideAnything"); return finish(orig.call(self, a, b)); };
+        return operation;
     }
     // A component holding several spots: classify(node) names the spot an element is. Removed ones are left out, and a
     // wrapper that only held removed buttons goes too, so nothing keeps empty space.
     function hideWalk(node, depth, classify, edit, gone) {
         if (!node || typeof node !== "object" || depth > 14) return node;
         if (Array.isArray(node)) {
-            let changed = false;
-            const next = node.map(child => { const value = hideWalk(child, depth + 1, classify, edit, gone); if (value !== child) changed = true; return value; });
-            if (!changed) return node;
+            // Runs on every render of a hooked component, and in nearly every array nothing changes: copy only once a child does
+            // (1.61x faster on Hermes than mapping every array).
+            let next = null;
+            for (let i = 0; i < node.length; i++) {
+                const child = node[i], value = hideWalk(child, depth + 1, classify, edit, gone);
+                if (value !== child && next === null) next = node.slice(0, i);
+                if (next !== null) next.push(value);
+            }
+            if (next === null) return node;
             const kept = next.filter(child => child !== null);
             // A badge dot drawn beside a removed button (hidden from screen readers, no content of its own) goes with it.
             return kept.length && kept.every(child => child && child.props && child.props.accessibilityElementsHidden === true && child.props.children == null) ? [] : kept;
@@ -10615,14 +10994,20 @@
     }
     // prepare() runs on every render (it may use hooks) and can return its own "is this spot gone" check.
     function hideTree(classify, prepare) {
-        return function (orig, self, args) {
-            useSettings("hideAnything");
-            const gone = prepare ? prepare() : null;
-            const rendered = orig.apply(self, args);
+        const finish = (rendered, gone) => {
             if (!React || !enabled("hideAnything")) return rendered;
             const edit = hideEditing();
             return edit || settings.hideAnythingSpots ? hideWalk(rendered, 0, classify, edit, gone) : rendered;
         };
+        // Same (props) / (props, ref) fast paths as hideWhole (Hermes HBC98: 56.6 -> 36.1 us per 100 renders, 1.57x).
+        const operation = function (orig, self, args) {
+            useSettings("hideAnything");
+            const gone = prepare ? prepare() : null;
+            return finish(orig.apply(self, args), gone);
+        };
+        operation.call1 = (orig, self, a) => { useSettings("hideAnything"); const gone = prepare ? prepare() : null; return finish(orig.call(self, a), gone); };
+        operation.call2 = (orig, self, a, b) => { useSettings("hideAnything"); const gone = prepare ? prepare() : null; return finish(orig.call(self, a, b), gone); };
+        return operation;
     }
     // A message's hold menu (LongPressMessageActionSheet 9978): each row is an ActionSheetRow with Discord's own label, matched
     // by message key in any language, and the rows lesbunny adds by their keys. A group whose rows are all gone goes too. The
@@ -10708,12 +11093,16 @@
     // The ⋯ menu's rows are drawn by ContextMenuItem (14279), which only gets each item's label: the ones profileMenu marked
     // get the dashed outline and the X. Tapping the X closes the menu first, so the "Remove this button?" alert is on top.
     function closeContextMenu() { try { const hide = inspectedExport(9663, "hideContextMenu"); if (typeof hide === "function") hide(); } catch (_) {} }
-    function menuItemMark(orig, self, args) {
-        const rendered = orig.apply(self, args), props = args[0];
+    // Every row of every context menu renders through this: (props) and (props, ref) calls skip the arguments object and
+    // apply (Hermes HBC98: 38.1 -> 20.5 us per 100 rows, 1.86x).
+    function menuItemMarked(rendered, props) {
         if (!rendered || !hideMenuLabels.size || !props || typeof props.label !== "string" || !hideEditing()) return rendered;
         const key = hideMenuLabels.get(props.label);
         return key && !spotHidden(key) ? el(HideMark, {key:"hide:" + key, spot:key, base:rendered, inset:true, before:closeContextMenu}) : rendered;
     }
+    function menuItemMark(orig, self, args) { return menuItemMarked(orig.apply(self, args), args[0]); }
+    menuItemMark.call1 = (orig, self, props) => menuItemMarked(orig.call(self, props), props);
+    menuItemMark.call2 = (orig, self, props, ref) => menuItemMarked(orig.call(self, props, ref), props);
     // A tab measures where it sits for the line under the selected one, so its mark is drawn inside it instead of around it.
     function markInside(rendered, key) {
         if (!rendered || !rendered.props) return rendered;
@@ -10751,13 +11140,16 @@
     }
     // Each tab (TabItem 11679 on profiles, SegmentedControlItem 9052 elsewhere) knows its index into state.items, so Activity
     // and Wishlist are found by id.
-    function segmentedItemMark(orig, self, args) {
-        const rendered = orig.apply(self, args), props = args[0];
+    // Every tab of every profile and search tab bar: same call1/call2 fast paths (Hermes HBC98: 35.2 -> 18.8 us per 100 tabs, 1.87x).
+    function segmentedItemMarked(rendered, props) {
         if (!rendered || !props || !props.state || !Array.isArray(props.state.items) || !hideEditing()) return rendered;
         const item = props.state.items[props.index];
         const key = !item ? null : profileTabItems(props.state.items) ? PROFILE_TABS[item.id] : "page" in item && "count" in item ? SEARCH_TAB_SPOTS[item.id] : null;
         return key ? markInside(rendered, key) : rendered;
     }
+    function segmentedItemMark(orig, self, args) { return segmentedItemMarked(orig.apply(self, args), args[0]); }
+    segmentedItemMark.call1 = (orig, self, props) => segmentedItemMarked(orig.call(self, props), props);
+    segmentedItemMark.call2 = (orig, self, props, ref) => segmentedItemMarked(orig.call(self, props, ref), props);
     // The server tag next to someone's name (UserProfilePrimaryInfo 10858) is its local GuildTag, the one element given a
     // primaryGuildOverride without badges. Someone without a tag draws nothing there, so HideMark shows no outline.
     // Message requests (MessageRequestsButton 17158) only draws while there are some, so the header counts them too.
@@ -10809,15 +11201,20 @@
     // A server's channel list keeps room for its Search row (useRedesignGuildHeaderHeight 17263: SMALL_BUTTON_HEIGHT plus
     // SEARCH_BAR_MARGIN_BOTTOM). With Search, Invite and Events all removed the row is gone, so its room goes too.
     function serverHeaderEmpty() { return spotHidden("server.search") && spotHidden("server.invite") && spotHidden("server.events"); }
-    function guildHeaderHeight(orig, self, args) {
-        useSettings("hideAnything");
-        const height = orig.apply(self, args), guild = args[0];
+    // useRedesignGuildHeaderHeight(guild) is read on every server header render: the one-argument call skips the arguments
+    // object and apply (Hermes HBC98: 60.6 -> 43.0 us per 100 calls, 1.41x).
+    function guildHeaderHeightFinish(height, guild) {
         if (typeof height !== "number" || !enabled("hideAnything") || !serverHeaderEmpty()) return height;
         // Only real servers have the row (not Favorites).
         if (!guild || typeof guild.id !== "string" || !/^\d{15,}$/.test(guild.id)) return height;
         const button = inspectedExport(5484, "SMALL_BUTTON_HEIGHT"), margin = inspectedExport(11895, "SEARCH_BAR_MARGIN_BOTTOM");
         return Math.max(0, height - (typeof button === "number" ? button : 32) - (typeof margin === "number" ? margin : 0));
     }
+    function guildHeaderHeight(orig, self, args) {
+        useSettings("hideAnything");
+        return guildHeaderHeightFinish(orig.apply(self, args), args[0]);
+    }
+    guildHeaderHeight.call1 = (orig, self, guild) => { useSettings("hideAnything"); return guildHeaderHeightFinish(orig.call(self, guild), guild); };
     // A profile's tab bar (Tabs 12364) with only Main left is just a label: it goes, and Main's page shows on its own.
     function profileTabsBar(orig, self, args) {
         const rendered = orig.apply(self, args), props = args[0], items = props && props.state && props.state.items;
@@ -10920,10 +11317,13 @@
         return swapJoinDates(rendered, 0);
     }
     // Roles (UserProfileRolesCard 7158) on a profile; the card a new member sees after onboarding isn't a profile and stays.
-    function rolesCard(orig, self, args) {
-        const props = args[0];
-        return props && ("user" in props || "userId" in props || "guildMember" in props) ? hideWhole("profile.roles")(orig, self, args) : orig.apply(self, args);
-    }
+    // Built once, not on every render of the card, and (props) / (props, ref) calls skip the arguments object and apply
+    // (Hermes HBC98: 128.9 -> 75.2 us per 100 renders, 1.71x).
+    const rolesWhole = hideWhole("profile.roles");
+    const isRolesProps = props => !!props && ("user" in props || "userId" in props || "guildMember" in props);
+    function rolesCard(orig, self, args) { return isRolesProps(args[0]) ? rolesWhole(orig, self, args) : orig.apply(self, args); }
+    rolesCard.call1 = (orig, self, props) => isRolesProps(props) ? rolesWhole.call1(orig, self, props) : orig.call(self, props);
+    rolesCard.call2 = (orig, self, props, ref) => isRolesProps(props) ? rolesWhole.call2(orig, self, props, ref) : orig.call(self, props, ref);
     // The note (UserProfileNote 14101). With User and server reviews on, lesbunny draws Reviews right after it: only the note goes.
     function noteSpot(orig, self, args) {
         useSettings("hideAnything");
@@ -10992,8 +11392,20 @@
         const icon = node.props.icon, label = node.props.label;
         if (icon && typeof icon === "object" && icon.type && icon.type === inspectedExport(9709, "BoostGemIcon")) return "guild.boost";
         if (typeof label !== "string" || !label) return null;
-        return label === discordText("VINpSK") ? "guild.invite" : label === discordText("HcoRu0") ? "guild.notifications" : label === discordText("Uj0md3") ? "guild.boost" : null;
+        // One probe lookup per button instead of up to three intl lookups; the table is rebuilt only when Discord's language
+        // changes, and the first entry wins like the old ternary chain (Hermes HBC98 6.10 -> 4.39 us per 6 buttons, 1.39x).
+        const probe = discordText("VINpSK");
+        if (!guildTabCache || guildTabCache.probe !== probe) {
+            const map = new Map();
+            [["VINpSK", "guild.invite"], ["HcoRu0", "guild.notifications"], ["Uj0md3", "guild.boost"]].forEach(entry => {
+                const text = discordText(entry[0]);
+                if (text && !map.has(text)) map.set(text, entry[1]);
+            });
+            guildTabCache = {probe, map};
+        }
+        return guildTabCache.map.get(label) || null;
     }
+    let guildTabCache = null;
     // Its rows (GuildUnreadAction and GuildActionSheetSecondaryActions, 14925): plain rows by Discord's own label, and the
     // module's own option components by name, since they draw their rows themselves.
     const GUILD_ROW_NAMES = Object.assign(Object.create(null), {BrowseChannelsOption:"guild.channelsRoles", ChangeIdentityOption:"guild.serverProfile",
@@ -11099,6 +11511,8 @@
     // until you set one. Other people's statuses stay.
     const statusWhole = hideWhole("you.status");
     function statusBubble(orig, self, args) { const props = args[0]; return props && props.editEnabled ? statusWhole(orig, self, args) : orig.apply(self, args); }
+    statusBubble.call1 = (orig, self, props) => props && props.editEnabled ? statusWhole.call1(orig, self, props) : orig.call(self, props);
+    statusBubble.call2 = (orig, self, props, ref) => props && props.editEnabled ? statusWhole.call2(orig, self, props, ref) : orig.call(self, props, ref);
     // Under a server's name in the channel list (ChannelListStickyHeader 17265): the member count, a dot, then "Community".
     // The dot goes with either of them.
     function stickySubheader(node, depth, Text, community, edit) {
@@ -11406,10 +11820,18 @@
         const types = inspectedExport(6235, "AdCreativeType");
         if (!types || types.NO_FILL === undefined) return exports;
         noQuestDock = Object.freeze({type:types.NO_FILL});
-        exports = hookExport(exports, "useMobileQuestDock", (orig, self, args) => { const dock = orig.apply(self, args); return questDockHidden() ? noQuestDock : dock; });
-        exports = hookExport(exports, "useMobileQuestDockHeight", (orig, self, args) => { const height = orig.apply(self, args); return questDockHidden() ? 0 : height; });
+        // These hooks take no argument and run on every render of the dock: the no-argument call skips the arguments
+        // object and apply (Hermes HBC98: 33.7 -> 14.7 us per 100 calls, 2.3x).
+        const questHook = (hidden) => {
+            const hook = (orig, self, args) => { const value = orig.apply(self, args); return questDockHidden() ? hidden : value; };
+            hook.call0 = (orig, self) => { const value = orig.call(self); return questDockHidden() ? hidden : value; };
+            return hook;
+        };
+        exports = hookExport(exports, "useMobileQuestDock", questHook(noQuestDock));
+        exports = hookExport(exports, "useMobileQuestDockHeight", questHook(0));
+        const questFlag = questHook(false);
         for (const key of ["useIsMobileQuestDockRendered", "useIsMobileQuestDockRenderedBase", "useIsMobileQuestDockVisibleToUser"])
-            exports = hookExport(exports, key, (orig, self, args) => { const value = orig.apply(self, args); return questDockHidden() ? false : value; });
+            exports = hookExport(exports, key, questFlag);
         return exports;
     }
     // The dock itself sits in its own component, so switching it off unmounts it instead of changing its hooks.
@@ -11469,8 +11891,17 @@
         // Hot two-argument hooks (permission checks, message lookups) can declare operation.call2(orig, self, a, b):
         // passing `arguments` on to apply is ~3x the cost of the call itself on Hermes.
         // One-argument hooks (RowGenerator.generate) can declare operation.call1(orig, self, a) the same way.
-        const call2 = operation.call2, call1 = operation.call1;
-        const patched = typeof call2 === "function" && typeof call1 === "function" ?
+        // Three-argument calls (getMobileOptimizedSrc(src, w, h), the avatar URL builders) can declare
+        // operation.call3(orig, self, a, b, c) the same way.
+        // Store getters called with no argument or one (getChannelId(), getChannelId(guildId)) declare call0 and call1.
+        const call3 = operation.call3, call2 = operation.call2, call1 = operation.call1, call0 = operation.call0;
+        const patched = typeof call0 === "function" && typeof call1 === "function" ?
+            function (a) { const n = arguments.length; return n === 0 ? call0(orig, this) : n === 1 ? call1(orig, this, a) : operation(orig, this, arguments); } :
+            typeof call0 === "function" ?
+            function () { return arguments.length === 0 ? call0(orig, this) : operation(orig, this, arguments); } :
+            typeof call3 === "function" ?
+            function (a, b, c) { return arguments.length === 3 ? call3(orig, this, a, b, c) : operation(orig, this, arguments); } :
+            typeof call2 === "function" && typeof call1 === "function" ?
             function (a, b) {
                 const n = arguments.length;
                 return n === 1 ? call1(orig, this, a) : n === 2 ? call2(orig, this, a, b) : operation(orig, this, arguments);
@@ -12567,25 +12998,37 @@
             accountSwitcher.origUsers = store.getUsers.bind(store);
         if (!accountSwitcher.origValidUsers && typeof store.getValidUsers === "function")
             accountSwitcher.origValidUsers = store.getValidUsers.bind(store);
-        let patched = hookExport(store, "getCanUseMultiAccountMobile", function (orig, self, args) {
+        // getCanUseMultiAccountMobile() and getHasLoggedInAccounts() take no argument and are read on every account
+        // screen: the no-argument call skips the arguments object and apply (Hermes HBC98: 36.1 -> 16.4 us per 100 calls, 2.2x).
+        const canUseMulti = function (orig, self, args) {
             return enabled("accountSwitcher") ? true : orig.apply(self, args);
-        });
-        patched = hookExport(patched, "getUsers", function (orig, self, args) {
-            const res = orig.apply(self, args);
-            return enabled("accountSwitcher") ? accountSwitcherWithCurrent(res, false) : res;
-        });
-        patched = hookExport(patched, "getValidUsers", function (orig, self, args) {
-            const res = orig.apply(self, args);
+        };
+        canUseMulti.call0 = function (orig, self) { return enabled("accountSwitcher") ? true : orig.call(self); };
+        // getUsers() and getValidUsers() are no-argument reads too (Hermes HBC98: 18.0 -> 9.5 us per 25 rounds of both, switcher off).
+        const usersAnswer = res => enabled("accountSwitcher") ? accountSwitcherWithCurrent(res, false) : res;
+        const usersHook = (orig, self, args) => usersAnswer(orig.apply(self, args));
+        usersHook.call0 = (orig, self) => usersAnswer(orig.call(self));
+        const validAnswer = res => {
             if (!enabled("accountSwitcher")) return res;
             const list = accountSwitcherWithCurrent(res, true);
             // A push sync with Notifications from every account off: only the signed-in account (see accountSwitcherPushSync).
             if (accountSwitcher.pushOnlyCurrent) { const me = currentUser(); return me ? list.filter(u => u && u.id === me.id) : list; }
             return list;
-        });
-        patched = hookExport(patched, "getHasLoggedInAccounts", function (orig, self, args) {
+        };
+        const validHook = (orig, self, args) => validAnswer(orig.apply(self, args));
+        validHook.call0 = (orig, self) => validAnswer(orig.call(self));
+        const hasAccounts = function (orig, self, args) {
             const res = orig.apply(self, args);
             return enabled("accountSwitcher") ? (res || accountSwitcherUsers().length > 0) : res;
-        });
+        };
+        hasAccounts.call0 = function (orig, self) {
+            const res = orig.call(self);
+            return enabled("accountSwitcher") ? (res || accountSwitcherUsers().length > 0) : res;
+        };
+        let patched = hookExport(store, "getCanUseMultiAccountMobile", canUseMulti);
+        patched = hookExport(patched, "getUsers", usersHook);
+        patched = hookExport(patched, "getValidUsers", validHook);
+        patched = hookExport(patched, "getHasLoggedInAccounts", hasAccounts);
         const out = replaceValue(exports, "default", patched);
         if (enabled("accountSwitcher")) accountSwitcherSync();
         return out;
@@ -12688,15 +13131,18 @@
     }
     function hookIsStaffForMultiAccount(exports) {
         if (!exports) return exports;
-        const wrap = function (orig, self, args) {
-            const res = orig.apply(self, args);
+        // isStaff(user) is asked on many renders: the one-argument call skips the arguments object and apply
+        // (Hermes HBC98: 40.0 -> 22.5 us per 100 calls, 1.78x).
+        const answer = (res, user) => {
             if (res || !enabled("accountSwitcher")) return res;
-            const user = args[0], me = currentUser();
+            const me = currentUser();
             if (!me || (user && user.id === me.id)) return true;
             const store = accountSwitcherStore();
             try { if (store && typeof store.getCanUseMultiAccountMobile === "function" && !store.getCanUseMultiAccountMobile()) return true; } catch (_) {}
             return res;
         };
+        const wrap = (orig, self, args) => answer(orig.apply(self, args), args[0]);
+        wrap.call1 = (orig, self, user) => answer(orig.call(self, user), user);
         if (typeof exports.default === "function") exports = hookExport(exports, "default", wrap);
         if (typeof exports.isStaffFromRawUser === "function") exports = hookExport(exports, "isStaffFromRawUser", wrap);
         return exports;
@@ -13330,17 +13776,25 @@
     // from lexical environment slots [2, 4] and [2, 5] captured once when 9255's factory ran, so lengthConstants
     // always returns SPLIT_UNLIMITED when features.splitMessages is built in, and maxLengthModule restores the real
     // limit when the toggle is off.
+    // getMaxMessageLength() and useMessageMaxLength() take no argument and run on every chat input render: the
+    // no-argument call skips the arguments object and apply (Hermes HBC98: 80.1 -> 43.0 us per 100 calls of both, 1.86x).
+    function maxLengthResult(value) {
+        if (enabled("splitMessages")) return SPLIT_UNLIMITED;
+        return value === SPLIT_UNLIMITED ? messageLimit() : value;
+    }
     function maxLengthModule(exports) {
-        const big = (orig, self, args) => {
-            const value = orig.apply(self, args);
-            if (enabled("splitMessages")) return SPLIT_UNLIMITED;
-            return value === SPLIT_UNLIMITED ? messageLimit() : value;
-        };
+        const big = (orig, self, args) => maxLengthResult(orig.apply(self, args));
+        big.call0 = (orig, self) => maxLengthResult(orig.call(self));
         exports = hookExport(exports, "getMaxMessageLength", big);
-        return hookExport(exports, "default", (orig, self, args) => {
+        const useBig = (orig, self, args) => {
             if (React) useSettings("splitMessages");
-            return big(orig, self, args);
-        });
+            return maxLengthResult(orig.apply(self, args));
+        };
+        useBig.call0 = (orig, self) => {
+            if (React) useSettings("splitMessages");
+            return maxLengthResult(orig.call(self));
+        };
+        return hookExport(exports, "default", useBig);
     }
     // Constants (1087): DraftStore (7239) and useMessageMaxLength (9561) both read MAX_MESSAGE_LENGTH and
     // MAX_MESSAGE_LENGTH_PREMIUM once at module evaluation time during startup (before venus-patches.json finishes
@@ -14628,26 +15082,20 @@
             (!key || existing.key === key) && (!quoteKey || existing.quoteKey === quoteKey) && existing.quotes === nextQuotes) return;
         let raw = source.content;
         const hasRaw = typeof raw === "string" && raw.length > 0;
-        let snapshot = null;
+        // A forward has no text of its own: what's translated is the forwarded message inside it.
+        let forward = false;
         if (!hasRaw) {
             raw = "";
             const contentSource = translateContentSource(source);
-            if (contentSource && contentSource !== source && typeof contentSource.content === "string" && contentSource.content) {
-                const list = source.messageSnapshots || source.message_snapshots;
-                const first = Array.isArray(list) && list[0];
-                if (first && first.message) snapshot = {message:Object.assign({}, typeof first.message.toJS === "function" ? first.message.toJS() : first.message),
-                    moderator_report:first.moderatorReport !== undefined ? first.moderatorReport : first.moderator_report || null,
-                    rest:Array.isArray(list) && list.length > 1 ? list.slice(1).map(item => ({message:item && item.message && typeof item.message.toJS === "function" ? item.message.toJS() : item && item.message,
-                        moderator_report:item && (item.moderatorReport !== undefined ? item.moderatorReport : item.moderator_report || null)})) : []};
-            }
-            if (!snapshot) return;
+            forward = !!(contentSource && contentSource !== source && typeof contentSource.content === "string" && contentSource.content);
+            if (!forward) return;
         }
         let entry = existing;
         if (entry) translate.shown.delete(id);
         else if (translate.shown.size >= 300) translate.shown.delete(translate.shown.keys().next().value);
-        if (!entry) entry = {channelId, id, source, raw, snapshot, key:key || null, quoteKey:quoteKey || null, quotes:nextQuotes};
+        if (!entry) entry = {channelId, id, source, raw, forward, key:key || null, quoteKey:quoteKey || null, quotes:nextQuotes};
         else {
-            entry.source = source; entry.raw = raw; entry.snapshot = snapshot;
+            entry.source = source; entry.raw = raw; entry.forward = forward;
             if (key) entry.key = key;
             if (quoteKey) entry.quoteKey = quoteKey;
             entry.quotes = nextQuotes;
@@ -14812,21 +15260,21 @@
     }
     // Discord keeps a row until its message record changes, so its text is changed for a moment (a zero-width
     // space) and then put back, like Fix unknown mentions does. The translation ignores that space.
+    // Only content is ever sent, forwards included: a forward's own (empty) text changes, which is enough for Discord to
+    // redraw the row and read the forwarded message again. Forwards used to be redrawn by sending back a copy of the
+    // forwarded message, but that copy was already in Discord's drawn shape, and MESSAGE_UPDATE treats message_snapshots as
+    // raw API data: their embeds came out without color, title, description, fields, images or thumbnails, and Discord
+    // saved them that way on the phone. Translating any message redraws every one shown, so every forward was hit (#142).
     function translateRedraw(ids) {
         if (!translate.dispatcher) return;
         const entries = [];
         ids.forEach(id => {
             const entry = translate.shown.get(id);
-            if (entry && (typeof entry.raw === "string" && entry.raw || entry.snapshot) && !translate.refreshing.has(id)) entries.push(entry);
+            if (entry && (typeof entry.raw === "string" && entry.raw || entry.forward) && !translate.refreshing.has(id)) entries.push(entry);
         });
         if (!entries.length) return;
         const dispatch = message => { try { translate.dispatcher.dispatch({type:"MESSAGE_UPDATE", message}); } catch (_) {} };
-        const update = (entry, suffix) => {
-            if (entry.raw) return {id:entry.id, channel_id:entry.channelId, content:entry.raw + suffix};
-            const snap = entry.snapshot;
-            return {id:entry.id, channel_id:entry.channelId, message_snapshots:[{message:Object.assign({}, snap.message, {content:snap.message.content + suffix}),
-                moderator_report:snap.moderator_report}].concat(snap.rest)};
-        };
+        const update = (entry, suffix) => ({id:entry.id, channel_id:entry.channelId, content:(entry.raw || "") + suffix});
         entries.forEach(entry => { translate.refreshing.add(entry.id); dispatch(update(entry, "\u200b")); });
         later(() => entries.forEach(entry => { dispatch(update(entry, "")); translate.refreshing.delete(entry.id); }), 120);
     }
@@ -14943,21 +15391,28 @@
     // message in it is in another language. Tap it to translate the chat, and every message you see in it; the bar
     // stays, so one more tap shows it as written. The chat stays translated when you leave and come back, until
     // Discord restarts. Single messages still have Translate and Show original in their menu. The cog opens these settings.
-    function translateBarHeader(orig, self, args) {
-        const props = args[0];
+    // ChatViewWrapper renders on every chat update as (props) or (props, ref): those calls skip the arguments object, apply and
+    // the argument copy (Hermes HBC98: 183.6 -> 125.0 us per 100 renders, 1.47x).
+    function translateBarProps(props) {
         // The bar is always in the tree and draws nothing unless it's wanted, so switching options never remounts the chat.
         // Appended after ChatViewWrapper's children (like JumpToPresentButton) so it sits above DCDChatList's native
         // GestureDetector on Android and receives touches directly.
-        if (!props || !props.channelId || !React || !RN) return orig.apply(self, args);
         const bar = el(TranslateBar, {key:"venus-translate-bar", channelId:props.channelId});
         const children = Array.isArray(props.children) ? props.children.concat([bar]) : [props.children, bar];
         // Discord's own sticky header (the blue "25+ new messages" bar, thread and safety banners) is measured, so the
         // pill always sits just under whatever Discord shows there instead of on top of it (#82).
         // Only a header Discord already passes is wrapped: StickyWrapper (10380) fills the chat with its header box on Android,
         // so adding one where there was none could take touches from the messages.
-        const next = Object.assign({}, props, props.stickyHeader ? {children, stickyHeader:el(TranslateHeaderMeasure, {channelId:props.channelId}, props.stickyHeader)} : {children});
+        return Object.assign({}, props, props.stickyHeader ? {children, stickyHeader:el(TranslateHeaderMeasure, {channelId:props.channelId}, props.stickyHeader)} : {children});
+    }
+    function translateBarHeader(orig, self, args) {
+        const props = args[0];
+        if (!props || !props.channelId || !React || !RN) return orig.apply(self, args);
+        const next = translateBarProps(props);
         return args.length === 1 ? orig.call(self, next) : orig.apply(self, [next].concat(Array.prototype.slice.call(args, 1)));
     }
+    translateBarHeader.call1 = (orig, self, props) => !props || !props.channelId || !React || !RN ? orig.call(self, props) : orig.call(self, translateBarProps(props));
+    translateBarHeader.call2 = (orig, self, props, ref) => !props || !props.channelId || !React || !RN ? orig.call(self, props, ref) : orig.call(self, translateBarProps(props), ref);
     // How tall Discord's sticky header is right now, per channel. Only the bar listens, so a change never redraws the chat.
     const translateHeader = {heights:new Map(), listeners:new Set()};
     function TranslateHeaderMeasure(props) {
@@ -15023,6 +15478,7 @@
     }
     function TranslateBar(props) {
         useSettings("translate");
+        useSettings("expandBar");
         const [, bump] = React.useState(0);
         const channelId = props.channelId, headerHeight = useTranslateHeaderHeight(channelId);
         React.useEffect(() => {
@@ -15037,7 +15493,7 @@
             return () => msgStore.removeChangeListener(check);
         }, [channelId, settings.translate, settings.translateMode, settings.translateAsk, settings.translateTarget, settings.translateLanguage]);
         const s = useTranslateBarStyles();
-        if (!translateBarShown(channelId)) return null;
+        if (!translateBarShown(channelId) || expandBar.expanded) return null;
         const on = translate.channels.has(channelId), Press = inspectedExport(6462, "PressableOpacity") || RN.TouchableOpacity || RN.Pressable || RN.View;
         const label = on ? tr("Show original") : tr("Translate to {language}", {language:translateTargetName()});
         const tap = () => { haptic("SELECTION"); animateLayout(); translateChannel(channelId, !on); };
@@ -16202,22 +16658,29 @@
     }
     // Discord's root providers (11577) build the theme context once and keep it in a memo keyed on theme, flags and
     // so on, never on our revision. Re-keying the value they hand down makes createStyles and useToken read fresh.
-    function rootThemeContextProvider(orig, self, args) {
+    // The provider re-renders with the app: (props) and (props, ref) calls skip the arguments object and apply
+    // (Hermes HBC98: 37.1 -> 20.5 us per 100 renders, 1.81x).
+    function rootThemePrepare() {
         // customThemesApply ends with notify("customThemes") whenever the tables change, Material You's included, so the
         // whole app re-renders once per real change, never for a Material You option that leaves the colors as they are.
         if (features.customThemes || features.materialYou) useSettings("customThemes");
         if (features.iconPacks) useSettings("iconPacks");
         // Switching Light, Ash, Dark or Onyx re-renders this provider: the native table follows the new appearance.
         if (features.customThemes && materialYou.nativeSlot && customThemesActiveEntry() && nativeThemeSlot() !== materialYou.nativeSlot) myNativeSync(customThemesActiveEntry());
-        return themeContextRekey(orig.apply(self, args));
     }
+    function rootThemeContextProvider(orig, self, args) { rootThemePrepare(); return themeContextRekey(orig.apply(self, args)); }
+    rootThemeContextProvider.call1 = (orig, self, props) => { rootThemePrepare(); return themeContextRekey(orig.call(self, props)); };
+    rootThemeContextProvider.call2 = (orig, self, props, ref) => { rootThemePrepare(); return themeContextRekey(orig.call(self, props, ref)); };
     // The server list (Guilds) and DMs (MainTabs) sit under a second ThemeContextProvider (4934) that memoizes its own
     // value on its props and the parent's theme, flags and so on, never on the parent's key. On a cold start they mount
     // before the saved theme is read, so that memo kept the key from before it and createStyles kept serving Discord's
     // colors there (#110). Re-keyed the same way, they recolor with the rest of Discord.
+    // Same fast paths (Hermes HBC98: 30.3 -> 12.0 us per 100 renders, 2.5x).
     function nestedThemeContextProvider(orig, self, args) {
         return themeContextRekey(orig.apply(self, args));
     }
+    nestedThemeContextProvider.call1 = (orig, self, props) => themeContextRekey(orig.call(self, props));
+    nestedThemeContextProvider.call2 = (orig, self, props, ref) => themeContextRekey(orig.call(self, props, ref));
     // One re-keyed copy per memoized value and revision, so a provider that re-renders with the same value hands down
     // the same object and doesn't re-render every consumer under it.
     const themeContextRekeyed = new WeakMap();
@@ -16282,9 +16745,12 @@
         }
         return source;
     }
-    function chatViewWrapperThemeBackground(orig, self, args) {
-        useSettings("customThemes");
-        const tree = orig.apply(self, args);
+    // Same call1/call2 fast paths as the other ChatViewWrapper hooks (Hermes HBC98: 48.8 -> 31.3 us per 100 renders, 1.56x,
+    // background off).
+    function chatViewWrapperThemeBackground(orig, self, args) { useSettings("customThemes"); return chatThemeBackground(orig.apply(self, args)); }
+    chatViewWrapperThemeBackground.call1 = (orig, self, props) => { useSettings("customThemes"); return chatThemeBackground(orig.call(self, props)); };
+    chatViewWrapperThemeBackground.call2 = (orig, self, props, ref) => { useSettings("customThemes"); return chatThemeBackground(orig.call(self, props, ref)); };
+    function chatThemeBackground(tree) {
         if (!enabled("customThemes") || !settings.customThemesBackground || !React || !RN || !RN.Image || !tree) return tree;
         const active = customThemesActiveEntry();
         const bg = active && active.background;
@@ -18014,12 +18480,15 @@
         try { return store && typeof store.getCurrentUser === "function" ? store.getCurrentUser() : null; } catch (_) { return null; }
     }
     function hookStaffEnv(exports) {
-        return hookExport(exports, "isStaffEnv", function (orig, self, args) {
-            const real = orig.apply(self, args);
+        // Hermes HBC98: 40.0 -> 23.0 us per 100 calls (1.74x) with the one-argument fast path.
+        const answer = (real, user) => {
             if (real || !enabled("experiments")) return real;
-            const user = args[0], me = experimentsMe();
+            const me = experimentsMe();
             return !!(user && me && user.id === me.id);
-        });
+        };
+        const check = (orig, self, args) => answer(orig.apply(self, args), args[0]);
+        check.call1 = (orig, self, user) => answer(orig.call(self, user), user);
+        return hookExport(exports, "isStaffEnv", check);
     }
     function experimentsInit(dispatcher) {
         if (experiments.dispatcher || !dispatcher || typeof dispatcher.subscribe !== "function") return;
@@ -18121,9 +18590,11 @@
         }
         return false;
     }
-    function hideBlockedChannelStream(orig, self, args) {
-        const params = args[0];
-        if (!params || typeof params !== "object") return orig.apply(self, args);
+    // Runs every time the chat list is built. The usual one-argument call skips the arguments object and apply
+    // (Hermes HBC98: 43.0 -> 22.0 us per 100 calls with Hide blocked messages off, 1.96x).
+    function hideBlockedChannelStream(orig, self, args) { return hideBlockedChannelStream.call1(orig, self, args[0]); }
+    hideBlockedChannelStream.call1 = (orig, self, params) => {
+        if (!params || typeof params !== "object") return orig.call(self, params);
         const active = enabled("hideBlocked") && (settings.hideBlockedBlocked || settings.hideBlockedIgnored || settings.hideBlockedReplies);
         const ver = active ? hideBlocked.version + ":" + (settings.hideBlockedBlocked ? 1 : 0) + (settings.hideBlockedIgnored ? 1 : 0) + (settings.hideBlockedReplies ? 1 : 0) : "";
         const mgr = params.chatManager;
@@ -18134,10 +18605,8 @@
         }
         const messages = params.messages;
         if (!active || !messages || typeof messages.forEach !== "function") {
-            if (!force) return orig.apply(self, args);
-            const next = Array.from(args);
-            next[0] = Object.assign({}, params, {forceRender:true});
-            return orig.apply(self, next);
+            if (!force) return orig.call(self, params);
+            return orig.call(self, Object.assign({}, params, {forceRender:true}));
         }
         const wrapped = Object.create(messages);
         wrapped.forEach = function (fn, thisArg) {
@@ -18145,10 +18614,8 @@
                 if (!hideBlockedShouldHide(msg)) fn.call(thisArg, msg, index, collection);
             });
         };
-        const next = Array.from(args);
-        next[0] = Object.assign({}, params, {messages:wrapped, forceRender:force || params.forceRender});
-        return orig.apply(self, next);
-    }
+        return orig.call(self, Object.assign({}, params, {messages:wrapped, forceRender:force || params.forceRender}));
+    };
     // Close their DM (based on RemoveBlockedUsers): when you block someone, RelationshipStore gets RELATIONSHIP_ADD (or _UPDATE
     // for a friend) with type 2. lesbunny then closes your DM with them through Discord's own closePrivateChannel (7290), the
     // same as Close DM in its menu: the chat leaves the Messages list and nothing is deleted. Open on that chat, you're
@@ -18710,12 +19177,16 @@
         const kept = match[3] ? match[3].split("&").filter(part => part && !FULL_IMAGE_RESIZE.test(part)) : [];
         return match[1] + match[2] + (kept.length ? "?" + kept.join("&") : "");
     }
-    function fullImagesSrc(orig, self, args) {
+    // Asked for every picture drawn in chat: the usual three-argument call skips the arguments object and apply
+    // (Hermes HBC98: 38.1 -> 17.6 us per 100 calls, 2.17x).
+    function fullImagesUrl(src, width, height) {
         if (enabled("fullImages") && (fullImages.viewer > 0 ? settings.fullImagesViewer : settings.fullImagesChat)) {
-            try { const url = fullImageUrl(args[0], args[1], args[2], settings.fullImagesGifs); if (url) return url; } catch (_) {}
+            try { return fullImageUrl(src, width, height, settings.fullImagesGifs); } catch (_) {}
         }
-        return orig.apply(self, args);
+        return null;
     }
+    function fullImagesSrc(orig, self, args) { return fullImagesUrl(args[0], args[1], args[2]) || orig.apply(self, args); }
+    fullImagesSrc.call3 = (orig, self, src, width, height) => fullImagesUrl(src, width, height) || orig.call(self, src, width, height);
     function hookFullImagesViewer(exports) {
         FULL_IMAGE_VIEWER_CALLS.forEach(key => {
             exports = hookExport(exports, key, (orig, self, args) => {
@@ -18737,9 +19208,10 @@
         const want = banner ? 1024 : 512;
         return url.replace(FULL_AVATAR_SIZE, (all, sep, n) => Number(n) >= want ? all : sep + "size=" + want);
     }
+    // Every avatar and banner in chat and member lists goes through these: the usual three-argument call skips the
+    // arguments object and apply (Hermes HBC98: 29.8 -> 10.7 us per 100 calls, 2.8x).
     function fullAvatarHook(banner) {
-        return (orig, self, args) => {
-            const out = orig.apply(self, args);
+        const finish = out => {
             if (!settings.fullImagesAvatars || !enabled("fullImages")) return out;
             try {
                 if (typeof out === "string") return fullAvatarUrl(out, banner);
@@ -18750,6 +19222,9 @@
             } catch (_) {}
             return out;
         };
+        const operation = (orig, self, args) => finish(orig.apply(self, args));
+        operation.call3 = (orig, self, a, b, c) => finish(orig.call(self, a, b, c));
+        return operation;
     }
     function hookFullAvatars(exports) {
         const hookAll = target => { FULL_AVATAR_CALLS.forEach(name => { target = hookExport(target, name, fullAvatarHook(name.indexOf("Banner") >= 0)); }); return target; };
@@ -18763,12 +19238,18 @@
     // Always trust links and files (based on AlwaysTrust by zt and Trwy): MaskedLinkStore.isTrustedDomain (8766) decides
     // whether a link asks "Leaving Discord", and SuspiciousDownloadUtils.isSuspiciousDownload (8537) whether a file link
     // warns it may be dangerous. Domains Discord blocks outright are a separate check and stay blocked.
+    // isTrustedDomain(url) runs once per link Discord draws: the one-argument call skips the arguments object and apply
+    // (Hermes HBC98: 34.7 -> 15.4 us per 100 calls, 2.10x).
     function alwaysTrustDomain(orig, self, args) {
         return enabled("alwaysTrust") && settings.alwaysTrustLinks ? true : orig.apply(self, args);
     }
+    alwaysTrustDomain.call1 = (orig, self, url) => enabled("alwaysTrust") && settings.alwaysTrustLinks ? true : orig.call(self, url);
+    // isSuspiciousDownload(name) runs once per attachment: the one-argument call skips the arguments object and apply
+    // (Hermes HBC98: 36.1 -> 16.4 us per 100 calls, 2.21x).
     function alwaysTrustFile(orig, self, args) {
         return enabled("alwaysTrust") && settings.alwaysTrustFiles ? null : orig.apply(self, args);
     }
+    alwaysTrustFile.call1 = (orig, self, name) => enabled("alwaysTrust") && settings.alwaysTrustFiles ? null : orig.call(self, name);
     // Reply without pinging (#128): every way Discord starts a reply (Reply in a message's menu, swipe to reply, Double-tap to
     // reply, the notification center and ICYMI) goes through PendingReplyActionCreators (9990), and PendingReplyStore (7633)
     // turns the ping on whenever shouldMention isn't false. So the reply simply starts with shouldMention:false where you
@@ -19228,7 +19709,42 @@
         try { return orig.apply(self, args); }
         finally { if (swapped) try { if (own === undefined) delete store.getStatus; else store.getStatus = own; } catch (_) {} }
     }
+    // playInAppMessageSound(message) takes one argument (Discord 351.11) and runs for every in-app message sound: the
+    // one-argument call skips the arguments object and apply (Hermes HBC98: 44.9 -> 24.4 us per 100 calls, 1.84x).
     function dndBannerSound(orig, self, args) { return enabled("dndBanners") && dndIsOn() ? undefined : orig.apply(self, args); }
+    dndBannerSound.call1 = (orig, self, message) => enabled("dndBanners") && dndIsOn() ? undefined : orig.call(self, message);
+    // Full-screen chat in landscape (#125): Discord puts chat beside the server and channel lists whenever the window is
+    // 600dp wide or more (useChatLayout 5075, from useWindowSizeClassifier), so turning a phone sideways squeezes the chat
+    // into what's left. On a phone held sideways (its shorter side under 600dp) lesbunny reports the phone layout instead:
+    // the chat takes the whole width, and the lists slide in from the left edge, like the member list from the right.
+    // Tablets keep Discord's side-by-side layout.
+    const LANDSCAPE_PHONE_LAYOUT = Object.freeze({isChatBesideChannelList:false, isChatLockedOpen:false});
+    function landscapePhone() {
+        if (!enabled("landscapeFull") || !RN || !RN.Dimensions) return false;
+        try { const d = RN.Dimensions.get("window"); return d.width > d.height && d.height < 600; } catch (_) { return false; }
+    }
+    // useChatLayout() and getChatLayout() take no argument and are read on every screen render: the no-argument call skips the
+    // arguments object and apply (Hermes HBC98: 66.4 -> 48.8 us per 100 calls, 1.36x).
+    function landscapeChatLayout(orig, self, args) {
+        const layout = orig.apply(self, args);
+        return layout && layout.isChatBesideChannelList && landscapePhone() ? LANDSCAPE_PHONE_LAYOUT : layout;
+    }
+    landscapeChatLayout.call0 = (orig, self) => {
+        const layout = orig.call(self);
+        return layout && layout.isChatBesideChannelList && landscapePhone() ? LANDSCAPE_PHONE_LAYOUT : layout;
+    };
+    // useChatLayout is a hook: Discord's screens only call it again when the window changes size. Without subscribing
+    // here, flipping the switch changed nothing until the next rotation or restart, so every change showed up one step
+    // late: turning it on seemed to do nothing, and turning it off kept the full-screen chat. The same subscription also
+    // redraws once the saved settings finish loading, after Discord's first frame. Always called, so the hook count is stable.
+    function landscapeChatLayoutHook(orig, self, args) {
+        try { if (React) useSettings("landscapeFull"); } catch (_) {}
+        return landscapeChatLayout(orig, self, args);
+    }
+    landscapeChatLayoutHook.call0 = (orig, self) => {
+        try { if (React) useSettings("landscapeFull"); } catch (_) {}
+        return landscapeChatLayout.call0(orig, self);
+    };
     // Download voice messages (#125, after VoiceDownload): a voice message gets a Download button of its own, right under its
     // waveform: the native call-to-action button Discord's message view already draws (Message.ctaButton, the one under
     // age-verification DMs), so it looks and feels like the rest of the chat and needs no hold menu. Its tap reaches
@@ -19639,6 +20155,949 @@
             footnote("note", "Only servers that allow previews, like Discoverable communities, open this way. You won't show in the member list, and you join to send messages.")];
         return settingsBody(ui, groups);
     }
+    // Silent edit, Silent delete and Local edit (issues #46 and #129, based on the Silent Edit, Silentdeletee and localedit
+    // plugins). Silent edit sends the edited text as a new message and deletes the old one, so nothing says "(edited)";
+    // that only makes sense for the newest message in a chat, which is the one the new message lands right under.
+    // Silent delete blanks your message first, so a message logger that reads the edit, not the delete, sees nothing.
+    // Local edit changes how one message reads on this phone only: the row is drawn from a copy with your text.
+    const silentRemoving = new Set();
+    // Gateway deletes caused by these two aren't kept by Keep deleted messages: they were meant to vanish.
+    function silentRemovingKey(key) { silentRemoving.add(key); later(() => silentRemoving.delete(key), 20000, false); }
+    function httpCall(method, request) {
+        const http = inspectedExport(1297, "HTTP"), send = http && http[method];
+        if (typeof send !== "function") return Promise.reject(new Error("Discord's network client isn't ready"));
+        return Promise.resolve().then(() => send.call(http, request));
+    }
+    function ownMessage(message) {
+        const me = currentUser(), author = message && message.author;
+        return !!(me && author && author.id === me.id);
+    }
+    function silentNonce() { return String(Math.floor((Date.now() - 1420070400000) * 4194304)); }
+    // Why an edit can't be silent, or "" when it can.
+    function silentEditBlocker(channelId, message, content) {
+        if (!message || !message.id || !ownMessage(message)) return "mine";
+        if (message.type !== 0 && message.type !== 19) return "kind";
+        if (content === message.content) return "same";
+        if (message.poll || Array.isArray(message.components) && message.components.length || Array.isArray(message.stickerItems) && message.stickerItems.length ||
+            Array.isArray(message.messageSnapshots) && message.messageSnapshots.length) return "files";
+        if (Array.isArray(message.attachments) && message.attachments.length) return "files";
+        let list = null;
+        try { list = msgStore && typeof msgStore.getMessages === "function" ? msgStore.getMessages(channelId) : null; } catch (_) { list = null; }
+        const last = list && typeof list.last === "function" ? list.last() : null;
+        if (!last || String(last.id) !== String(message.id) || list.hasMoreAfter) return "latest";
+        return "";
+    }
+    // editMessage(channelId, messageId, {content}): the hook sits under the other edit hooks, so it gets their final text.
+    function silentEdit(orig, self, args) {
+        if (!enabled("silentEdit")) return orig.apply(self, args);
+        const edit = args[2], channelId = String(args[0]), messageId = String(args[1]);
+        const content = edit && typeof edit.content === "string" ? edit.content : null;
+        if (content === null || !content.trim() || content.length > 2000) return orig.apply(self, args);
+        let message = null;
+        try { message = msgStore && typeof msgStore.getMessage === "function" ? msgStore.getMessage(channelId, messageId) : null; } catch (_) { message = null; }
+        const blocker = silentEditBlocker(channelId, message, content);
+        if (blocker) {
+            if (settings.silentEditNotice && (blocker === "latest" || blocker === "files")) later(() => reviewToast(reviewUI(),
+                blocker === "latest" ? "Edited the normal way: only your latest message can be edited silently" :
+                    "Edited the normal way: a message with files can't be edited silently", venusIcon(10023, "PencilIcon")), 0);
+            return orig.apply(self, args);
+        }
+        const body = {content, tts:false, nonce:silentNonce(), allowed_mentions:{parse:[], replied_user:false}};
+        const flags = Number(message.flags) & (4 | 4096);
+        if (flags) body.flags = flags;
+        const reference = message.messageReference || message.message_reference;
+        const quoted = reference && (reference.message_id || reference.messageId);
+        if (quoted) body.message_reference = {message_id:String(quoted), channel_id:String(reference.channel_id || reference.channelId || channelId),
+            guild_id:reference.guild_id || reference.guildId || undefined};
+        return httpCall("post", {url:"/channels/" + channelId + "/messages", body}).then(response => {
+            silentRemovingKey(deletedKey(channelId, messageId));
+            return httpCall("del", {url:"/channels/" + channelId + "/messages/" + messageId}).then(() => response, () => response);
+        }, () => orig.apply(self, args));
+    }
+    // deleteMessage(channelId, messageId): your own message is made blank, then deleted a moment later.
+    function silentDelete(orig, self, args) {
+        if (!enabled("silentDelete")) return orig.apply(self, args);
+        const channelId = String(args[0]), messageId = String(args[1]), key = deletedKey(channelId, messageId);
+        let message = null;
+        try { message = msgStore && typeof msgStore.getMessage === "function" ? msgStore.getMessage(channelId, messageId) : null; } catch (_) { message = null; }
+        if (!message || !ownMessage(message) || features.noDelete && deleted.has(key) || message.type !== 0 && message.type !== 19) return orig.apply(self, args);
+        silentRemovingKey(key);
+        const url = "/channels/" + channelId + "/messages/" + messageId;
+        return httpCall("patch", {url, body:{content:"\u200b", embeds:[], attachments:[]}}).then(() => null, () => null).then(() =>
+            new Promise(resolve => later(() => resolve(orig.apply(self, args)), 350)));
+    }
+    // Channel, thread and post menus are a thin component (channelId, onClose) that renders the real sheet one level down, so
+    // the rows only exist in that inner component's output. rowsFor(tree, props) adds rows to a tree that has them; when the
+    // tree is just the inner element, it is swapped for a twin that renders the original and then adds the rows.
+    function sheetInnerHook(rowsFor) {
+        const types = new WeakMap();
+        return function sheetInner(orig, self, args) {
+            const tree = orig.apply(self, args);
+            if (!React || !tree || typeof tree !== "object") return tree;
+            const direct = rowsFor(tree, args[0]);
+            if (direct !== tree) return direct;
+            const type = tree.type, props = tree.props;
+            if (typeof type !== "function" || !props || !(props.channel || props.thread || props.channelId)) return tree;
+            let twin = types.get(type);
+            if (!twin) {
+                twin = function SheetInner(innerProps) {
+                    const out = type.apply(this, arguments);
+                    try { return rowsFor(out, innerProps); } catch (_) { return out; }
+                };
+                if (type.displayName || type.name) twin.displayName = type.displayName || type.name;
+                types.set(type, twin);
+            }
+            return React.createElement(twin, tree.key == null ? props : Object.assign({}, props, {key:tree.key}));
+        };
+    }
+    // One new row in a message's hold menu (LongPressMessageActionSheet 9978), styled like Discord's own rows.
+    function sheetAddRow(tree, props, key, label, IconComponent, onPress, sheetKey, variant) {
+        let added = false;
+        return cloneTree(tree, function (node, nodeProps) {
+            if (added || !Array.isArray(nodeProps.children)) return nodeProps;
+            const rows = nodeProps.children.filter(child => child && child.props && typeof child.props.label === "string" && typeof child.props.onPress === "function");
+            if (!rows.length || nodeProps.children.some(child => child && child.key === key)) return nodeProps;
+            added = true;
+            const template = rows[rows.length - 1], icon = template.props.icon;
+            const row = React.cloneElement(template, {key, label, arrow:false, variant:variant, disabled:false,
+                icon:icon && icon.props && "IconComponent" in icon.props ? React.cloneElement(icon, {IconComponent}) : icon,
+                onPress:function () {
+                    const sheets = reviewUI().sheets;
+                    try { if (sheets && typeof sheets.hideActionSheet === "function") sheets.hideActionSheet(sheetKey || "MessageLongPressActionSheet"); } catch (_) {}
+                    if (props && typeof props.onClose === "function") try { props.onClose(); } catch (_) {}
+                    later(onPress, 60);
+                }});
+            const index = nodeProps.children.indexOf(template) + 1;
+            return Object.assign({}, nodeProps, {children:nodeProps.children.slice(0, index).concat([row], nodeProps.children.slice(index))});
+        }, 0, () => added);
+    }
+    const LOCAL_EDIT_MAX = 300, LOCAL_EDIT_TEXT = 4000, LOCAL_EDIT_SHEET = "VenusLocalEdit";
+    // "channel:message" -> the text you gave it, oldest first.
+    const localEdits = new Map(), localEditCopies = new WeakMap();
+    function localEditLoad(raw) {
+        if (!raw || typeof raw !== "object" || Array.isArray(raw)) return;
+        Object.keys(raw).slice(-LOCAL_EDIT_MAX).forEach(key => {
+            if (/^\d{17,20}:\d{17,20}$/.test(key) && typeof raw[key] === "string" && raw[key].length <= LOCAL_EDIT_TEXT && !localEdits.has(key)) localEdits.set(key, raw[key]);
+        });
+    }
+    function localEditData() { const out = {}; localEdits.forEach((text, key) => { out[key] = text; }); return out; }
+    // A copy of an object with one own property replaced, keeping its prototype (message records are classes).
+    function copyWith(object, key, value) {
+        const copy = Object.create(Object.getPrototypeOf(object), Object.getOwnPropertyDescriptors(object));
+        Object.defineProperty(copy, key, {value, enumerable:true, configurable:true, writable:true});
+        return copy;
+    }
+    // generate(row): the row, or a copy whose message reads as you wrote it.
+    function localEditRow(row) {
+        if (!row || row.rowType !== 1 || !row.message || !localEdits.size || !enabled("localEdit")) return row;
+        const message = row.message, key = (message.channel_id || message.channelId) + ":" + message.id, text = localEdits.get(key);
+        if (text === undefined) return row;
+        const shown = settings.localEditMark ? text + "\n-# " + tr("Edited on this phone") : text;
+        let hit = localEditCopies.get(message);
+        if (!hit || hit.shown !== shown) { hit = {shown, row:null}; localEditCopies.set(message, hit); }
+        if (!hit.row || hit.source !== row) { hit.source = row; hit.row = copyWith(row, "message", copyWith(message, "content", shown)); }
+        return hit.row;
+    }
+    // A row is drawn again only when its message changes, so the message is updated twice, to what it is.
+    function localEditRedraw(channelId, id) {
+        const d = dispatcher;
+        if (typeof d !== "function") return;
+        let live = null;
+        try { live = msgStore && typeof msgStore.getMessage === "function" ? msgStore.getMessage(channelId, id) : null; } catch (_) { live = null; }
+        const content = live && typeof live.content === "string" ? live.content : null;
+        if (content === null) return;
+        const update = value => { try { d({type:"MESSAGE_UPDATE", message:{id, channel_id:channelId, content:value}}); } catch (_) {} };
+        update(content + "\u200b"); later(() => update(content), 80);
+    }
+    function localEditSet(channelId, id, text) {
+        const key = channelId + ":" + id;
+        if (text === undefined) localEdits.delete(key);
+        else { localEdits.delete(key); if (localEdits.size >= LOCAL_EDIT_MAX) localEdits.delete(localEdits.keys().next().value); localEdits.set(key, text); }
+        save(); notify("localEdit"); localEditRedraw(channelId, id);
+    }
+    function localEditClear() {
+        const keys = Array.from(localEdits.keys());
+        localEdits.clear(); save(); notify("localEdit");
+        keys.forEach(key => { const at = key.indexOf(":"); localEditRedraw(key.slice(0, at), key.slice(at + 1)); });
+    }
+    function localEditSheet(orig, self, args) {
+        const tree = orig.apply(self, args), props = args[0], message = props && props.message;
+        if (!enabled("localEdit") || !React || !tree || !message || !message.id) return tree;
+        const channelId = String(message.channel_id || message.channelId || props.channel && props.channel.id || "");
+        if (!channelId || message.type !== 0 && message.type !== 19) return tree;
+        const text = typeof message.content === "string" ? message.content : "";
+        if (!text.trim() && !localEdits.has(channelId + ":" + message.id)) return tree;
+        const id = String(message.id), name = message.author && (message.author.globalName || message.author.username) || "";
+        return sheetAddRow(tree, props, "venus-local-edit", tr("Edit locally"), venusIcon(10023, "PencilIcon"),
+            () => localEditOpen(channelId, id, text, String(name)));
+    }
+    function localEditOpen(channelId, id, original, name) {
+        const ui = reviewUI();
+        if (!enabled("localEdit") || typeof ui.showSheet !== "function") return;
+        try { ui.showSheet({key:LOCAL_EDIT_SHEET, content:el(LocalEditSheet, {channelId, id, original, name}), stackingBehavior:"stack"}); } catch (_) {}
+    }
+    function LocalEditSheet(props) {
+        useSettings("localEdit");
+        const ui = reviewUI(), Button = inspectedExport(5479, "Button"), key = props.channelId + ":" + props.id;
+        const saved = localEdits.get(key), start = saved !== undefined ? saved : props.original;
+        const [text, setText] = React.useState(start);
+        const changed = text !== start && String(text).trim().length > 0;
+        const close = () => hideReviewSheet(ui, LOCAL_EDIT_SHEET);
+        const save = () => {
+            if (!changed) return;
+            haptic("IMPACT_LIGHT");
+            const clean = String(text).slice(0, LOCAL_EDIT_TEXT);
+            localEditSet(props.channelId, props.id, clean === props.original ? undefined : clean);
+            close();
+            reviewToast(ui, "Edited on this phone", venusIcon(10023, "PencilIcon"));
+        };
+        const restore = () => {
+            haptic("IMPACT_LIGHT"); localEditSet(props.channelId, props.id, undefined); close();
+            reviewToast(ui, "Original message back", venusIcon(12093, "UndoIcon"));
+        };
+        const button = (id, label, onPress, variant, disabled) => Button ? el(Button, {key:id, text:label, variant, size:"lg", grow:true, disabled:!!disabled, onPress}) : null;
+        const header = ui.Header ? el(ui.Header, {title:tr("Edit locally"), trailing:ui.Close ? el(ui.Close, {onPress:close}) : undefined}) : null;
+        const input = ui.TextInput ? el(ui.TextInput, {value:text, onChange:value => setText(String(value == null ? "" : value)), multiline:true, numberOfLines:6, autoFocus:true,
+                maxLength:LOCAL_EDIT_TEXT, accessibilityLabel:tr("Message")}) :
+            el(RN.TextInput, {value:text, onChangeText:setText, multiline:true, maxLength:LOCAL_EDIT_TEXT, style:{fontSize:16, padding:12, minHeight:120, color:"#f2f3f5"}});
+        const body = [props.name ? groupTitle("who", tr("Message from {name}", {name:props.name})) : null, el(RN.View, {key:"input"}, input),
+            footnote("note", "Only you see this, on this phone. Nobody else sees the change, and the message stays as it was on Discord."),
+            el(RN.View, {key:"buttons", style:{gap:10, paddingTop:4}}, button("save", tr("Save"), save, "primary", !changed),
+                saved !== undefined ? button("restore", tr("Restore original"), restore, "secondary") : null)];
+        return serverEditScroll(ui, header, el(RN.View, {style:{paddingHorizontal:12, paddingBottom:24, gap:16}}, body.filter(Boolean)));
+    }
+    function SilentEditSettings() {
+        useSettings("silentEdit");
+        const ui = reviewUI();
+        if (!React || !RN) return null;
+        const on = enabled("silentEdit"), Group = ui.TableRowGroup || RN.View, Switch = ui.TableSwitchRow;
+        const groups = [
+            on ? null : offCard("status", venusIcon(10023, "PencilIcon"), "silentEdit"),
+            statusCard("limit", "Only works when your message is the latest in the chat. Edit an older message and it's edited the normal way, with (edited).",
+                {title:tr("Latest message only"), IconComponent:venusIcon(7838, "WarningIcon")}),
+            el(Group, {key:"opts", title:tr("When it can't be silent")},
+                switchRow(Switch, "silentEditNotice", "Tell me", "A short message says the edit was sent the normal way.", rowIcon(5145, "CircleInformationIcon"))),
+            footnote("note", "lesbunny sends your new text as a message and deletes the old one, so it has a new time and loses its reactions. Messages with files, stickers or polls are always edited the normal way.")];
+        return settingsBody(ui, groups);
+    }
+    function LocalEditSettings() {
+        useSettings("localEdit");
+        const ui = reviewUI();
+        if (!React || !RN) return null;
+        const on = enabled("localEdit"), Group = ui.TableRowGroup || RN.View, Switch = ui.TableSwitchRow, n = localEdits.size;
+        const groups = [
+            on ? null : offCard("status", venusIcon(10023, "PencilIcon"), "localEdit"),
+            statusCard("count", n ? pl(n, "{n} message reads differently on this phone.", "{n} messages read differently on this phone.") :
+                "Hold any message in a chat and tap Edit locally to change how it reads here.", {IconComponent:venusIcon(10023, "PencilIcon")}),
+            el(Group, {key:"opts", title:tr("In chat")},
+                switchRow(Switch, "localEditMark", "Mark edited messages", "A small line under the message says you changed it.", rowIcon(5145, "CircleInformationIcon"))),
+            n ? el(Group, {key:"clear"}, actionRow(ui, "restore", "Restore all messages", "Every message goes back to what was sent.",
+                () => confirmAction("Restore all messages?", "Every message you edited locally goes back to what was sent.", "Restore all", localEditClear), !on, true, rowIcon(12093, "UndoIcon"))) : null,
+            footnote("note", "Only you see these changes, and only on this phone. Nothing is sent to Discord.")];
+        return settingsBody(ui, groups);
+    }
+    // HypeSquad, Custom idle, Pause invites, Fast delete channels, Mutual group DMs and Platform spoof (issue #129 and the
+    // requests that came with it). HypeSquad and Pause invites are plain API calls; Custom idle swaps Discord's idle time
+    // for a live value; Fast delete skips the channel delete alert and adds a row to the channel menu; Mutual group DMs adds
+    // a line to profiles; Platform spoof changes the device the gateway sign-in (IDENTIFY) tells Discord about.
+    const HYPESQUAD_HOUSES = [[1, 64, "#9c84ef"], [2, 128, "#f47b67"], [3, 256, "#45ddc0"]];
+    function houseName(id) { return id === 1 ? tr("Bravery") : id === 2 ? tr("Brilliance") : tr("Balance"); }
+    const hype = {house:undefined, busy:false};
+    function hypeSquadCurrent() {
+        const user = currentUser(), flags = user && (user.publicFlags != null ? user.publicFlags : user.public_flags != null ? user.public_flags : user.flags);
+        if (typeof flags !== "number") return 0;
+        for (let i = 0; i < HYPESQUAD_HOUSES.length; i++) if (flags & HYPESQUAD_HOUSES[i][1]) return HYPESQUAD_HOUSES[i][0];
+        return 0;
+    }
+    function hypeSquadHouse() { return hype.house !== undefined ? hype.house : hypeSquadCurrent(); }
+    // house 1 to 3 joins, 0 leaves.
+    function hypeSquadJoin(house) {
+        if (hype.busy || !enabled("hypeSquad")) return;
+        hype.busy = true; notify("hypeSquad");
+        const request = house ? httpCall("post", {url:"/hypesquad/online", body:{house_id:house}}) : httpCall("del", {url:"/hypesquad/online"});
+        request.then(() => {
+            hype.busy = false; hype.house = house; notify("hypeSquad"); haptic("IMPACT_LIGHT");
+            reviewToast(reviewUI(), house ? "HypeSquad house changed" : "Left HypeSquad", venusIcon(6473, "CheckmarkLargeIcon"));
+        }, () => {
+            hype.busy = false; notify("hypeSquad");
+            reviewToast(reviewUI(), "Couldn't change your HypeSquad house", venusIcon(7838, "WarningIcon"));
+        });
+    }
+    function HypeSquadSettings() {
+        useSettings("hypeSquad");
+        const ui = reviewUI();
+        if (!React || !RN) return null;
+        const on = enabled("hypeSquad"), Group = ui.TableRowGroup || RN.View, Row = ui.TableRow, current = hypeSquadHouse(), Check = venusIcon(6473, "CheckmarkLargeIcon");
+        const house = HYPESQUAD_HOUSES.find(entry => entry[0] === current);
+        const dot = color => el(RN.View, {style:{width:24, height:24, borderRadius:12, backgroundColor:color}});
+        const rows = Row ? HYPESQUAD_HOUSES.map(([id, , color]) => el(Row, {key:id, label:houseName(id), icon:dot(color), disabled:!on || hype.busy,
+            trailing:id === current ? el(Check, {size:"md"}) : undefined, onPress:() => { if (id !== current) { haptic("SELECTION"); hypeSquadJoin(id); } }})) : [];
+        const groups = [
+            on ? null : offCard("status", venusIcon(18747, "HomeIcon"), "hypeSquad"),
+            statusCard("now", house ? tr("You're in {house}.", {house:houseName(house[0])}) : "You're not in a HypeSquad house.", {IconComponent:venusIcon(18747, "HomeIcon")}),
+            el(Group, {key:"houses", title:tr("Pick a house")}, rows),
+            current ? el(Group, {key:"leave"}, actionRow(ui, "leave", "Leave HypeSquad", "You keep your account. Only the house badge goes.",
+                () => confirmAction("Leave HypeSquad?", "Your house badge is removed from your profile.", "Leave", () => hypeSquadJoin(0)), !on || hype.busy, true, rowIcon(6485, "XSmallIcon"))) : null,
+            footnote("note", "Discord limits how often you can change house, so a change may be refused for a while.")];
+        return settingsBody(ui, groups);
+    }
+    // Custom idle: IdleStore (6144) reads Discord's IDLE_DURATION (1087) once, but compares against it on every check. An
+    // object whose valueOf answers with the current choice makes that comparison live, with no restart.
+    function customIdleValue(value) { const n = Math.round(Number(value)); return Number.isFinite(n) ? Math.max(0, Math.min(720, n)) : CUSTOM_IDLE_DEFAULT; }
+    function customIdleMillis() {
+        if (!enabled("customIdle")) return CUSTOM_IDLE_DEFAULT * 60000;
+        const minutes = customIdleValue(settings.customIdleMinutes);
+        return minutes > 0 ? minutes * 60000 : Infinity;
+    }
+    function customIdleApply(exports) {
+        if (!exports || exports.IDLE_DURATION === undefined) return exports;
+        return replaceValue(exports, "IDLE_DURATION", {valueOf:customIdleMillis, toString:() => String(customIdleMillis())});
+    }
+    function CustomIdleSettings() {
+        useSettings("customIdle");
+        const ui = reviewUI();
+        if (!React || !RN) return null;
+        const on = enabled("customIdle"), minutes = customIdleValue(settings.customIdleMinutes), Icon = venusIcon(14205, "UserClockIcon");
+        const text = n => n === 0 ? tr("Never") : n >= 60 && n % 60 === 0 ? tr("{n} h", {n:n / 60}) : tr("{n} min", {n});
+        const groups = [
+            on ? null : offCard("status", Icon, "customIdle"),
+            statusCard("now", minutes === 0 ? "Discord never sets you to Idle on its own." : pl(minutes, "Discord sets you to Idle after {n} minute without activity.",
+                "Discord sets you to Idle after {n} minutes without activity."), {IconComponent:Icon}),
+            el(PresetOrCustom, {key:"time", title:tr("Go idle after"), value:minutes, disabled:!on, placeholder:CUSTOM_IDLE_DEFAULT, min:1, max:720,
+                inputLabel:tr("Minutes, {min} to {max}", {min:1, max:720}), format:text, presets:[10, 30, 60, 0].map(n => ({value:n, label:text(n)})),
+                onChange:value => setSetting("customIdleMinutes", value), hint:tr("Discord's own time is 10 minutes.")}),
+            footnote("note", "Opening Discord again sets you back to active.")];
+        return settingsBody(ui, groups);
+    }
+    // Pause invites: the server icon's hold menu gets Pause invites (or Resume invites) for anyone who can manage the server.
+    // Discord's own switch lives in the server's Safety settings; this is PUT /guilds/:id/incident-actions, the same call.
+    const PAUSE_INVITES_SHEET = "VenusPauseInvites";
+    function pauseInvitesGuild(id) { return serverCall(serverStore(2090), "getGuild", id) || null; }
+    function pauseInvitesPaused(guild) {
+        const feat = guild && guild.features, until = guild && guild.incidentsData && guild.incidentsData.invitesDisabledUntil;
+        const flagged = !!feat && (typeof feat.has === "function" ? feat.has("INVITES_DISABLED") : Array.isArray(feat) && feat.indexOf("INVITES_DISABLED") >= 0);
+        const stamp = until instanceof Date ? until.getTime() : typeof until === "string" ? Date.parse(until) : 0;
+        return flagged || stamp > Date.now();
+    }
+    function pauseInvitesAllowed(guild) {
+        const P = inspectedExport(1087, "Permissions") || inspectedExport(1098, "Permissions"), perms = permissions || inspectedExport(4845, "default");
+        try { return !!(guild && P && P.MANAGE_GUILD != null && perms && perms.can(P.MANAGE_GUILD, guild)); } catch (_) { return false; }
+    }
+    function pauseInvitesMenu(orig, self, args) {
+        const items = orig.apply(self, args), guildId = args[0] == null ? null : String(args[0]);
+        if (!enabled("pauseInvites") || !Array.isArray(items) || !guildId || !/^\d{17,20}$/.test(guildId)) return items;
+        const guild = pauseInvitesGuild(guildId);
+        if (!guild || !pauseInvitesAllowed(guild)) return items;
+        const paused = pauseInvitesPaused(guild);
+        return items.concat([{IconComponent:paused ? venusIcon(12093, "UndoIcon") : venusIcon(8676, "PauseIcon"), label:tr(paused ? "Resume invites" : "Pause invites"),
+            action:() => { if (paused) pauseInvitesSet(guildId, 0); else pauseInvitesAsk(guildId); }}]);
+    }
+    function pauseInvitesAsk(guildId) {
+        const ui = reviewUI();
+        if (typeof ui.simpleSheet !== "function") { pauseInvitesSet(guildId, 24); return; }
+        const Clock = venusIcon(5150, "ClockIcon");
+        const options = [1, 6, 24].map(hours => ({label:pl(hours, "{n} hour", "{n} hours"), IconComponent:Clock, onPress:() => { hideReviewSheet(ui, PAUSE_INVITES_SHEET); pauseInvitesSet(guildId, hours); }}));
+        try { ui.simpleSheet({key:PAUSE_INVITES_SHEET, header:{title:tr("Pause invites for"), onClose:() => hideReviewSheet(ui, PAUSE_INVITES_SHEET)}, options}); } catch (_) {}
+    }
+    // hours 0 resumes. The server also holds a pause on DMs: it's sent back as it is, so this never changes it.
+    function pauseInvitesSet(guildId, hours) {
+        const guild = pauseInvitesGuild(guildId), data = guild && guild.incidentsData, dms = data && data.dmsDisabledUntil;
+        const dmsStamp = dms instanceof Date ? dms.getTime() : typeof dms === "string" ? Date.parse(dms) : 0;
+        const body = {invites_disabled_until:hours ? new Date(Date.now() + hours * 3600000).toISOString() : null,
+            dms_disabled_until:dmsStamp > Date.now() ? new Date(dmsStamp).toISOString() : null};
+        httpCall("put", {url:"/guilds/" + guildId + "/incident-actions", body}).then(() => {
+            haptic("IMPACT_LIGHT"); reviewToast(reviewUI(), hours ? "Invites paused" : "Invites resumed", venusIcon(6473, "CheckmarkLargeIcon"));
+        }, () => reviewToast(reviewUI(), "Couldn't change invites. Check that you can manage this server.", venusIcon(7838, "WarningIcon")));
+    }
+    // Fast delete channels: channel settings stops asking, and a channel's hold menu gets a Delete channel row.
+    const FAST_DELETE_TITLES = ["8D8Rsb", "H7vTe2", "nEOg1N", "ifbXnL"];
+    function fastDeleteAlert(popup) {
+        const title = popup && popup.title;
+        if (typeof title !== "string" || typeof popup.onConfirm !== "function" || !locale || !locale.intl || !locale.t) return false;
+        return FAST_DELETE_TITLES.some(key => { const token = locale.t[key], label = token && locale.intl.string(token); return typeof label === "string" && label === title; });
+    }
+    function fastDeleteAllowed(channel) {
+        if (!channel || !channel.guild_id || channel.type === 10 || channel.type === 11 || channel.type === 12) return false;
+        const P = inspectedExport(1087, "Permissions") || inspectedExport(1098, "Permissions"), perms = permissions || inspectedExport(4845, "default");
+        try { return !!(P && P.MANAGE_CHANNELS != null && perms && perms.can(P.MANAGE_CHANNELS, channel)); } catch (_) { return false; }
+    }
+    const fastDeleteInner = sheetInnerHook(function (tree, props) {
+        if (!enabled("fastDeleteChannels") || !settings.fastDeleteChannelsMenu || !React || !tree || !props) return tree;
+        const channelId = props.channelId || props.channel && props.channel.id;
+        if (!channelId) return tree;
+        const channel = channelStore && typeof channelStore.getChannel === "function" ? channelStore.getChannel(String(channelId)) : null;
+        if (!fastDeleteAllowed(channel)) return tree;
+        return sheetAddRow(tree, props, "venus-delete-channel", tr("Delete channel"), venusIcon(5148, "TrashIcon"), () => fastDeleteChannel(channel),
+            "ChannelLongPress-" + channelId, "destructive");
+    });
+    function fastDeleteSheet(orig, self, args) { return fastDeleteInner(orig, self, args); }
+    function fastDeleteChannel(channel) {
+        if (!channel || !channel.id) return;
+        httpCall("del", {url:"/channels/" + channel.id}).then(() => { haptic("IMPACT_LIGHT"); reviewToast(reviewUI(), "Channel deleted", venusIcon(5148, "TrashIcon")); },
+            () => reviewToast(reviewUI(), "Couldn't delete the channel", venusIcon(7838, "WarningIcon")));
+    }
+    function FastDeleteChannelsSettings() {
+        useSettings("fastDeleteChannels");
+        const ui = reviewUI();
+        if (!React || !RN) return null;
+        const on = enabled("fastDeleteChannels"), Group = ui.TableRowGroup || RN.View, Switch = ui.TableSwitchRow;
+        const groups = [
+            on ? null : offCard("status", venusIcon(18679, "ChannelListIcon"), "fastDeleteChannels"),
+            statusCard("warn", "A deleted channel can't be brought back.", {title:tr("No undo"), IconComponent:venusIcon(7838, "WarningIcon")}),
+            el(Group, {key:"opts", title:tr("Delete faster")},
+                switchRow(Switch, "fastDeleteChannelsConfirm", "Skip the confirmation", "Channel settings deletes right away, without asking first.", rowIcon(6573, "CircleXIcon")),
+                switchRow(Switch, "fastDeleteChannelsMenu", "Delete from the channel menu", "Hold a channel to delete it from its menu. Needs Manage Channels.", rowIcon(5148, "TrashIcon"))),
+            footnote("note", "Threads and forum posts are always deleted the normal way.")];
+        return settingsBody(ui, groups);
+    }
+    // View raw data (#141): hold a message, channel, thread, forum post, DM, server or role, or open a person's menu, to read
+    // what Discord holds about it as formatted JSON and copy it. Everything comes from the stores Discord already filled, so
+    // nothing is requested. Records (users, servers, roles) aren't plain objects, so rawValue turns them into JSON that can
+    // never throw: Sets and Maps become lists and objects, dates ISO text, BigInts (permissions) text, loops and functions
+    // are left out. Email and phone number are left out of everything unless you turn that off.
+    const RAW_DEPTH = 10, RAW_ITEMS = 1000, RAW_SHOWN = 60000, RAW_CONTACT = /^(email|phone)$/;
+    let viewRawRole = null;
+    function rawId(id) { return typeof id === "string" && /^\d{17,20}$/.test(id); }
+    function rawValue(value, ctx, depth) {
+        if (value === null) return null;
+        switch (typeof value) {
+            case "string": case "boolean": return value;
+            case "number": return Number.isFinite(value) ? value : String(value);
+            case "bigint": return String(value);
+            case "undefined": case "function": case "symbol": return undefined;
+        }
+        if (value instanceof Date) { const time = value.getTime(); return Number.isFinite(time) ? value.toISOString() : null; }
+        if (ctx.stack.indexOf(value) >= 0) return "[Circular]";
+        if (depth >= RAW_DEPTH) return "[Too deep]";
+        ctx.stack.push(value);
+        try {
+            let source = value;
+            if (value instanceof Set) source = Array.from(value);
+            else if (value instanceof Map) { source = {}; value.forEach((item, key) => { source[String(key)] = item; }); }
+            else if (typeof value.toJS === "function") { try { const js = value.toJS(); if (js && typeof js === "object") source = js; } catch (_) {} }
+            if (Array.isArray(source)) {
+                const list = [];
+                for (let i = 0; i < source.length && i < RAW_ITEMS; i++) { const item = rawValue(source[i], ctx, depth + 1); list.push(item === undefined ? null : item); }
+                if (source.length > RAW_ITEMS) list.push("\u2026 " + (source.length - RAW_ITEMS) + " more");
+                return list;
+            }
+            const out = {}, keys = Object.keys(source);
+            for (let i = 0; i < keys.length && i < RAW_ITEMS; i++) {
+                const key = keys[i];
+                if (ctx.hide && RAW_CONTACT.test(key)) { ctx.removed++; continue; }
+                let item;
+                try { item = rawValue(source[key], ctx, depth + 1); } catch (_) { item = undefined; }
+                if (item !== undefined) out[key] = item;
+            }
+            return out;
+        } finally { ctx.stack.pop(); }
+    }
+    // What the viewer shows: the kind (its name and icon), a title, the id, and the JSON text. null when Discord has nothing.
+    function rawKind(channel) {
+        const type = channel && channel.type;
+        if (type === 1) return {label:tr("Direct message"), icon:[11671, "UserIcon"]};
+        if (type === 3) return {label:tr("Group DM"), icon:[8489, "GroupIcon"]};
+        if (type === 10 || type === 11 || type === 12) {
+            const parent = serverCall(serverStore(2068), "getChannel", channel.parent_id);
+            return parent && (parent.type === 15 || parent.type === 16) ? {label:tr("Forum post"), icon:[8488, "ForumIcon"]} : {label:tr("Thread"), icon:[8473, "ThreadIcon"]};
+        }
+        return type === 15 || type === 16 ? {label:tr("Channel"), icon:[8488, "ForumIcon"]} : {label:tr("Channel"), icon:[16648, "HashmarkIcon"]};
+    }
+    // A role's own color as #rrggbb (roles with no color are 0), so its badge in the viewer can wear it.
+    function rawColor(role) {
+        const value = role && (typeof role.color === "number" ? role.color : parseInt(role.color, 10));
+        return Number.isFinite(value) && value > 0 && value <= 0xffffff ? "#" + ("000000" + value.toString(16)).slice(-6) : null;
+    }
+    function rawSnapshot(spec) {
+        const ctx = {hide:!!settings.viewRawHideContact, removed:0, stack:[]};
+        let data, title = "", kind, content = null, accent = null;
+        if (spec.kind === "message") {
+            const message = spec.message;
+            if (!message) return null;
+            data = rawValue(message, ctx, 0);
+            kind = {label:tr("Message"), icon:[8471, "ChatIcon"]};
+            title = message.author && (message.author.globalName || message.author.username) || "";
+            content = typeof message.content === "string" ? message.content : "";
+        } else if (spec.kind === "channel") {
+            const channel = serverCall(serverStore(2068), "getChannel", spec.id);
+            if (!channel) return null;
+            data = rawValue(channel, ctx, 0);
+            kind = rawKind(channel);
+            title = channel.name ? String(channel.name) : mutualGroupName(channel);
+        } else if (spec.kind === "server") {
+            const guild = serverCall(serverStore(2090), "getGuild", spec.id);
+            if (!guild) return null;
+            data = rawValue(guild, ctx, 0);
+            kind = {label:tr("Server"), icon:[9545, "ServerIcon"]};
+            title = guild.name ? String(guild.name) : "";
+        } else if (spec.kind === "user") {
+            const user = serverCall(serverStore(1392), "getUser", spec.id);
+            if (!user) return null;
+            data = rawValue(user, ctx, 0);
+            // In a server, what the server holds about them (nickname, roles, join date) follows the person's own data.
+            const member = spec.guildId ? serverCall(serverStore(2128), "getMember", spec.guildId, spec.id) : null;
+            if (member && data && typeof data === "object") data.member = rawValue(member, ctx, 1);
+            kind = {label:tr("User"), icon:[11671, "UserIcon"]};
+            title = user.globalName || user.username || "";
+        } else if (spec.kind === "role") {
+            const role = (spec.guildId ? serverCall(serverStore(2122), "getRole", spec.guildId, spec.id) : null) || spec.role;
+            if (!role) return null;
+            data = rawValue(role, ctx, 0);
+            kind = {label:tr("Role"), icon:[8895, "ShieldUserIcon"]};
+            title = role.name ? String(role.name) : "";
+            accent = rawColor(role);
+        } else return null;
+        let json = "";
+        try { json = JSON.stringify(data, null, 2) || ""; } catch (_) { json = ""; }
+        if (!json) return null;
+        return {kind, title, accent, id:spec.id || (spec.message && String(spec.message.id)) || "", json, content, removed:ctx.removed};
+    }
+    const VIEW_RAW_DARK = {card:{backgroundColor:"#1e1f22", borderRadius:16, borderWidth:1, borderColor:"#ffffff14", overflow:"hidden"},
+        pad:{paddingHorizontal:14, paddingVertical:12}, code:{fontFamily:"monospace", fontSize:12, lineHeight:18, color:"#dbdee1"},
+        empty:{fontSize:14, color:"#949ba4"}, badge:{width:44, height:44, borderRadius:22, alignItems:"center", justifyContent:"center", backgroundColor:"#5865f229"}, badgeIcon:{color:"#94a8ff"}};
+    function useViewRawStyles() {
+        return useThemed("viewRaw", c => ({card:Object.assign({}, VIEW_RAW_DARK.card, {backgroundColor:c.BACKGROUND_BASE_LOWER, borderColor:c.BORDER_SUBTLE}),
+            pad:VIEW_RAW_DARK.pad, code:Object.assign({}, VIEW_RAW_DARK.code, {color:c.TEXT_DEFAULT}), empty:Object.assign({}, VIEW_RAW_DARK.empty, {color:c.TEXT_MUTED}),
+            badge:VIEW_RAW_DARK.badge, badgeIcon:{color:c.TEXT_BRAND || VIEW_RAW_DARK.badgeIcon.color}}), VIEW_RAW_DARK);
+    }
+    function ViewRawSheet(props) {
+        useSettings("viewRaw");
+        const ui = reviewUI(), spec = props.spec, s = useViewRawStyles();
+        const snap = React.useMemo(() => rawSnapshot(spec), [spec]);
+        const [tab, setTab] = React.useState("data");
+        const header = ui.Header ? el(ui.Header, {title:tr("Raw data"), trailing:ui.Close ? el(ui.Close, {onPress:() => hideReviewSheet(ui, props.sheetKey)}) : undefined}) : undefined;
+        const Sheet = ui.ActionSheet || RN.View;
+        if (!snap) return el(Sheet, {header}, el(RN.View, {style:{padding:24}},
+            serverText(tr("Nothing to show right now."), "text-md/medium", "text-muted", {color:"#949ba4", fontSize:16})));
+        const Button = inspectedExport(5479, "Button"), Press = RN.Pressable || RN.View, Group = ui.TableRowGroup || RN.View, Switch = ui.TableSwitchRow;
+        const showContent = snap.content !== null && tab === "content", text = showContent ? snap.content : snap.json;
+        const shown = text.length > RAW_SHOWN ? text.slice(0, RAW_SHOWN) : text, wrap = !!settings.viewRawWrap;
+        const copy = () => { if (showContent) serverCopy(snap.content, "Raw content copied"); else serverCopy(snap.json, "Raw data copied"); };
+        const copyLabel = showContent ? tr("Copy raw content") : tr("Copy raw data"), empty = showContent && !snap.content;
+        const Icon = venusIcon(snap.kind.icon[0], snap.kind.icon[1]);
+        const hero = el(RN.View, {key:"hero", style:{flexDirection:"row", alignItems:"center", gap:14, paddingHorizontal:4}},
+            el(RN.View, {style:snap.accent ? [s.badge, {backgroundColor:snap.accent + "29"}] : s.badge}, el(Icon, {size:"md", color:snap.accent || s.badgeIcon.color})),
+            el(RN.View, {style:{flex:1, gap:2}},
+                serverText(snap.title || snap.kind.label, "text-md/semibold", "text-strong", {color:"#f2f3f5", fontSize:16, fontWeight:"600"}, {numberOfLines:1}),
+                serverText(snap.kind.label + " \u00b7 " + snap.id, "text-sm/medium", "text-muted", {color:"#949ba4", fontSize:13}, {selectable:true})));
+        const code = empty ? el(RN.Text, {style:[s.empty, {padding:14}]}, tr("This message has no text.")) :
+            wrap ? el(RN.View, {style:s.pad}, el(RN.Text, {selectable:true, style:s.code}, shown)) :
+            el(RN.ScrollView, {horizontal:true, nestedScrollEnabled:true, showsHorizontalScrollIndicator:false}, el(RN.View, {style:s.pad}, el(RN.Text, {selectable:true, style:s.code}, shown)));
+        const copyButton = Button ? el(Button, {key:"copy", text:copyLabel, size:"lg", variant:"primary", grow:true, disabled:empty, onPress:copy}) :
+            el(Press, {key:"copy", onPress:empty ? undefined : copy, accessibilityRole:"button", accessibilityLabel:copyLabel,
+                style:{padding:14, borderRadius:24, alignItems:"center", backgroundColor:"#5865f2", opacity:empty ? 0.5 : 1}},
+                el(RN.Text, {style:{color:"#ffffff", fontWeight:"600"}}, copyLabel));
+        const notes = [snap.removed && !showContent ? tr("Email and phone number are left out.") : null,
+            text.length > RAW_SHOWN ? tr("Too long to show in full. Copy has everything.") : null].filter(Boolean);
+        const body = [hero,
+            snap.content !== null ? venusSegmented({key:"viewRawTabs", value:tab, onChange:setTab,
+                items:[{value:"data", label:tr("Raw data")}, {value:"content", label:tr("Raw content")}]}) : null,
+            el(RN.View, {key:"code", style:s.card}, code),
+            notes.length ? el(RN.View, {key:"notes", style:{paddingHorizontal:4, gap:2}}, notes.map(note => serverText(note, "text-xs/medium", "text-muted", {color:"#949ba4", fontSize:12}, {key:note}))) : null,
+            copyButton,
+            Switch ? el(Group, {key:"view"}, switchRow(Switch, "viewRawWrap", "Wrap lines", "Long lines wrap instead of scrolling sideways.", rowIcon(8480, "TextIcon"))) : null];
+        const content = el(RN.View, {style:{paddingHorizontal:12, paddingBottom:24, gap:16}}, body.filter(Boolean));
+        const Scroll = inspectedExport(6584, "BottomSheetScrollView");
+        return Scroll ? el(Sheet, {header, scrollable:true}, el(Scroll, null, content)) :
+            el(Sheet, {header}, RN.ScrollView ? el(RN.ScrollView, null, content) : content);
+    }
+    function openViewRaw(spec) {
+        if (!enabled("viewRaw") || !React || !RN || !spec) return;
+        const ui = reviewUI();
+        if (!ui.ActionSheet || typeof ui.showSheet !== "function") { reviewToast(ui, "The raw data viewer is unavailable right now.", venusIcon(6573, "CircleXIcon")); return; }
+        const key = "VenusViewRaw:" + spec.kind + ":" + (spec.id || spec.message && spec.message.id);
+        try { ui.showSheet({key, content:el(ViewRawSheet, {spec, sheetKey:key}), stackingBehavior:"stack"}); } catch (_) {}
+    }
+    // Message menu row.
+    function viewRawMessageSheet(orig, self, args) {
+        const tree = orig.apply(self, args), props = args[0], message = props && props.message;
+        if (!enabled("viewRaw") || !settings.viewRawMessages || !React || !tree || !message || !message.id) return tree;
+        return sheetAddRow(tree, props, "venus-view-raw", tr("View raw data"), venusIcon(12003, "FileIcon"), () => openViewRaw({kind:"message", message}));
+    }
+    // Channel, thread and forum post menus (the same shape; only the sheet's key differs).
+    function viewRawChannelHook(sheetKey) {
+        return sheetInnerHook(function (tree, props) {
+            if (!enabled("viewRaw") || !settings.viewRawChannels || !React || !tree || !props) return tree;
+            const channel = props.channel || props.thread || props.post;
+            const id = String(props.channelId || channel && channel.id || "");
+            if (!rawId(id)) return tree;
+            return sheetAddRow(tree, props, "venus-view-raw", tr("View raw data"), venusIcon(12003, "FileIcon"), () => openViewRaw({kind:"channel", id}), sheetKey(id));
+        });
+    }
+    const viewRawChannelMenu = viewRawChannelHook(id => "ChannelLongPress-" + id);
+    const viewRawThreadMenu = viewRawChannelHook(() => "ThreadLongPressActionSheet");
+    const viewRawPostMenu = viewRawChannelHook(() => "ForumPostLongPressActionSheet");
+    // The server icon's menu: after Discord's own rows and lesbunny's.
+    function viewRawServerMenu(orig, self, args) {
+        const items = orig.apply(self, args), guildId = args[0] == null ? null : String(args[0]);
+        if (!enabled("viewRaw") || !settings.viewRawServers || !Array.isArray(items) || !rawId(guildId)) return items;
+        return items.concat([{IconComponent:venusIcon(12003, "FileIcon"), label:tr("View raw data"), action:() => openViewRaw({kind:"server", id:guildId})}]);
+    }
+    // A person's ⋯ menu. The row goes in its own group, above the one with Block and Report when there is one.
+    function viewRawProfileMenu(orig, self, args) {
+        const rendered = orig.apply(self, args), props = args[0];
+        if (!enabled("viewRaw") || !settings.viewRawPeople || !React || !rendered || !props) return rendered;
+        const userId = String(props.userId || props.user && props.user.id || ""), guildId = props.guildId ? String(props.guildId) : "";
+        const Menu = inspectedExport(9662, "ContextMenu");
+        if (!Menu || !rawId(userId)) return rendered;
+        const item = {label:tr("View raw data"), venusRaw:true, action:() => later(() => openViewRaw({kind:"user", id:userId, guildId:rawId(guildId) ? guildId : ""}), 60)};
+        return cloneTree(rendered, (node, nodeProps) => {
+            if (node.type !== Menu || !Array.isArray(nodeProps.items) || nodeProps.items.some(entry => entry && entry.venusRaw)) return nodeProps;
+            const items = nodeProps.items, last = items[items.length - 1];
+            const danger = Array.isArray(last) && last.some(entry => entry && entry.variant === "destructive");
+            const grouped = items.some(Array.isArray);
+            const next = !grouped ? items.concat([item]) : danger ? items.slice(0, -1).concat([[item], last]) : items.concat([[item]]);
+            return Object.assign({}, nodeProps, {items:next});
+        }, 0);
+    }
+    // Roles: a role on a profile opens its own little menu when you hold it (Copy ID), drawn by showSimpleActionSheet (7167).
+    // The role isn't in what that menu is given, so the role chip's long press is wrapped to say which role it was for
+    // while Discord's own handler runs, and the menu gets a View raw data option for that role.
+    const viewRawTypes = new WeakMap();
+    function viewRawType(type, make) {
+        let wrapped = viewRawTypes.get(type);
+        if (!wrapped) { wrapped = make(type); viewRawTypes.set(type, wrapped); }
+        return wrapped;
+    }
+    function viewRawSwap(node, match, make, depth) {
+        if (!node || typeof node !== "object" || depth > 12) return node;
+        if (Array.isArray(node)) {
+            let list = node;
+            for (let i = 0; i < node.length; i++) { const next = viewRawSwap(node[i], match, make, depth + 1); if (next !== node[i]) { if (list === node) list = node.slice(); list[i] = next; } }
+            return list;
+        }
+        const props = node.props;
+        if (!props) return node;
+        if (typeof node.type === "function" && match(props)) return React.createElement(viewRawType(node.type, make), Object.assign({}, props, {key:node.key}));
+        const children = props.children;
+        if (children == null || typeof children !== "object") return node;
+        const next = viewRawSwap(children, match, make, depth + 1);
+        return next === children ? node : React.cloneElement(node, {children:next});
+    }
+    function viewRawRoleItem(type) {
+        return function ViewRawRoleItem(props) {
+            const out = type(props), role = props && props.role;
+            if (!out || !role || typeof role !== "object") return out;
+            const openRaw = function () {
+                haptic("IMPACT_LIGHT");
+                const id = String(role.id), guildId = props.guildId ? String(props.guildId) : "";
+                openViewRaw({kind:"role", id, guildId:rawId(guildId) ? guildId : "", role});
+            };
+            let done = false;
+            const tree = cloneTree(out, (node, nodeProps) => {
+                if (done || !("onLongPress" in nodeProps) || !("onPress" in nodeProps)) return nodeProps;
+                done = true;
+                const press = nodeProps.onLongPress;
+                if (typeof press !== "function") return Object.assign({}, nodeProps, {onLongPress:openRaw});
+                return Object.assign({}, nodeProps, {onLongPress:function () {
+                    viewRawRole = {guildId:props.guildId, role};
+                    try { return press.apply(this, arguments); } finally { viewRawRole = null; }
+                }});
+            }, 0);
+            if (done) return tree;
+            // Without Developer Mode, Discord draws the chip with no press handlers at all (it is not even a pressable), so there is
+            // nothing to hook. The chip gets a pressable around it that only listens for the hold; a plain tap still falls through.
+            if (!RN || !RN.Pressable) return out;
+            // Discord's own chip pressable (the one Developer Mode uses) is swapped in for the plain view, with its style and
+            // content, so holding a role shows the same pressed highlight.
+            const Highlight = inspectedExport(6462, "PressableHighlight");
+            if (Highlight && out && typeof out === "object" && out.props && (out.type === RN.View || typeof out.type === "string")) {
+                return el(Highlight, {onLongPress:openRaw, accessibilityRole:"button", style:out.props.style}, out.props.children);
+            }
+            return el(RN.Pressable, {onLongPress:openRaw, delayLongPress:350, accessible:false, style:state => state && state.pressed ? {opacity:0.6} : null}, out);
+        };
+    }
+    function viewRawRoleList(type) {
+        return function ViewRawRoleList(props) {
+            return viewRawSwap(type(props), p => !!p.role && typeof p.role === "object" && typeof p.role.id === "string" && "guildId" in p, viewRawRoleItem, 0);
+        };
+    }
+    function viewRawRolesCard(orig, self, args) {
+        const rendered = orig.apply(self, args);
+        if (!enabled("viewRaw") || !settings.viewRawRoles || !React || !rendered) return rendered;
+        return viewRawSwap(rendered, p => "guildMemberRoleIds" in p, viewRawRoleList, 0);
+    }
+    function viewRawSimpleSheet(orig, self, args) {
+        const ctx = viewRawRole, params = args[0];
+        if (!ctx || !params || params.key !== "RoleItem" || !Array.isArray(params.options) || !enabled("viewRaw") || !settings.viewRawRoles) return orig.apply(self, args);
+        viewRawRole = null;
+        const id = String(ctx.role.id), guildId = ctx.guildId ? String(ctx.guildId) : "";
+        const option = {label:tr("View raw data"), icon:params.options.some(o => o && o.icon) ? venusIcon(12003, "FileIcon") : undefined, onPress:() => later(() => openViewRaw({kind:"role", id, guildId:rawId(guildId) ? guildId : "", role:ctx.role}), 60)};
+        const next = Array.from(args);
+        next[0] = Object.assign({}, params, {options:params.options.concat([option])});
+        return orig.apply(self, next);
+    }
+    const VIEW_RAW_SAMPLE = "{\n  \"id\": \"1234567890123456789\",\n  \"type\": 0,\n  \"content\": \"Hello!\",\n  \"author\": {\n    \"username\": \"sam\",\n    \"globalName\": \"Sam\"\n  }\n}";
+    function ViewRawSettings() {
+        useSettings("viewRaw");
+        const ui = reviewUI(), s = useViewRawStyles();
+        if (!React || !RN) return null;
+        const on = enabled("viewRaw"), Group = ui.TableRowGroup || RN.View, Switch = ui.TableSwitchRow;
+        const groups = [
+            on ? null : offCard("status", venusIcon(12003, "FileIcon"), "viewRaw"),
+            el(RN.View, {key:"preview", style:[s.card, {opacity:on ? 1 : 0.5}], pointerEvents:"none"},
+                el(RN.View, {style:s.pad}, el(RN.Text, {style:s.code}, VIEW_RAW_SAMPLE))),
+            el(Group, {key:"where", title:tr("Where to show it")},
+                switchRow(Switch, "viewRawMessages", "Messages", "In the menu when you hold a message.", rowIcon(8471, "ChatIcon")),
+                switchRow(Switch, "viewRawChannels", "Channels", "In the menu for channels, threads, forum posts and DMs.", rowIcon(18679, "ChannelListIcon")),
+                switchRow(Switch, "viewRawServers", "Servers", "In the menu when you hold a server's icon.", rowIcon(9545, "ServerIcon")),
+                switchRow(Switch, "viewRawPeople", "People", "In the \u22ef menu on a profile.", rowIcon(11671, "UserIcon")),
+                switchRow(Switch, "viewRawRoles", "Roles", "In the menu when you hold a role on a profile.", rowIcon(8895, "ShieldUserIcon"))),
+            el(Group, {key:"viewer", title:tr("Viewer")},
+                switchRow(Switch, "viewRawHideContact", "Leave out email and phone", "Hides them from a person's raw data. Yours too.", rowIcon(13951, "ShieldLockIcon")),
+                switchRow(Switch, "viewRawWrap", "Wrap lines", "Long lines wrap instead of scrolling sideways.", rowIcon(8480, "TextIcon")))];
+        return settingsBody(ui, groups);
+    }
+    // Mutual group DMs: a line under a profile's mutual servers and friends, and a list of the group DMs you share.
+    const MUTUAL_GROUPS_SHEET = "VenusMutualGroups";
+    function mutualGroupList(userId) {
+        let list = [];
+        try { list = channelStore && typeof channelStore.getSortedPrivateChannels === "function" ? channelStore.getSortedPrivateChannels() : []; } catch (_) { list = []; }
+        return Array.isArray(list) ? list.filter(channel => channel && channel.type === 3 && Array.isArray(channel.recipients) && channel.recipients.indexOf(userId) >= 0) : [];
+    }
+    function mutualGroupName(channel) {
+        if (channel.name) return String(channel.name);
+        const names = (channel.recipients || []).map(id => { const user = userStore && userStore.getUser(id); return user && (user.globalName || user.username); }).filter(Boolean);
+        return names.length ? names.join(", ") : tr("Group DM");
+    }
+    function mutualGroupsRow(orig, self, args) {
+        const result = orig.apply(self, args);
+        if (!enabled("mutualGroupDMs") || !React || !RN) return result;
+        const user = args[0] && args[0].user, me = currentUser();
+        if (!user || !user.id || me && user.id === me.id) return result;
+        const count = mutualGroupList(user.id).length;
+        return count ? el(React.Fragment, null, result, el(MutualGroupsRow, {key:"venus-mutual-groups", userId:user.id, count})) : result;
+    }
+    function MutualGroupsRow(props) {
+        const Text = inspectedExport(5187, "Text"), Press = RN.Pressable || RN.TouchableOpacity || RN.View, Icon = venusIcon(8489, "GroupIcon"), Chevron = venusIcon(7182, "ChevronSmallRightIcon");
+        const label = pl(props.count, "{n} mutual group DM", "{n} mutual group DMs");
+        return el(Press, {onPress:() => { haptic("SELECTION"); mutualGroupsOpen(props.userId); }, accessibilityRole:"button", accessibilityLabel:label,
+            style:{flexDirection:"row", alignItems:"center", gap:6, paddingVertical:8}},
+            el(Icon, {size:"xs"}), Text ? el(Text, {variant:"text-sm/medium", color:"text-default"}, label) : el(RN.Text, {style:{color:"#dbdee1", fontSize:14}}, label), el(Chevron, {size:"xs"}));
+    }
+    function mutualGroupsOpen(userId) {
+        const ui = reviewUI();
+        if (!enabled("mutualGroupDMs") || typeof ui.showSheet !== "function") return;
+        try { ui.showSheet({key:MUTUAL_GROUPS_SHEET, content:el(MutualGroupsSheet, {userId}), stackingBehavior:"stack"}); } catch (_) {}
+    }
+    function mutualGroupGo(channelId) {
+        const ui = reviewUI();
+        try { if (ui.sheets && typeof ui.sheets.hideAllActionSheets === "function") ui.sheets.hideAllActionSheets(); } catch (_) {}
+        const go = inspectedExport(1114, "transitionTo");
+        if (typeof go === "function") later(() => { try { go("/channels/@me/" + channelId); } catch (_) {} }, 250);
+    }
+    function MutualGroupsSheet(props) {
+        useSettings("mutualGroupDMs");
+        const ui = reviewUI(), Group = ui.TableRowGroup || RN.View, Row = ui.TableRow;
+        const close = () => hideReviewSheet(ui, MUTUAL_GROUPS_SHEET);
+        const header = ui.Header ? el(ui.Header, {title:tr("Mutual group DMs"), trailing:ui.Close ? el(ui.Close, {onPress:close}) : undefined}) : null;
+        const rows = Row ? mutualGroupList(props.userId).map(channel => el(Row, {key:channel.id, label:mutualGroupName(channel), arrow:true, icon:rowIcon(8489, "GroupIcon"),
+            subLabel:pl((channel.recipients || []).length + 1, "{n} member", "{n} members"), onPress:() => { haptic("SELECTION"); mutualGroupGo(channel.id); }})) : [];
+        const content = el(RN.View, {style:{paddingHorizontal:12, paddingBottom:24, gap:16}}, rows.length ? el(Group, {key:"list"}, rows) :
+            footnote("none", "You don't share any group DMs."));
+        return serverEditScroll(ui, header, content);
+    }
+    // Platform spoof: the gateway sign-in (IDENTIFY) carries the client's properties, and Discord decides from them whether
+    // you show as mobile, desktop or web. GatewaySocketSingleton (14713) builds the sign-in with socket.handleIdentify.
+    const platformSpoof = {hooked:false, applied:undefined};
+    function platformSpoofProperties(kind, base) {
+        const keep = {client_launch_id:base.client_launch_id, client_heartbeat_session_id:base.client_heartbeat_session_id};
+        const locale = base.system_locale || questLocale();
+        if (kind === "web") return Object.assign({os:"Windows", browser:"Chrome", device:"", system_locale:locale, has_client_mods:false,
+            browser_user_agent:"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/" + QUEST_DESKTOP.chrome + " Safari/537.36",
+            browser_version:QUEST_DESKTOP.chrome, os_version:"10", referrer:"", referring_domain:"", referrer_current:"", referring_domain_current:"", release_channel:"stable",
+            client_build_number:QUEST_DESKTOP.build, client_event_source:null}, keep);
+        if (kind === "console") return Object.assign({os:"Xbox", browser:"Discord Embedded", device:"", system_locale:locale, has_client_mods:false, release_channel:"stable",
+            client_build_number:QUEST_DESKTOP.build, client_event_source:null}, keep);
+        return Object.assign({os:"Windows", browser:"Discord Client", release_channel:"stable", client_version:QUEST_DESKTOP.version, os_version:QUEST_DESKTOP.osVersion,
+            os_arch:"x64", app_arch:"x64", system_locale:locale, has_client_mods:false, browser_user_agent:QUEST_DESKTOP_UA, browser_version:QUEST_DESKTOP.electron,
+            os_sdk_version:QUEST_DESKTOP.osSdk, client_build_number:QUEST_DESKTOP.build, native_build_number:QUEST_DESKTOP.native, client_event_source:null}, keep);
+    }
+    function platformSpoofResult(result) {
+        const wanted = enabled("platformSpoof") ? settings.platformSpoofDevice : "";
+        platformSpoof.applied = wanted;
+        if (!wanted || !result || typeof result !== "object" || !result.properties || typeof result.properties !== "object") return result;
+        return Object.assign({}, result, {properties:platformSpoofProperties(wanted, result.properties)});
+    }
+    function platformSpoofHook(exports) {
+        const socket = exports && exports.socket;
+        if (!socket || typeof socket.handleIdentify !== "function" || platformSpoof.hooked) return exports;
+        platformSpoof.hooked = true;
+        const orig = socket.handleIdentify;
+        replaceValue(socket, "handleIdentify", function () {
+            const result = orig.apply(this, arguments);
+            try { return result && typeof result.then === "function" ? result.then(platformSpoofResult) : platformSpoofResult(result); } catch (_) { return result; }
+        });
+        return exports;
+    }
+    // A new device only shows once Discord signs in again, so a change asks to reopen (when lesbunny can reopen Discord).
+    function platformSpoofAsk() {
+        const wanted = enabled("platformSpoof") ? settings.platformSpoofDevice : "";
+        if (!features.platformSpoof || platformSpoof.applied === undefined || platformSpoof.applied === wanted || !RN) return;
+        const ui = reviewUI();
+        if (!features.systemFont || !files) { reviewToast(ui, "Reopen Discord to show your new device", venusIcon(11630, "RefreshIcon")); return; }
+        const reopen = () => { Promise.resolve().then(() => files.writeFile("documents", PREFS, settingsSnapshot(), "utf8")).then(() => files.fileExists("venus-font-v1:restart")).catch(() => {}); };
+        const title = tr("Show your new device"), body = tr("Discord shows it the next time it signs in. Reopen Discord to do that now.");
+        if (ui.alerts && typeof ui.alerts.show === "function") try { ui.alerts.show({title, body, confirmText:tr("Reopen now"), cancelText:tr("Later"), onConfirm:reopen}); return; } catch (_) {}
+        if (RN.Alert) RN.Alert.alert(title, body, [{text:tr("Later"), style:"cancel"}, {text:tr("Reopen now"), onPress:reopen}]);
+    }
+    // Keep media playing (#134). Discord plays voice messages, audio files and chat videos in its own native player and pauses
+    // them when it leaves the screen; the native side (extensions/media, BackgroundMedia.kt) keeps the sound going with a media
+    // notification and pops a playing video out into Android's picture-in-picture window. It reads the switches from the
+    // settings file itself, so the JS side only sends the notification's texts in the user's language, and, when Discord
+    // goes to the background, who sent what is playing and where (FileModule.moveFile with a private prefix).
+    const MEDIA_PREFIX = "venus-media-v1:", backgroundMedia = {listening:false, sent:""};
+    function mediaBridge(request) {
+        if (!files || typeof files.moveFile !== "function") return Promise.resolve(null);
+        return Promise.resolve().then(() => files.moveFile(MEDIA_PREFIX + JSON.stringify(request), "", "")).catch(() => null);
+    }
+    function backgroundMediaLabels() {
+        if (!features.backgroundMedia) return;
+        const labels = {voice:tr("Voice message"), audio:tr("Audio"), play:tr("Play"), pause:tr("Pause"), back:tr("Skip back"), forward:tr("Skip forward"), channel:tr("Media playback")};
+        const text = JSON.stringify(labels);
+        if (text === backgroundMedia.sent) return;
+        backgroundMedia.sent = text;
+        mediaBridge({action:"labels", labels});
+    }
+    function backgroundMediaStart() {
+        if (backgroundMedia.listening) return;
+        backgroundMedia.listening = true;
+        backgroundMediaLabels();
+        try {
+            if (RN && RN.AppState && typeof RN.AppState.addEventListener === "function")
+                RN.AppState.addEventListener("change", state => { if (state !== "active" && enabled("backgroundMedia")) later(backgroundMediaDescribe, 150); });
+        } catch (_) {}
+    }
+    function backgroundMediaDescribe() {
+        mediaBridge({action:"now"}).then(text => {
+            const now = typeof text === "string" ? JSON.parse(text) : null;
+            if (!now || !/^\d{17,20}$/.test(String(now.messageId || ""))) return;
+            const meta = backgroundMediaMeta(now);
+            if (meta) mediaBridge(Object.assign({action:"meta"}, meta));
+        }).catch(() => {});
+    }
+    // The notification's title (Voice message, or the audio file's name), the sender, the chat, the sender's picture and a link back.
+    function backgroundMediaMeta(now) {
+        const messages = inspectedExport(5532, "default"), channels = inspectedExport(2068, "default"), guilds = inspectedExport(2090, "default");
+        const channelId = String(now.channelId || ""), messageId = String(now.messageId);
+        let message = null, channel = null, guild = null;
+        try { message = messages && typeof messages.getMessage === "function" ? messages.getMessage(channelId, messageId) : null; } catch (_) {}
+        try { channel = channels && typeof channels.getChannel === "function" ? channels.getChannel(channelId) : null; } catch (_) {}
+        try { guild = channel && channel.guild_id && guilds ? guilds.getGuild(channel.guild_id) : null; } catch (_) {}
+        const author = message && message.author, base = url => String(url || "").split("?")[0];
+        const list = message && Array.isArray(message.attachments) ? message.attachments : [];
+        const attachment = list.find(a => a && (base(a.url) === base(now.url) || base(a.proxy_url) === base(now.url))) || list[0] || null;
+        const voice = !!(message && (message.flags & 8192)) || !!(attachment && (attachment.waveform || attachment.duration_secs));
+        const title = voice || !attachment ? tr("Voice message") : String(attachment.filename || tr("Audio"));
+        const artist = author ? String(author.globalName || author.global_name || author.username || "") : "";
+        let where = "";
+        if (channel) where = guild ? "#" + (channel.name || "") + " \u00b7 " + (guild.name || "") : channel.name ? String(channel.name) : tr("Direct message");
+        let art = "";
+        try { art = author && typeof author.getAvatarURL === "function" ? String(author.getAvatarURL(channel && channel.guild_id, 128) || "") : ""; } catch (_) {}
+        if (!/^https:\/\//.test(art)) art = "";
+        return {messageId, title, artist, where, art, link:"https://discord.com/channels/" + (channel && channel.guild_id || "@me") + "/" + channelId + "/" + messageId};
+    }
+    // The preview: a phone's media notification you can play with (play/pause and both skip buttons work, at the length picked
+    // below), and the picture-in-picture window floating over a home screen. Each half fades back when its switch is off.
+    const MEDIA_PREVIEW_MS = 47000;
+    function BackgroundMediaPreview(props) {
+        useSettings("backgroundMedia");
+        const s = useChatPreviewStyles(), k = usePreviewChrome(), Press = RN.Pressable || RN.View;
+        const audio = !!props.on && !!settings.backgroundMediaAudio, video = !!props.on && !!settings.backgroundMediaVideo;
+        const skip = [5, 10, 15, 30].includes(settings.backgroundMediaSkip) ? settings.backgroundMediaSkip : 10;
+        const [state, setState] = React.useState({at:12000, playing:true});
+        const playing = (audio || video) && state.playing;
+        React.useEffect(() => {
+            if (!playing || reduceMotion || typeof global.setInterval !== "function") return undefined;
+            const timer = global.setInterval(() => setState(st => st.playing ? {at:st.at + 500 >= MEDIA_PREVIEW_MS ? 0 : st.at + 500, playing:true} : st), 500);
+            return () => global.clearInterval(timer);
+        }, [playing]);
+        const seek = delta => { haptic("SELECTION"); setState(st => ({at:Math.max(0, Math.min(MEDIA_PREVIEW_MS - 500, st.at + delta)), playing:st.playing})); };
+        const toggle = () => { haptic("SELECTION"); setState(st => ({at:st.at, playing:!st.playing})); };
+        const Play = venusIcon(8674, "PlayIcon"), Pause = venusIcon(8676, "PauseIcon"), Skip = venusIcon(11632, "RetryIcon"), Phones = venusIcon(13214, "HeadphonesIcon");
+        const width = (Math.max(0, Math.min(1, state.at / MEDIA_PREVIEW_MS)) * 100).toFixed(1) + "%";
+        const caption = text => el(RN.Text, {style:[s.muted, {fontSize:12, fontWeight:"700", letterSpacing:0.3}]}, text);
+        const skipButton = (key, forward, big, color, live) => el(Press, {key, disabled:!live, onPress:() => seek((forward ? 1 : -1) * skip * 1000),
+            accessibilityRole:"button", accessibilityLabel:tr(forward ? "Skip forward" : "Skip back"), hitSlop:{top:8, bottom:8, left:8, right:8},
+            style:{width:big ? 40 : 24, height:big ? 40 : 24, alignItems:"center", justifyContent:"center"}},
+            el(RN.View, {style:forward ? null : {transform:[{scaleX:-1}]}}, el(Skip, {size:big ? "md" : "xs", color})),
+            big ? el(RN.Text, {style:{position:"absolute", color, fontSize:8, fontWeight:"800"}}, String(skip)) : null);
+        const playButton = (key, big, live) => el(Press, {key, onPress:toggle, disabled:!live, accessibilityRole:"button", accessibilityLabel:tr(playing ? "Pause" : "Play"),
+            hitSlop:{top:8, bottom:8, left:8, right:8}, style:big ? [k.brand, {width:52, height:52, borderRadius:26, alignItems:"center", justifyContent:"center"}] : null},
+            el(playing ? Pause : Play, {size:big ? "md" : "sm", color:"#ffffff"}));
+        const notification = el(RN.View, {key:"notification", style:{gap:8, opacity:audio ? 1 : 0.45}},
+            caption(tr("In your notifications")),
+            el(RN.View, {style:[k.secondary, {borderRadius:20, padding:14, gap:12}]},
+                el(RN.View, {style:{flexDirection:"row", alignItems:"center", gap:12}},
+                    el(RN.View, {style:{width:48, height:48, borderRadius:12, backgroundColor:"#eb459e", alignItems:"center", justifyContent:"center"}},
+                        el(RN.Text, {style:{color:"#ffffff", fontSize:20, fontWeight:"700"}}, "S")),
+                    el(RN.View, {style:{flex:1}},
+                        el(RN.Text, {style:s.name, numberOfLines:1}, tr("Voice message")),
+                        el(RN.Text, {style:[s.muted, {fontSize:13}], numberOfLines:1}, "Sam \u00b7 #general")),
+                    el(RN.View, {style:[k.brand, {width:24, height:24, borderRadius:12, alignItems:"center", justifyContent:"center"}]},
+                        el(Phones, {size:"xxs", color:"#ffffff"}))),
+                el(RN.View, {style:{gap:4}},
+                    el(RN.View, {style:{height:4, borderRadius:2, backgroundColor:"#80848e55", overflow:"hidden"}},
+                        el(RN.View, {style:[k.brand, {height:4, width}]})),
+                    el(RN.View, {style:{flexDirection:"row", justifyContent:"space-between"}},
+                        el(RN.Text, {style:[s.muted, {fontSize:11}]}, clockText(state.at)),
+                        el(RN.Text, {style:[s.muted, {fontSize:11}]}, clockText(MEDIA_PREVIEW_MS)))),
+                el(RN.View, {style:{flexDirection:"row", alignItems:"center", justifyContent:"center", gap:28}},
+                    skipButton("back", false, true, k.icon.color, audio), playButton("play", true, audio), skipButton("forward", true, true, k.icon.color, audio))));
+        const APP_COLORS = ["#57f287", "#fee75c", "#5865f2", "#eb459e", "#ed4245", "#00a8fc", "#f0b232", "#9b84ee"];
+        const tiles = APP_COLORS.map((color, i) => el(RN.View, {key:"app" + i, style:{width:"25%", alignItems:"center", paddingVertical:7}},
+            el(RN.View, {style:{width:34, height:34, borderRadius:10, backgroundColor:color, opacity:0.3}})));
+        const pip = el(RN.View, {key:"pip", style:{position:"absolute", right:12, bottom:12, width:168, height:95, borderRadius:14, overflow:"hidden",
+                backgroundColor:"#000000", shadowColor:"#000000", shadowOpacity:0.35, shadowRadius:10, shadowOffset:{width:0, height:4}, elevation:6}},
+            el(RN.View, {style:{flex:3, backgroundColor:"#3b4ba8"}},
+                el(RN.View, {style:{position:"absolute", right:28, top:12, width:22, height:22, borderRadius:11, backgroundColor:"#fee75c"}})),
+            el(RN.View, {style:{flex:2, backgroundColor:"#1f2a63"}}),
+            el(RN.View, {style:{position:"absolute", left:0, right:0, top:0, bottom:0, backgroundColor:"#00000047", flexDirection:"row",
+                alignItems:"center", justifyContent:"center", gap:18}},
+                skipButton("pipBack", false, false, "#ffffff", video), playButton("pipPlay", false, video), skipButton("pipForward", true, false, "#ffffff", video)),
+            el(RN.View, {style:{position:"absolute", left:0, bottom:0, height:3, width, backgroundColor:"#5865f2"}}));
+        const floating = el(RN.View, {key:"floating", style:{gap:8, opacity:video ? 1 : 0.45}},
+            caption(tr("Over other apps")),
+            el(RN.View, {style:[k.secondary, {borderRadius:20, height:200, padding:10, overflow:"hidden"}]},
+                el(RN.View, {style:{flexDirection:"row", flexWrap:"wrap"}}, tiles), pip));
+        return el(RN.View, {key:"preview", accessible:false, accessibilityLabel:tr("Keep media playing preview"), style:[s.chat, {padding:12, gap:16}]},
+            notification, floating);
+    }
+    function BackgroundMediaSettings() {
+        useSettings("backgroundMedia");
+        const ui = reviewUI();
+        if (!React || !RN) return null;
+        const on = enabled("backgroundMedia"), Group = ui.TableRowGroup || RN.View, Switch = ui.TableSwitchRow;
+        const Icon = venusIcon(8674, "PlayIcon");
+        const any = !!(settings.backgroundMediaAudio || settings.backgroundMediaVideo);
+        const groups = [
+            !on ? offCard("status", Icon, "backgroundMedia") : !any ? statusCard("status", "Turn on at least one option below.", {title:tr("Nothing keeps playing"), IconComponent:Icon}) : null,
+            el(BackgroundMediaPreview, {key:"preview", on}),
+            el(Group, {key:"what", title:tr("When you leave Discord")},
+                switchRow(Switch, "backgroundMediaAudio", "Voice messages and audio", "Keep playing in the background, with controls in your notifications and on the lock screen.", rowIcon(13214, "HeadphonesIcon")),
+                switchRow(Switch, "backgroundMediaVideo", "Videos", "Pop out into a small window over other apps, with play and skip buttons.", rowIcon(11187, "VideoIcon"))),
+            any ? el(RN.View, {key:"skip", style:{gap:10}},
+                groupTitle("skipTitle", "Skip buttons"),
+                venusSegmented({key:"skipSeg", value:settings.backgroundMediaSkip, disabled:!on, onChange:value => setSetting("backgroundMediaSkip", value),
+                    items:[5, 10, 15, 30].map(n => ({value:n, label:tr("{n} s", {n})}))})) : null,
+            footnote("note", "Closing the small window pauses the video. Swipe the notification away to stop the sound.")];
+        return settingsBody(ui, groups);
+    }
+    function PlatformSpoofSettings() {
+        useSettings("platformSpoof");
+        const ui = reviewUI();
+        if (!React || !RN) return null;
+        const on = enabled("platformSpoof");
+        const groups = [
+            on ? null : offCard("status", venusIcon(5133, "UserPlatformIcon"), "platformSpoof"),
+            statusCard("risk", "Discord doesn't allow this. It could put your account at risk.", {title:tr("Use at your own risk"), IconComponent:venusIcon(7838, "WarningIcon")}),
+            radioGroup(ui, "device", "Show me as", "platformSpoofDevice", on, [
+                ["desktop", "Desktop", "A computer", rowIcon(9386, "ScreenIcon")],
+                ["web", "Web", "A web browser", rowIcon(9393, "GlobeEarthIcon")],
+                ["console", "Console", "A game console", rowIcon(9514, "GameControllerIcon")]]),
+            footnote("note", "Anyone who sees device icons sees this. It shows the next time Discord signs in, so reopen Discord after changing it.")];
+        return settingsBody(ui, groups);
+    }
     // Tap mentions to open profiles (based on ClickableMentions by mwittrien). The message bar is a native view
     // (ChatInputNativeComponent, 12337) that only reports taps on attachments, but every tap moves the cursor and arrives
     // as onSelectionOrTextChange. When the text hasn't changed and the cursor lands inside an @mention, lesbunny opens that
@@ -19697,6 +21156,296 @@
         haptic("SELECTION");
         try { if (RN && RN.Keyboard && typeof RN.Keyboard.dismiss === "function") RN.Keyboard.dismiss(); } catch (_) {}
         later(() => { try { show({userId:user.id, channelId, guildId:channel && channel.guild_id || undefined}); } catch (_) {} }, 60);
+    }
+    // Expand the message bar. Discord caps the message bar at about 200 dp: its height is driven on the UI thread by two
+    // Reanimated worklets in useChatInputMaxHeight (12338), getChatInputMaxHeightWorklet and
+    // getChatInputHeightAnimationTimingWorklet, which useChatInputHeightWorklet (12887) copies into its own worklets when
+    // a message bar mounts. lesbunny swaps in twin worklets (same closure plus one shared value) before that happens, so the
+    // cap becomes "the room above the keyboard" while the bar is expanded and is Discord's own number otherwise. A button
+    // at the top-right of the text area flips the shared value, then re-runs the animation once from JS so the bar moves
+    // right away instead of at the next keystroke. Nothing else about the bar is touched: sending, drafts and the native
+    // text field work as before, and if a worklet isn't where lesbunny expects, the bar is simply left alone.
+    const expandBar = {expanded:false, multiline:false, pill:false, content:0, shared:null, worklets:null, live:null, subscribed:false};
+    // Room kept free above the open bar (the status bar and the channel header), plus a little air under the header.
+    const EXPAND_BAR_RESERVE = 128;
+    const expandBarHandlers = new WeakMap();
+    const EXPAND_BAR_DARK = {button:{position:"absolute", top:4, right:6, width:32, height:32, borderRadius:16, alignItems:"center", justifyContent:"center"},
+        pressed:{backgroundColor:"#4e50584d"}, icon:{color:"#b5bac1"}};
+    function useExpandBarStyles() {
+        return useThemed("expandBar", c => ({button:EXPAND_BAR_DARK.button,
+            pressed:{backgroundColor:c.BACKGROUND_MOD_NORMAL || c.BACKGROUND_MOD_SUBTLE},
+            icon:{color:c.CHAT_INPUT_ICON_DEFAULT_TINT || c.INTERACTIVE_ICON_DEFAULT || c.ICON_MUTED}}), EXPAND_BAR_DARK);
+    }
+    // Two diagonal arrows: pointing out when the bar can grow, pointing in when it can shrink (drawn here because Discord
+    // ships only the first of them); Discord's own fullscreen icon stands in if react-native-svg isn't there.
+    function expandBarGlyph(open, color, size) {
+        const Svg = inspectedExport(7846, "Svg"), Path = inspectedExport(7846, "Path");
+        if (Svg && Path) {
+            const lines = open ? ["M4 14h6v6", "M20 10h-6V4", "M14 10l7-7", "M3 21l7-7"] : ["M15 3h6v6", "M21 3l-7 7", "M9 21H3v-6", "M3 21l7-7"];
+            return el(Svg, {width:size, height:size, viewBox:"0 0 24 24", fill:"none"}, lines.map(d =>
+                el(Path, {key:d, d, stroke:color, strokeWidth:2, strokeLinecap:"round", strokeLinejoin:"round", fill:"none"})));
+        }
+        return el(venusIcon(16089, "FullscreenEnterIcon"), {size:"sm", color});
+    }
+    // Worklets are plain functions that carry __closure, __workletHash and __initData; on the UI thread Reanimated rebuilds
+    // them from __initData.code (release builds carry only the code) and binds this to the closure. The JS body does the
+    // same thing for calls from the JS thread, so both runtimes give one answer.
+    function expandBarHeights(exports) {
+        try {
+            const origMax = exports && exports.getChatInputMaxHeightWorklet, origTiming = exports && exports.getChatInputHeightAnimationTimingWorklet;
+            const makeMutable = inspectedExport(1658, "makeMutable");
+            const mc = origMax && origMax.__closure, tc = origTiming && origTiming.__closure;
+            if (typeof origMax !== "function" || typeof origTiming !== "function" || typeof makeMutable !== "function" || !mc || !tc ||
+                typeof mc.getKeyboardStateWorklet !== "function" || typeof mc.getWindowDimensionsWorklet !== "function" || !mc.KeyboardTypes ||
+                typeof mc.MIN_HEIGHT !== "number" || typeof tc.withTiming !== "function" || !tc.Easing || typeof tc.timingFastDuration !== "number") {
+                if (settings.debugLog) dlog("W", "hooks", "expand message bar: the height worklets have changed, so the bar is left as it is");
+                return exports;
+            }
+            const shared = expandBar.shared || (expandBar.shared = makeMutable(0));
+            // With the keyboard closed the bar sits above the navigation bar, which the keyboard's height otherwise covers, so
+            // that inset is kept free too (without it the open bar ran under the channel header and lost its top corners).
+            const insetsOf = inspectedExport(10696, "getSafeAreaInsetsWorklet");
+            const insets = typeof insetsOf === "function" && insetsOf.__workletHash ? insetsOf : null;
+            const max = function () {
+                const reserve = shared.get();
+                if (!(reserve > 0)) return origMax();
+                const keys = mc.getKeyboardStateWorklet();
+                const keyboard = keys.keyboardType !== mc.KeyboardTypes.SYSTEM ? keys.customKeyboardHeight : keys.keyboardHeight;
+                const win = mc.getWindowDimensionsWorklet({ignoreKeyboard:true});
+                const bottom = keyboard > 0 ? 0 : insets ? insets().bottom || 0 : 16;
+                return Math.max(mc.MIN_HEIGHT * 2, win.height - keyboard - bottom - reserve);
+            };
+            max.__closure = {origMax, shared, getKeyboardStateWorklet:mc.getKeyboardStateWorklet, KeyboardTypes:mc.KeyboardTypes,
+                getWindowDimensionsWorklet:mc.getWindowDimensionsWorklet, MIN_HEIGHT:mc.MIN_HEIGHT, insets};
+            max.__workletHash = 7391842650013;
+            max.__initData = {code:"function venusExpandMax(){const{origMax,shared,getKeyboardStateWorklet,KeyboardTypes,getWindowDimensionsWorklet,MIN_HEIGHT,insets}=this.__closure;" +
+                "const reserve=shared.get();if(!(reserve>0)){return origMax();}" +
+                "const keys=getKeyboardStateWorklet();const keyboard=keys.keyboardType!==KeyboardTypes.SYSTEM?keys.customKeyboardHeight:keys.keyboardHeight;" +
+                "const win=getWindowDimensionsWorklet({ignoreKeyboard:true});const bottom=keyboard>0?0:insets?insets().bottom||0:16;" +
+                "return Math.max(MIN_HEIGHT*2,win.height-keyboard-bottom-reserve);}"};
+            const timing = function (contentSize, minHeight) {
+                const cap = max();
+                const value = shared.get() > 0 ? cap : Math.min(Math.max(contentSize, minHeight), cap);
+                return tc.withTiming(value, {duration:tc.timingFastDuration, easing:tc.Easing.linear});
+            };
+            timing.__closure = {max, shared, withTiming:tc.withTiming, timingFastDuration:tc.timingFastDuration, Easing:tc.Easing};
+            timing.__workletHash = 7391842650027;
+            timing.__initData = {code:"function venusExpandTiming(contentSize,minHeight){const{max,shared,withTiming,timingFastDuration,Easing}=this.__closure;" +
+                "const cap=max();const value=shared.get()>0?cap:Math.min(Math.max(contentSize,minHeight),cap);" +
+                "return withTiming(value,{duration:timingFastDuration,easing:Easing.linear});}"};
+            // From the JS thread the answer is worked out here from plain numbers (a shared value just set from JS may not have
+            // reached the UI thread yet, so reading it back would give the old answer).
+            const cap = function (reserve) {
+                if (!(reserve > 0)) return origMax();
+                const keys = mc.getKeyboardStateWorklet();
+                const keyboard = keys.keyboardType !== mc.KeyboardTypes.SYSTEM ? keys.customKeyboardHeight : keys.keyboardHeight;
+                const win = mc.getWindowDimensionsWorklet({ignoreKeyboard:true});
+                const bottom = keyboard > 0 ? 0 : insets ? insets().bottom || 0 : 16;
+                return Math.max(mc.MIN_HEIGHT * 2, win.height - keyboard - bottom - reserve);
+            };
+            expandBar.worklets = {max, timing, cap, withTiming:tc.withTiming, duration:tc.timingFastDuration, easing:tc.Easing.linear};
+            return replaceValue(replaceValue(exports, "getChatInputMaxHeightWorklet", max), "getChatInputHeightAnimationTimingWorklet", timing);
+        } catch (error) {
+            if (settings.debugLog) try { dlog("W", "hooks", "expand message bar: " + dlogText(error)); } catch (_) {}
+            return exports;
+        }
+    }
+    // The hook that owns a message bar's height: remember its shared values, so a tap can move the bar at once.
+    function expandBarHeightHook(orig, self, args) {
+        const out = orig.apply(self, args), input = args && args[0];
+        const pick = key => out && out[key] != null ? out[key] : input && input[key];
+        const live = {textFieldHeight:pick("textFieldHeight"), textFieldMinHeight:pick("textFieldMinHeight")};
+        // The hook keeps its content size to itself (a shared value that never leaves it), so the size comes from the text
+        // view's own change events instead (expandBarContent).
+        if (live.textFieldHeight && typeof live.textFieldHeight.set === "function") expandBar.live = live;
+        return out;
+    }
+    function expandBarApply() {
+        const live = expandBar.live, w = expandBar.worklets;
+        if (!live || !live.textFieldHeight) { if (settings.debugLog) dlog("W", "hooks", "expand message bar: the bar's height isn't known yet"); return; }
+        const min = live.textFieldMinHeight && typeof live.textFieldMinHeight.get === "function" ? live.textFieldMinHeight.get() : 0;
+        const content = expandBar.content > 0 ? expandBar.content : min;
+        try {
+            let top = 0, timing = null, options = {duration:200};
+            if (w) { top = w.cap(expandBar.expanded ? EXPAND_BAR_RESERVE : 0); timing = w.withTiming; options = {duration:w.duration, easing:w.easing}; }
+            if (!(top > 0)) {
+                // The height worklets aren't in place: use the window's height instead.
+                const win = RN && RN.Dimensions ? RN.Dimensions.get("window").height : 800;
+                top = Math.max(min * 2, win * (expandBar.expanded ? 0.45 : 0.3));
+                timing = inspectedExport(1658, "withTiming");
+            }
+            const target = expandBar.expanded ? top : Math.min(Math.max(content, min), top);
+            if (settings.debugLog) dlog("I", "hooks", "expand message bar: " + (expandBar.expanded ? "open" : "close") + " to " + Math.round(target));
+            live.textFieldHeight.set(typeof timing === "function" ? timing(target, options) : target);
+        } catch (error) { if (settings.debugLog) try { dlog("W", "hooks", "expand message bar: " + dlogText(error)); } catch (_) {} }
+    }
+    function expandBarSet(next) {
+        next = !!next;
+        if (expandBar.expanded === next) return;
+        expandBar.expanded = next;
+        if (expandBar.shared) try { expandBar.shared.set(next ? EXPAND_BAR_RESERVE : 0); } catch (_) {}
+        expandBarApply();
+        notify("expandBar");
+    }
+    // The button shows once the text has grown past one line (like the bar does), and while it is expanded.
+    function expandBarContent(event) {
+        const height = event && event.nativeEvent && event.nativeEvent.height;
+        if (typeof height !== "number") return;
+        const before = expandBar.content;
+        expandBar.content = height;
+        const live = expandBar.live, min = live && live.textFieldMinHeight && typeof live.textFieldMinHeight.get === "function" ? live.textFieldMinHeight.get() : 0;
+        const multiline = height > (min > 0 ? min + 6 : 56);
+        if (multiline !== expandBar.multiline || expandBar.expanded && height !== before) { expandBar.multiline = multiline; notify("expandBar"); }
+    }
+    const EXPAND_BAR_GUTTER = 40;
+    // The text view stops short of the button (a margin on its own style), so typing never runs underneath it. The component
+    // doesn't take a style prop (it builds its own), so this goes on the element it rendered.
+    const EXPAND_BAR_TEXT = {flex:1, justifyContent:"center"}, EXPAND_BAR_TEXT_OPEN = {flex:1, justifyContent:"flex-start"};
+    function expandBarStyle(style, open) {
+        const flat = RN && RN.StyleSheet && typeof RN.StyleSheet.flatten === "function" ? RN.StyleSheet.flatten(style) : style;
+        const base = Object.assign({}, flat && typeof flat === "object" ? flat : null);
+        // On the bar's corner the button sits above the send button, outside the text's column, so the text keeps its full
+        // width; only the fallback (the button beside the text view) needs the gutter.
+        if (!expandBar.pill && (open || expandBar.multiline)) base.marginRight = (typeof base.marginRight === "number" ? base.marginRight : 0) + EXPAND_BAR_GUTTER;
+        if (open) {
+            const live = expandBar.live, min = live && live.textFieldMinHeight && typeof live.textFieldMinHeight.get === "function" ? live.textFieldMinHeight.get() : 0;
+            delete base.flex;
+            base.flexGrow = 0; base.flexShrink = 0; base.flexBasis = "auto"; base.alignSelf = "stretch";
+            base.minHeight = Math.max(expandBar.content > 0 ? expandBar.content : 0, min > 0 ? min : 40);
+        }
+        return base;
+    }
+    function expandBarProps(props, open) {
+        if (!props) return props;
+        const orig = props.onChangeContentSize;
+        let handler = orig;
+        if (typeof orig === "function") {
+            handler = expandBarHandlers.get(orig);
+            if (!handler) {
+                handler = function (event) {
+                    try { expandBarContent(event); } catch (_) {}
+                    return orig.apply(this, arguments);
+                };
+                expandBarHandlers.set(orig, handler);
+            }
+        }
+        // The gutter follows the button: it's there while the button is (a second line or more, or open). The size the text is
+        // measured at is the narrower one, so a message that needs two lines keeps needing them and the button can't flicker.
+        if (handler === orig && !open) return props;
+        return Object.assign({}, props, open ? {maxHeight:4000, onChangeContentSize:handler} : {onChangeContentSize:handler});
+    }
+    function ExpandBarButton() {
+        useSettings("expandBar");
+        useLanguage();
+        const s = useExpandBarStyles();
+        const open = expandBar.expanded;
+        if (!enabled("expandBar") || !(open || expandBar.multiline) || !RN) return null;
+        const Press = RN.Pressable;
+        if (!Press) return null;
+        return el(Press, {onPress:() => { haptic("IMPACT_LIGHT"); expandBarSet(!expandBar.expanded); }, accessibilityRole:"button",
+            accessibilityLabel:tr(open ? "Collapse message bar" : "Expand message bar"), hitSlop:{top:8, bottom:8, left:8, right:8},
+            style:state => [s.button, state && state.pressed ? s.pressed : null]}, expandBarGlyph(open, s.icon.color, 20));
+    }
+    // The message bar's native text view, with the button beside it and the height cap lifted while expanded.
+    function expandBarWrap(component) {
+        const wrapped = function (props) {
+            useSettings("expandBar");
+            const on = enabled("expandBar");
+            React.useEffect(() => { if (expandBar.expanded && !enabled("expandBar")) expandBarSet(false); });
+            const next = on ? expandBarProps(props, expandBar.expanded) : props;
+            let out = arguments.length > 1 ? component.call(this, next, arguments[1]) : component.call(this, next);
+            if (!on || !React || !RN || !out || typeof out !== "object" || !out.props || Array.isArray(out)) return out;
+            const open = expandBar.expanded;
+            try { out = React.cloneElement(out, {style:expandBarStyle(out.props.style, open)}); } catch (_) { return out; }
+            // Always the same shape while the feature is on (a view around the text view, and the button next to it), so
+            // opening and closing never rebuilds the text view and loses the draft or the keyboard. Open, the text view is as
+            // tall as its text and sits at the top of the bar instead of being centered in all of it.
+            return el(React.Fragment, null,
+                el(RN.View, {key:"venus-expand-text", style:open ? EXPAND_BAR_TEXT_OPEN : EXPAND_BAR_TEXT}, out),
+                expandBar.pill ? null : el(ExpandBarButton, {key:"venus-expand-button"}));
+        };
+        if (component.displayName) wrapped.displayName = component.displayName;
+        return copyStatics(wrapped, component);
+    }
+    // The button lives on the bar itself (the rounded box that holds the text and the + / emoji / send buttons), so it sits at
+    // the bar's own top-right corner however tall the bar is. That box is the one view in ChatInput that listens for touches
+    // to focus the field. If it can't be found, the button goes next to the text view instead (expandBarWrap).
+    function expandBarPill(orig, self, args) {
+        const tree = orig.apply(self, args);
+        expandBar.pill = false;
+        if (!enabled("expandBar") || !React || !tree) return tree;
+        let added = false;
+        const next = cloneTree(tree, (node, props) => {
+            if (added || !("onStartShouldSetResponder" in props) || !("onResponderRelease" in props) || !("accessibilityElementsHidden" in props) || props.collapsable !== false) return props;
+            added = true;
+            const kids = Array.isArray(props.children) ? props.children : props.children == null ? [] : [props.children];
+            return Object.assign({}, props, {children:kids.concat([el(ExpandBarButton, {key:"venus-expand-button"})])});
+        }, 0, () => added);
+        expandBar.pill = added;
+        if (!added && settings.debugLog) dlog("W", "hooks", "expand message bar: the bar's box wasn't found, so the button goes beside the text");
+        return next;
+    }
+    function expandBarInit(flux) {
+        if (expandBar.subscribed || !flux || typeof flux.subscribe !== "function") return;
+        expandBar.subscribed = true;
+        try {
+            flux.subscribe("CHANNEL_SELECT", () => { if (expandBar.expanded && settings.expandBarChats) expandBarSet(false); });
+            // Only a message you send from this phone (Discord adds it to the chat before the server confirms it).
+            flux.subscribe("MESSAGE_CREATE", event => { if (expandBar.expanded && settings.expandBarSending && event && event.optimistic === true) expandBarSet(false); });
+            // Saving (or leaving) an edit puts your draft back in the bar, so it closes then too.
+            flux.subscribe("MESSAGE_END_EDIT", () => { if (expandBar.expanded && settings.expandBarSending) expandBarSet(false); });
+            flux.subscribe("LOGOUT", () => expandBarSet(false));
+        } catch (_) {}
+    }
+    const EXPAND_BAR_SAMPLE = ["Quick recap for tonight:", "We start at 8 and the lobby opens early.", "Bring snacks, and tell Sam to bring the extra controller."];
+    // The settings page's picture of it: a message grows to three lines, the arrows appear, one tap opens the bar tall.
+    function ExpandBarPreview(props) {
+        useSettings("expandBar");
+        useLanguage();
+        const s = useChatPreviewStyles(), k = usePreviewChrome(), on = !!props.on;
+        const blank = {lines:0, open:false, pulse:null};
+        const [state, setState] = React.useState(blank);
+        const update = change => setState(st => Object.assign({}, st, change));
+        const story = useStory(on, () => [
+            [0, () => setState(blank), tr("Type a long message")],
+            [900, () => update({lines:1})], [750, () => update({lines:2})], [750, () => { animateLayout(); update({lines:3}); }],
+            [1000, () => update({pulse:{who:"btn", id:"expand"}}), tr("Tap the arrows in the corner of the message bar")],
+            [450, () => { animateLayout(); haptic("IMPACT_LIGHT"); update({open:true, pulse:null}); }, tr("It opens up tall, so you can read all of it")],
+            [2000, () => update({pulse:{who:"btn", id:"collapse"}}), tr("Tap them again to shrink it back")],
+            [450, () => { animateLayout(); haptic("IMPACT_LIGHT"); update({open:false, pulse:null}); }],
+            [1400, () => {}]
+        ], [settings.language]);
+        const lines = on ? state.lines : 3, open = on ? state.open : false;
+        const Press = RN.View, Plus = venusIcon(10621, "PlusLargeIcon"), Send = venusIcon(5139, "SendMessageIcon");
+        const pill = el(RN.View, {key:"pill", style:[k.pill, {alignItems:"flex-start", alignSelf:"stretch", minHeight:open ? 190 : 40, paddingVertical:9, paddingRight:44, flexDirection:"column", gap:2}]},
+            lines === 0 ? el(RN.Text, {style:[s.muted, {fontSize:15}]}, tr("Message {channel}", {channel:"#general"})) :
+                EXPAND_BAR_SAMPLE.slice(0, lines).map(line => el(RN.Text, {key:line, style:[s.text, {fontSize:15, lineHeight:20}]}, tr(line))),
+            lines >= 2 || open ? el(RN.View, {key:"corner", pointerEvents:"none", style:{position:"absolute", top:4, right:5, width:32, height:32}},
+                popIn("btn:" + (open ? "1" : "0"), el(Press, {style:[EXPAND_BAR_DARK.button, {position:"relative", top:0, right:0}], accessible:false},
+                    expandBarGlyph(open, k.icon.color, 20), tapRipple(state.pulse, "btn")))) : null);
+        return el(RN.View, {key:"preview"}, previewScreen(s, "preview", "Message bar preview", [
+            el(RN.View, {key:"stage", style:{height:268, justifyContent:"flex-end"}},
+                el(RN.View, {key:"chat", style:{flex:1, overflow:"hidden", justifyContent:"flex-end"}},
+                    previewMessage(s, "sam", "Sam", "#eb459e", tr("Today at 4:01 PM"), el(RN.Text, {style:s.text}, tr("Anyone up for a game later?")))),
+                el(RN.View, {key:"row", style:[k.inputRow, {alignItems:"flex-end"}]},
+                    el(RN.View, {style:k.round}, el(Plus, {size:"sm", color:k.icon.color})),
+                    pill,
+                    lines > 0 ? popIn("send", el(RN.View, {style:k.send}, el(Send, {size:"sm", color:k.brandText.color}))) : null))
+        ], {footer:on ? storyStrip(k, s, story) : null}));
+    }
+    function ExpandBarSettings() {
+        useSettings("expandBar");
+        const ui = reviewUI();
+        if (!React || !RN) return null;
+        const on = enabled("expandBar"), Group = ui.TableRowGroup || RN.View, Switch = ui.TableSwitchRow;
+        const groups = [
+            !on ? offCard("status", venusIcon(16089, "FullscreenEnterIcon"), "expandBar") : null,
+            el(ExpandBarPreview, {key:"preview", on}),
+            el(Group, {key:"options", title:tr("Collapse")},
+                switchRow(Switch, "expandBarSending", "Collapse after sending", "The message bar closes again when you send your message.", rowIcon(5139, "SendMessageIcon")),
+                switchRow(Switch, "expandBarChats", "Collapse when you switch chats", "Every chat starts with a normal message bar.", rowIcon(8471, "ChatIcon"))),
+            footnote("note", "The arrows appear once your message is longer than one line. Tap them again to shrink the bar.")];
+        return settingsBody(ui, groups);
     }
     function FullImagesSettings() {
         useSettings("fullImages");
@@ -19779,10 +21528,16 @@
     // Every deletable message in the chat (your own messages, other people's messages in servers where you have Manage
     // Messages, and cached deleted messages from Keep deleted messages) gets a native circle on its right side; tapping
     // a message fills the circle in Blurple with a white checkmark and updates the floating bottom bar.
+    // The selection follows you: switch chats, servers or DMs and the picks stay, so you can sweep a spammer's messages
+    // out of every place at once. `selected` holds the message ids (snowflakes are unique everywhere) and `where` says
+    // which chat each one is in; `touched` is every chat shown while selecting, so they can all be redrawn at the end.
     const bulkDelete = {
         active:false,
+        // The chat on screen now (it follows CHANNEL_SELECT).
         channelId:null,
         selected:new Set(),
+        where:new Map(),
+        touched:new Set(),
         deleting:false,
         progress:0,
         total:0,
@@ -19808,7 +21563,13 @@
         try {
             flux.subscribe("CHANNEL_SELECT", event => {
                 const nextId = event && (event.channelId || event.id);
-                if (bulkDelete.active && nextId && String(nextId) !== String(bulkDelete.channelId)) bulkDeleteCancel();
+                if (!bulkDelete.active || !nextId) return;
+                // The new chat draws its own circles as its rows are drawn; only remember it for the redraw at the end.
+                bulkDelete.channelId = String(nextId);
+                bulkDelete.touched.add(bulkDelete.channelId);
+                bulkDelete.manageFor = null;
+                // Rows already in the list when the chat opens are drawn once the chat is on screen.
+                if (!bulkDelete.deleting) later(() => { if (bulkDelete.active && bulkDelete.channelId === String(nextId)) bulkDeleteRedrawChannel(String(nextId)); }, 450, false);
             });
             flux.subscribe("LOGOUT", () => { if (bulkDelete.active) bulkDeleteCancel(); });
             // Switching accounts goes straight to a new CONNECTION_OPEN with no LOGOUT: the rest of a run would have been
@@ -19820,13 +21581,13 @@
             // A selected message someone else (or another of your devices) deleted can't be deleted again: drop it, so the
             // count stays right and Delete doesn't send a request that can only fail.
             flux.subscribe("MESSAGE_DELETE", event => {
-                if (bulkDelete.active && !bulkDelete.deleting && event && String(event.channelId) === bulkDelete.channelId &&
-                    bulkDelete.selected.delete(String(event.id))) notify("bulkDelete");
+                if (bulkDelete.active && !bulkDelete.deleting && event && bulkDelete.where.get(String(event.id)) === String(event.channelId) &&
+                    bulkDeleteDrop(event.id)) notify("bulkDelete");
             });
             flux.subscribe("MESSAGE_DELETE_BULK", event => {
-                if (!bulkDelete.active || bulkDelete.deleting || !event || String(event.channelId) !== bulkDelete.channelId || !Array.isArray(event.ids)) return;
+                if (!bulkDelete.active || bulkDelete.deleting || !event || !Array.isArray(event.ids)) return;
                 let changed = false;
-                for (let i = 0; i < event.ids.length; i++) if (bulkDelete.selected.delete(String(event.ids[i]))) changed = true;
+                for (let i = 0; i < event.ids.length; i++) if (bulkDelete.where.get(String(event.ids[i])) === String(event.channelId) && bulkDeleteDrop(event.ids[i])) changed = true;
                 if (changed) notify("bulkDelete");
             });
         } catch (_) {}
@@ -19849,6 +21610,54 @@
         const chId = String(channelId);
         if (bulkDelete.manageFor !== chId) { bulkDelete.manageFor = chId; bulkDelete.manage = bulkDeleteCanManage(chId); }
         return bulkDelete.manage;
+    }
+    function bulkDeleteAdd(channelId, id) {
+        id = String(id); channelId = String(channelId);
+        bulkDelete.selected.add(id);
+        bulkDelete.where.set(id, channelId);
+        bulkDelete.touched.add(channelId);
+    }
+    function bulkDeleteDrop(id) {
+        id = String(id);
+        bulkDelete.where.delete(id);
+        return bulkDelete.selected.delete(id);
+    }
+    function bulkDeleteClear() { bulkDelete.selected.clear(); bulkDelete.where.clear(); }
+    // Selected message ids by chat, in the order the chats were first picked from.
+    function bulkDeleteByChat() {
+        const out = new Map();
+        bulkDelete.selected.forEach(id => {
+            const ch = bulkDelete.where.get(id) || bulkDelete.channelId;
+            let list = out.get(ch);
+            if (!list) out.set(ch, list = []);
+            list.push(id);
+        });
+        return out;
+    }
+    // Where a chat is, for the review list: server and channel, or the person or group of a DM.
+    function bulkDeletePlace(channelId) {
+        let channel = null;
+        try { channel = receivedChannel(channelId); } catch (_) {}
+        const gId = channel && (channel.guild_id || channel.guildId);
+        let guildName = "";
+        if (gId) {
+            const guilds = inspectedExport(2090, "default");
+            try { const guild = guilds && typeof guilds.getGuild === "function" ? guilds.getGuild(gId) : null; if (guild && typeof guild.name === "string") guildName = guild.name; } catch (_) {}
+        }
+        let name = "";
+        if (channel) {
+            if (gId) {
+                name = typeof channel.name === "string" ? channel.name.trim() : "";
+                if (name && features.cleanChannels) name = channelNameFormat(channel, name);
+            } else if (channel.type === 3) name = mutualGroupName(channel);
+            else if (channel.type === 1) {
+                let user = null;
+                try { user = userStore && channel.recipients && channel.recipients.length ? userStore.getUser(channel.recipients[0]) : null; } catch (_) {}
+                name = user ? String(user.globalName || user.username || "") : "";
+            }
+        }
+        return {id:String(channelId), guildId:gId ? String(gId) : "", guildName, dm:!gId, group:!!channel && channel.type === 3,
+            name:name || tr("Unknown chat")};
     }
     function bulkDeleteCanSelect(message, channelId, isCachedDeleted, manage) {
         if (!message || typeof message !== "object") return false;
@@ -19930,12 +21739,13 @@
     function bulkDeletePruneKept() {
         if (!bulkDelete.active || bulkDelete.deleting || !bulkDelete.selected.size) return false;
         if (features.noDelete && enabled("noDelete") && settings.bulkDeleteIncludeCached) return false;
-        const chId = bulkDelete.channelId, bucket = chId && deletedByChannel.get(chId);
-        if (!bucket) return false;
         const dropped = [];
-        bulkDelete.selected.forEach(id => { if (bucket.has(deletedKey(chId, id))) dropped.push(id); });
+        bulkDelete.selected.forEach(id => {
+            const chId = bulkDelete.where.get(id), bucket = chId && deletedByChannel.get(chId);
+            if (bucket && bucket.has(deletedKey(chId, id))) dropped.push(id);
+        });
         if (!dropped.length) return false;
-        dropped.forEach(id => bulkDelete.selected.delete(id));
+        dropped.forEach(bulkDeleteDrop);
         notify("bulkDelete");
         return true;
     }
@@ -19977,18 +21787,27 @@
         const ids = bulkDeleteChannelSelectableIds(channelId).slice();
         const seen = new Set(ids);
         const add = id => { if (!seen.has(id)) { seen.add(id); ids.push(id); } };
-        bulkDelete.selected.forEach(add);
+        bulkDelete.selected.forEach(id => { if (bulkDelete.where.get(id) === String(channelId)) add(id); });
         if (extra) extra.forEach(add);
         bulkDeleteRedrawIds(channelId, ids);
+    }
+    // Every chat the selection has been in or looked at, once each.
+    function bulkDeleteRedrawAll(extra) {
+        const chats = new Set(bulkDelete.touched);
+        if (bulkDelete.channelId) chats.add(bulkDelete.channelId);
+        bulkDelete.where.forEach(ch => chats.add(ch));
+        if (extra) extra.forEach(ch => chats.add(ch));
+        chats.forEach(ch => bulkDeleteRedrawChannel(ch));
     }
     function bulkDeleteStart(channelId, message) {
         if (!enabled("bulkDelete") || !channelId) return;
         const chId = String(channelId);
-        if (bulkDelete.active && bulkDelete.channelId && bulkDelete.channelId !== chId) {
-            const prev = bulkDelete.channelId;
-            bulkDelete.active = false;
-            bulkDelete.selected.clear();
-            bulkDeleteRedrawChannel(prev);
+        if (bulkDelete.active) {
+            // Already selecting (the long press menu of another chat): this message just joins the selection.
+            bulkDelete.channelId = chId;
+            bulkDelete.manageFor = null;
+            if (message && message.id && bulkDeleteCanSelect(message, chId, undefined)) { bulkDeleteAdd(chId, message.id); notify("bulkDelete"); bulkDeleteRedrawIds(chId, [String(message.id)]); }
+            return;
         }
         haptic("IMPACT_MEDIUM");
         // The bar takes the composer's place, so an open keyboard would only hide the messages you're picking.
@@ -20003,16 +21822,18 @@
         bulkDelete.selectable = null;
         const me = currentUser();
         bulkDelete.userId = me && me.id ? String(me.id) : null;
-        bulkDelete.selected.clear();
-        if (message && message.id && bulkDeleteCanSelect(message, chId, undefined)) {
-            bulkDelete.selected.add(String(message.id));
-        }
+        bulkDeleteClear();
+        bulkDelete.touched.clear();
+        bulkDelete.touched.add(chId);
+        if (message && message.id && bulkDeleteCanSelect(message, chId, undefined)) bulkDeleteAdd(chId, message.id);
         notify("bulkDelete");
         bulkDeleteRedrawChannel(chId);
     }
     function bulkDeleteCancel() {
         if (!bulkDelete.active) return;
-        const prevChannel = bulkDelete.channelId;
+        const prevChats = new Set(bulkDelete.touched);
+        if (bulkDelete.channelId) prevChats.add(bulkDelete.channelId);
+        bulkDelete.where.forEach(ch => prevChats.add(ch));
         // A run stopped halfway still says what it removed, instead of looking like nothing happened.
         const stoppedAfter = bulkDelete.deleting ? bulkDelete.progress : 0;
         bulkDelete.run++;
@@ -20024,10 +21845,15 @@
         bulkDelete.progress = 0;
         bulkDelete.total = 0;
         bulkDelete.channelId = null;
-        const prevSelected = Array.from(bulkDelete.selected);
-        bulkDelete.selected.clear();
+        const prevSelected = new Map(bulkDelete.where);
+        bulkDeleteClear();
+        bulkDelete.touched.clear();
         notify("bulkDelete");
-        if (prevChannel) bulkDeleteRedrawChannel(prevChannel, prevSelected);
+        prevChats.forEach(ch => {
+            const picked = [];
+            prevSelected.forEach((where, id) => { if (where === ch) picked.push(id); });
+            bulkDeleteRedrawChannel(ch, picked);
+        });
         bulkDelete.manageFor = null;
         bulkDelete.selectable = null;
         if (stoppedAfter > 0) reviewToast(reviewUI(), pl(stoppedAfter, "Deleted {n} message", "Deleted {n} messages"), venusIcon(5148, "TrashIcon"));
@@ -20035,7 +21861,7 @@
     function bulkDeleteToggleMessage(channelId, messageId) {
         if (!bulkDelete.active || bulkDelete.deleting) return false;
         const chId = String(channelId || bulkDelete.channelId || "");
-        if (!chId || chId !== String(bulkDelete.channelId)) return false;
+        if (!chId) return false;
         const id = String(messageId || "");
         if (!id) return false;
         const store = msgStore || (msgStore = inspectedExport(5532, "default"));
@@ -20043,8 +21869,8 @@
         try { if (store && typeof store.getMessage === "function") msg = store.getMessage(chId, id); } catch (_) {}
         if (!bulkDeleteCanSelect(msg, chId, undefined, bulkDeleteManageCached(chId))) return true;
         haptic("SELECTION");
-        if (bulkDelete.selected.has(id)) bulkDelete.selected.delete(id);
-        else bulkDelete.selected.add(id);
+        if (bulkDelete.selected.has(id)) bulkDeleteDrop(id);
+        else bulkDeleteAdd(chId, id);
         notify("bulkDelete");
         bulkDeleteRedrawIds(chId, [id]);
         return true;
@@ -20059,12 +21885,12 @@
         const changed = [];
         if (allSelected) {
             selectable.forEach(id => {
-                if (bulkDelete.selected.delete(id)) changed.push(id);
+                if (bulkDeleteDrop(id)) changed.push(id);
             });
         } else {
             selectable.forEach(id => {
                 if (!bulkDelete.selected.has(id)) {
-                    bulkDelete.selected.add(id);
+                    bulkDeleteAdd(chId, id);
                     changed.push(id);
                 }
             });
@@ -20081,21 +21907,25 @@
         return bulkDeleteToggleMessage(chId, id);
     }
     function bulkDeleteConfirmAndRun() {
-        if (!bulkDelete.active || bulkDelete.deleting || !bulkDelete.selected.size || !bulkDelete.channelId) return;
+        if (!bulkDelete.active || bulkDelete.deleting || !bulkDelete.selected.size) return;
         bulkDeletePruneKept();
         if (!bulkDelete.selected.size) return;
-        const count = bulkDelete.selected.size;
+        const count = bulkDelete.selected.size, chats = bulkDeleteByChat().size;
         if (!settings.bulkDeleteConfirm) {
             bulkDeleteExecute();
             return;
         }
-        confirmAction(
-            pl(count, "Delete {n} message?", "Delete {n} messages?"),
+        // Across several chats the dialog says so: the messages aren't all in front of you.
+        const body = chats > 1 ?
+            pl(chats, "Are you sure you want to delete your selection from {n} chat? Messages selected: {count}. This can't be undone.",
+                "Are you sure you want to delete your selection from {n} chats? Messages selected: {count}. This can't be undone.", {count}) :
             pl(count, "Are you sure you want to delete {n} selected message? This can't be undone.",
-                "Are you sure you want to delete {n} selected messages? This can't be undone."),
-            "Delete",
-            bulkDeleteExecute
-        );
+                "Are you sure you want to delete {n} selected messages? This can't be undone.");
+        const ui = reviewUI();
+        if (ui.alerts && typeof ui.alerts.show === "function") {
+            try { ui.alerts.show({title:pl(count, "Delete {n} message?", "Delete {n} messages?"), body, confirmText:tr("Delete"), cancelText:tr("Cancel"), onConfirm:bulkDeleteExecute}); return; } catch (_) {}
+        }
+        if (RN && RN.Alert) RN.Alert.alert(pl(count, "Delete {n} message?", "Delete {n} messages?"), body, [{text:tr("Cancel"), style:"cancel"}, {text:tr("Delete"), style:"destructive", onPress:bulkDeleteExecute}]);
     }
     // Discord's DELETE /messages/:id. Its route bucket allows about 5 deletes per 5 seconds: one every 1.1 s rarely meets a
     // 429, and when one comes the wait it asks for (retryAfter, in seconds) is honoured before trying that message again.
@@ -20110,29 +21940,27 @@
         return {status:Number(status) || 0, retryMs:Number.isFinite(retry) && retry > 0 ? Math.min(60000, Math.ceil(retry * 1000)) : 0};
     }
     function bulkDeleteExecute() {
-        if (!bulkDelete.active || bulkDelete.deleting || !bulkDelete.selected.size || !bulkDelete.channelId) return;
-        const chId = bulkDelete.channelId;
-        const ids = Array.from(bulkDelete.selected);
-        // Oldest first (snowflakes compare by length, then text), the order they were written.
-        ids.sort((a, b) => a.length - b.length || (a < b ? -1 : a > b ? 1 : 0));
-        const cachedEntries = [], liveIds = [];
-        const bucket = deletedByChannel.get(chId);
-        ids.forEach(id => {
-            const entry = bucket && bucket.get(deletedKey(chId, id));
-            if (entry) cachedEntries.push(entry);
-            else liveIds.push(id);
+        if (!bulkDelete.active || bulkDelete.deleting || !bulkDelete.selected.size) return;
+        // Oldest first within each chat (snowflakes compare by length, then text), the order they were written; chats in
+        // the order they were first picked from.
+        const byChat = bulkDeleteByChat();
+        const cachedEntries = [], liveItems = [];
+        const keepCached = settings.bulkDeleteIncludeCached && features.noDelete && enabled("noDelete");
+        byChat.forEach((list, chId) => {
+            list.sort((a, b) => a.length - b.length || (a < b ? -1 : a > b ? 1 : 0));
+            const bucket = deletedByChannel.get(chId);
+            list.forEach(id => {
+                const entry = bucket && bucket.get(deletedKey(chId, id));
+                if (entry) {
+                    // Can't be selected now (see bulkDeletePruneKept): leave them kept.
+                    if (keepCached) cachedEntries.push(entry); else bulkDeleteDrop(id);
+                } else liveItems.push({chId, id});
+            });
         });
-        if (!settings.bulkDeleteIncludeCached || !(features.noDelete && enabled("noDelete"))) {
-            // Can't be selected now (see bulkDeletePruneKept): leave them kept.
-            for (let i = cachedEntries.length - 1; i >= 0; i--) bulkDelete.selected.delete(String(cachedEntries[i].id));
-            cachedEntries.length = 0;
-            ids.length = 0;
-            Array.prototype.push.apply(ids, liveIds);
-            if (!ids.length) { notify("bulkDelete"); return; }
-        }
+        if (!cachedEntries.length && !liveItems.length) { notify("bulkDelete"); return; }
         const run = ++bulkDelete.run;
         bulkDelete.deleting = true;
-        bulkDelete.total = ids.length;
+        bulkDelete.total = cachedEntries.length + liveItems.length;
         bulkDelete.progress = 0;
         bulkDelete.attempted = 0;
         bulkDelete.removing.clear();
@@ -20144,16 +21972,16 @@
             invalidateDeleted();
             persistDeleted();
             dispatchRemovals(cachedEntries);
-            cachedEntries.forEach(entry => bulkDelete.selected.delete(String(entry.id)));
+            cachedEntries.forEach(entry => bulkDeleteDrop(entry.id));
             bulkDelete.progress += cachedEntries.length;
             bulkDelete.attempted += cachedEntries.length;
             bulkDelete.deletedSession += cachedEntries.length;
         }
         notify("bulkDelete");
-        if (!liveIds.length) { bulkDeleteFinish(bulkDelete.progress, []); return; }
+        if (!liveItems.length) { bulkDeleteFinish(bulkDelete.progress, []); return; }
 
         const actions = msgActions || (msgActions = inspectedExport(7445, "default"));
-        if (!actions || typeof actions.deleteMessage !== "function") { bulkDeleteFinish(bulkDelete.progress, liveIds); return; }
+        if (!actions || typeof actions.deleteMessage !== "function") { bulkDeleteFinish(bulkDelete.progress, liveItems.map(item => item.id)); return; }
         const failed = [];
         let idx = 0, tries = 0;
         function step() {
@@ -20161,8 +21989,8 @@
             // Signed in as someone else now: stop before another request goes out with their token.
             const me = currentUser();
             if (bulkDelete.userId && !(me && String(me.id) === bulkDelete.userId)) { bulkDeleteCancel(); return; }
-            if (idx >= liveIds.length) { bulkDeleteFinish(bulkDelete.progress, failed); return; }
-            const id = liveIds[idx], key = deletedKey(chId, id);
+            if (idx >= liveItems.length) { bulkDeleteFinish(bulkDelete.progress, failed); return; }
+            const {chId, id} = liveItems[idx], key = deletedKey(chId, id);
             let p;
             bulkDelete.removing.add(key);
             try { p = actions.deleteMessage(chId, id, false); } catch (error) { p = Promise.reject(error); }
@@ -20183,12 +22011,12 @@
                     // Keep deleted messages keeps your own deletions too; a bulk delete is meant to clear them for real.
                     const kept = deleted.size && dropDeleted(deletedKey(chId, id));
                     if (kept) { invalidateDeleted(); persistDeleted(); dispatchRemovals([kept]); }
-                    bulkDelete.selected.delete(id);
+                    bulkDeleteDrop(id);
                     bulkDelete.progress++;
                     bulkDelete.deletedSession++;
                 } else failed.push(id);
                 notify("bulkDelete");
-                if (idx >= liveIds.length) bulkDeleteFinish(bulkDelete.progress, failed);
+                if (idx >= liveItems.length) bulkDeleteFinish(bulkDelete.progress, failed);
                 else later(step, BULK_DELETE_GAP_MS, false);
             });
         }
@@ -20196,8 +22024,7 @@
     }
     // Messages that couldn't be deleted stay selected, so you can see which ones are left and try again.
     function bulkDeleteFinish(count, failed) {
-        const prevChannel = bulkDelete.channelId;
-        const left = failed && failed.length ? failed.slice() : [];
+        const left = failed && failed.length ? failed.map(id => [id, bulkDelete.where.get(String(id)) || bulkDelete.channelId]) : [];
         bulkDelete.run++;
         bulkDelete.removing.clear();
         bulkDelete.attempted = 0;
@@ -20205,8 +22032,8 @@
         bulkDelete.progress = 0;
         bulkDelete.total = 0;
         if (left.length && bulkDelete.active) {
-            bulkDelete.selected.clear();
-            left.forEach(id => bulkDelete.selected.add(id));
+            bulkDeleteClear();
+            left.forEach(([id, ch]) => bulkDeleteAdd(ch, id));
             notify("bulkDelete");
             haptic("IMPACT_MEDIUM");
             const body = pl(left.length, "{n} message couldn't be deleted. It's still selected, so you can try again.",
@@ -20217,10 +22044,13 @@
         }
         animateLayout();
         bulkDelete.active = false;
+        const chats = new Set(bulkDelete.touched);
+        if (bulkDelete.channelId) chats.add(bulkDelete.channelId);
         bulkDelete.channelId = null;
-        bulkDelete.selected.clear();
+        bulkDeleteClear();
+        bulkDelete.touched.clear();
         notify("bulkDelete");
-        if (prevChannel) bulkDeleteRedrawChannel(prevChannel);
+        chats.forEach(ch => bulkDeleteRedrawChannel(ch));
         bulkDelete.manageFor = null;
         bulkDelete.selectable = null;
         if (count > 0) {
@@ -20350,8 +22180,7 @@
             else if (heightMod && typeof heightMod.useChatInputContainerHeight === "function")
                 inputHeight = heightMod.useChatInputContainerHeight(0);
         } catch (_) {}
-        const shown = enabled("bulkDelete") && bulkDelete.active && !!React && !!RN &&
-            !(props && props.channelId && String(props.channelId) !== String(bulkDelete.channelId));
+        const shown = enabled("bulkDelete") && bulkDelete.active && !!React && !!RN;
         // Android's Back leaves selection first, like every other selection mode, instead of leaving the chat.
         React.useEffect(() => {
             const back = shown && RN.BackHandler;
@@ -20370,9 +22199,10 @@
         const selectable = deleting ? [] : bulkDeleteChannelSelectableIds(bulkDelete.channelId);
         const allSelected = selectable.length > 0 && bulkDelete.selected.size >= selectable.length && selectable.every(id => bulkDelete.selected.has(id));
         const Trash = venusIcon(5148, "TrashIcon"), Close = venusIcon(6573, "CircleXIcon");
+        const chats = deleting ? 1 : bulkDeleteByChat().size;
         const statusText = deleting ?
             tr("Deleting {done} of {total}…", {done:Math.min(bulkDelete.attempted + 1, bulkDelete.total), total:bulkDelete.total}) :
-            tr("{n} selected", {n:count});
+            chats > 1 ? pl(chats, "{count} selected in {n} chat", "{count} selected in {n} chats", {count}) : tr("{n} selected", {n:count});
         const height = Math.max(56, Number.isFinite(inputHeight) && inputHeight > 0 ? inputHeight : 0);
         // A plain view placed with layout, never a native-driven transform or popIn wrapper: on Android those draw the bar
         // where it belongs but leave its touch area behind (#82). The slot takes every touch, so the hidden composer
@@ -20383,13 +22213,19 @@
                     el(RN.Text, {style:s.badgeText}, String(count))),
                 el(RN.View, {style:{flex:1, gap:1}},
                     el(RN.Text, {style:s.title, numberOfLines:1}, statusText),
-                    !deleting && selectable.length > 0 ? el(Press, {
-                        onPress:bulkDeleteSelectAll,
-                        accessibilityRole:"button",
-                        accessibilityLabel:tr(allSelected ? "Deselect all" : "Select all"),
-                        hitSlop:{top:8, bottom:8, left:8, right:8},
-                        style:{alignSelf:"flex-start"}
-                    }, el(RN.Text, {style:s.link, numberOfLines:1}, tr(allSelected ? "Deselect all" : "Select all"))) : null),
+                    !deleting && (selectable.length > 0 || count > 0) ? el(RN.View, {style:{flexDirection:"row", alignItems:"center", gap:14}},
+                        selectable.length > 0 ? el(Press, {
+                            onPress:bulkDeleteSelectAll,
+                            accessibilityRole:"button",
+                            accessibilityLabel:tr(allSelected ? "Deselect all" : "Select all"),
+                            hitSlop:{top:8, bottom:8, left:8, right:8}
+                        }, el(RN.Text, {style:s.link, numberOfLines:1}, tr(allSelected ? "Deselect all" : "Select all"))) : null,
+                        count > 0 ? el(Press, {
+                            onPress:bulkDeleteReview,
+                            accessibilityRole:"button",
+                            accessibilityLabel:tr("Review"),
+                            hitSlop:{top:8, bottom:8, left:8, right:8}
+                        }, el(RN.Text, {style:s.link, numberOfLines:1}, tr("Review"))) : null) : null),
                 !deleting ? el(Press, {
                     onPress:count > 0 ? bulkDeleteConfirmAndRun : undefined,
                     disabled:count === 0,
@@ -20409,23 +22245,91 @@
                     style:s.close
                 }, el(Close, {size:"sm", color:s.pillText.color}))));
     }
-    function bulkDeleteChatFooter(orig, self, args) {
-        const props = args[0];
+    // Review: everything picked so far, by server and chat. Tap a chat to jump to it, or take its messages off the selection.
+    const BULK_REVIEW_SHEET = "VenusBulkDeleteReview";
+    function bulkDeleteReview() {
+        const ui = reviewUI();
+        if (!ui.ActionSheet || typeof ui.showSheet !== "function" || !bulkDelete.selected.size) return;
+        haptic("SELECTION");
+        try { ui.showSheet({key:BULK_REVIEW_SHEET, content:el(BulkDeleteReviewSheet, {}), stackingBehavior:"stack"}); } catch (_) {}
+    }
+    function bulkDeleteUnselectChat(channelId) {
+        if (!bulkDelete.active || bulkDelete.deleting) return;
+        const ids = [];
+        bulkDelete.where.forEach((ch, id) => { if (ch === channelId) ids.push(id); });
+        if (!ids.length) return;
+        haptic("SELECTION");
+        animateLayout();
+        ids.forEach(bulkDeleteDrop);
+        notify("bulkDelete");
+        bulkDeleteRedrawIds(channelId, ids);
+        if (!bulkDelete.selected.size) hideReviewSheet(reviewUI(), BULK_REVIEW_SHEET);
+    }
+    function bulkDeleteGoTo(place) {
+        const ui = reviewUI();
+        hideReviewSheet(ui, BULK_REVIEW_SHEET);
+        if (place.id === bulkDelete.channelId) return;
+        const go = inspectedExport(1114, "transitionTo");
+        if (typeof go === "function") later(() => { try { go("/channels/" + (place.guildId || "@me") + "/" + place.id); } catch (_) {} }, 250);
+    }
+    function BulkDeleteReviewSheet() {
+        useSettings("bulkDelete");
+        useLanguage();
+        const ui = reviewUI(), Group = ui.TableRowGroup || RN.View, Row = ui.TableRow, Press = inspectedExport(6462, "PressableOpacity") || RN.TouchableOpacity || RN.Pressable;
+        const s = useBulkBarStyles();
+        const close = () => hideReviewSheet(ui, BULK_REVIEW_SHEET);
+        const byChat = bulkDeleteByChat(), places = [];
+        byChat.forEach((ids, channelId) => places.push(Object.assign(bulkDeletePlace(channelId), {count:ids.length})));
+        // Servers first, in the order picked, then direct messages.
+        const sections = [];
+        places.forEach(place => {
+            const key = place.dm ? "@me" : place.guildId;
+            let section = sections.find(item => item.key === key);
+            if (!section) sections.push(section = {key, title:place.dm ? tr("Direct messages") : place.guildName || tr("Unknown server"), dm:place.dm, places:[]});
+            section.places.push(place);
+        });
+        sections.sort((a, b) => (a.dm ? 1 : 0) - (b.dm ? 1 : 0));
+        const total = bulkDelete.selected.size;
+        const header = ui.Header ? el(ui.Header, {title:tr("Selection"), trailing:ui.Close ? el(ui.Close, {onPress:close}) : undefined}) : null;
+        const iconFor = place => place.group ? rowIcon(8489, "GroupIcon") : place.dm ? rowIcon(8490, "AtIcon") : rowIcon(8471, "ChatIcon");
+        const Clear = venusIcon(6573, "CircleXIcon");
+        const groups = sections.map(section => el(Group, {key:section.key, title:section.title},
+            Row ? section.places.map(place => el(Row, {key:place.id, label:place.name, icon:iconFor(place),
+                subLabel:place.id === bulkDelete.channelId ? tr("Open now") : undefined,
+                onPress:() => bulkDeleteGoTo(place),
+                trailing:el(RN.View, {style:{flexDirection:"row", alignItems:"center", gap:10}},
+                    el(RN.View, {style:place.count > 0 ? s.badge : s.badgeMuted}, el(RN.Text, {style:s.badgeText}, String(place.count))),
+                    Press && !bulkDelete.deleting ? el(Press, {onPress:() => bulkDeleteUnselectChat(place.id), accessibilityRole:"button",
+                        accessibilityLabel:tr("Remove"), hitSlop:{top:10, bottom:10, left:10, right:10}}, el(Clear, {size:"sm", color:s.pillText.color})) : null)})) : null));
+        const content = el(RN.View, {style:{paddingHorizontal:12, paddingBottom:24, gap:16}},
+            groups,
+            footnote("note", "Your selection stays when you switch chats, servers and DMs. Tap a chat to open it."));
+        return serverEditScroll(ui, header, content);
+    }
+    // Same call1/call2 fast paths as translateBarHeader (Hermes HBC98: 179.7 -> 123.1 us per 100 renders, 1.46x).
+    function bulkDeleteBarProps(props) {
         // Appended after ChatViewWrapper's children (like TranslateBar and JumpToPresentButton) so it sits above
         // DCDChatList's native GestureDetector on Android and receives touches directly instead of passing through to chat.
-        if (!features.bulkDelete || !props || !props.channelId || !React || !RN) return orig.apply(self, args);
         const bar = el(BulkDeleteBar, {key:"venus-bulk-bar", channelId:props.channelId});
         const children = Array.isArray(props.children) ? props.children.concat([bar]) : [props.children, bar];
-        const next = Object.assign({}, props, {children});
+        return Object.assign({}, props, {children});
+    }
+    function bulkDeleteChatFooter(orig, self, args) {
+        const props = args[0];
+        if (!features.bulkDelete || !props || !props.channelId || !React || !RN) return orig.apply(self, args);
+        const next = bulkDeleteBarProps(props);
         return args.length === 1 ? orig.call(self, next) : orig.apply(self, [next].concat(Array.prototype.slice.call(args, 1)));
     }
+    bulkDeleteChatFooter.call1 = (orig, self, props) => !features.bulkDelete || !props || !props.channelId || !React || !RN ? orig.call(self, props) : orig.call(self, bulkDeleteBarProps(props));
+    bulkDeleteChatFooter.call2 = (orig, self, props, ref) => !features.bulkDelete || !props || !props.channelId || !React || !RN ? orig.call(self, props, ref) : orig.call(self, bulkDeleteBarProps(props), ref);
     function BulkDeletePreview(props) {
         useSettings("bulkDelete");
         const s = useChatPreviewStyles(), k = usePreviewChrome(), on = !!props.on;
         const includeCached = !!settings.bulkDeleteIncludeCached;
-        const blank = {sheet:false, selecting:false, picked:["m1"], gone:false, pulse:null};
+        const blank = {sheet:false, selecting:false, picked:["m1"], gone:false, pulse:null, chat:0};
         const [state, setState] = React.useState(blank);
         const update = change => setState(st => Object.assign({}, st, typeof change === "function" ? change(st) : change));
+        const state0 = {picked:includeCached ? ["m1", "m2", "m3"] : ["m1", "m2"]};
         const story = useStory(on, () => {
             const steps = [
                 [0, () => setState(blank), tr("You sent a couple of messages you want to clean up")],
@@ -20442,6 +22346,10 @@
                     tr("Kept deleted messages can be selected too")]);
             }
             steps.push(
+                [1000, () => { animateLayout(); haptic("SELECTION"); update({chat:1, picked:state0.picked.concat(["x1"])}); },
+                    tr("Switch to another chat, server or DM: your selection stays")],
+                [950, () => { haptic("SELECTION"); update({pulse:{who:"x2", id:"pick4"}, picked:state0.picked.concat(["x1", "x2"])}); },
+                    tr("Keep picking there")],
                 [950, () => update({pulse:{who:"delBtn", id:"del"}}), tr("Tap Delete on the bar to remove them all at once")],
                 [450, () => { animateLayout(); haptic("IMPACT_MEDIUM"); update({gone:true, selecting:false, pulse:null}); },
                     tr("They're all gone at once")],
@@ -20451,7 +22359,9 @@
         }, [includeCached]);
         const Check = venusIcon(7101, "CheckmarkSmallIcon"), Trash = venusIcon(5148, "TrashIcon"), CircleCheck = venusIcon(7144, "CircleCheckIcon");
         const selecting = on ? state.selecting : true;
-        const picked = on ? state.picked : (includeCached ? ["m1", "m2", "m3"] : ["m1", "m2"]);
+        const picked = on ? state.picked : (includeCached ? ["m1", "m2", "m3", "x1"] : ["m1", "m2", "x1"]);
+        const chatTwo = on && state.chat === 1;
+        const chats = picked.some(id => id[0] === "x") && picked.some(id => id[0] === "m") ? 2 : 1;
         const gone = on ? state.gone : false;
         const circle = isChecked => el(RN.View, {
             style:{
@@ -20474,7 +22384,11 @@
                     selecting ? popIn("c:" + id + ":" + (isChecked ? "1" : "0"), circle(isChecked)) : null),
                 tapRipple(state.pulse, id));
         };
-        const rows = [
+        const rows = chatTwo ? [
+            previewMessage(s, "kim", "Kim", "#faa61a", tr("Today at 4:10 PM"), el(RN.Text, {style:s.text}, tr("Anyone up for a game later?"))),
+            msgRow("x1", tr("You"), "#5865f2", tr("Today at 4:11 PM"), tr("Wait, wrong link"), false),
+            msgRow("x2", tr("You"), "#5865f2", tr("Today at 4:12 PM"), tr("Let me clean these up"), false)
+        ] : [
             previewMessage(s, "sam", "Sam", "#eb459e", tr("Today at 4:01 PM"), el(RN.Text, {style:s.text}, tr("Anyone up for a game later?"))),
             gone ? null : msgRow("m1", tr("You"), "#5865f2", tr("Today at 4:02 PM"), tr("Wait, wrong link"), false),
             gone ? null : msgRow("m2", tr("You"), "#5865f2", tr("Today at 4:03 PM"), tr("Let me clean these up"), false),
@@ -20495,7 +22409,7 @@
         const bar = selecting ? popIn("bar", el(RN.View, {key:"bar", style:{marginHorizontal:10, marginBottom:8, paddingHorizontal:12, paddingVertical:8, borderRadius:18, backgroundColor:"#2b2d31", borderWidth:1, borderColor:"#ffffff18", flexDirection:"row", alignItems:"center", gap:8}},
             el(RN.View, {style:{minWidth:22, height:22, borderRadius:11, paddingHorizontal:6, backgroundColor:"#5865f2", alignItems:"center", justifyContent:"center"}},
                 el(RN.Text, {style:{color:"#ffffff", fontSize:12, fontWeight:"700"}}, String(picked.length))),
-            el(RN.Text, {style:[s.name, {fontSize:13, flex:1}], numberOfLines:1}, tr("{n} selected", {n:picked.length})),
+            el(RN.Text, {style:[s.name, {fontSize:13, flex:1}], numberOfLines:1}, chats > 1 ? pl(chats, "{count} selected in {n} chat", "{count} selected in {n} chats", {count:picked.length}) : tr("{n} selected", {n:picked.length})),
             el(RN.View, {style:{flexDirection:"row", alignItems:"center", gap:5, paddingHorizontal:12, height:30, borderRadius:15, backgroundColor:"#f23f43"}},
                 el(Trash, {size:"xxs", color:"#ffffff"}),
                 el(RN.Text, {style:{color:"#ffffff", fontSize:12, fontWeight:"700"}}, tr("Delete")),
@@ -20506,7 +22420,7 @@
                 bar,
                 sheet
             ], {
-                header:previewHeader(k, {title:"general"}),
+                header:previewHeader(k, {title:chatTwo ? "random" : "general"}),
                 footer:el(RN.View, {key:"foot"},
                     !selecting && !sheet ? previewInput(k, s, {placeholder:tr("Message {channel}", {channel:"#general"})}) : null,
                     on ? storyStrip(k, s, story) : null)
@@ -20608,17 +22522,22 @@
                 return exports;
             case 1417: return features.serverEdit ? serverEditHookAvatars(exports) : exports;
             case 10002: if ((features.quests || features.badges || features.userNotif || features.removedAlerts) && exports && exports.default) { bgKeepAlive.fg = exports.default; backgroundSync(); } return exports;
-            case 14713: return (features.quests || features.badges || features.userNotif || features.removedAlerts) ? hookGatewaySocket(exports) : exports;
+            case 14713:
+                if (features.platformSpoof) exports = platformSpoofHook(exports);
+                return (features.quests || features.badges || features.userNotif || features.removedAlerts) ? hookGatewaySocket(exports) : exports;
             case 14748: return (features.quests || features.badges || features.userNotif || features.removedAlerts) ? hookPauseGateway(exports) : exports;
             case 6015: if (features.dndBanners && exports && exports.default) dndBanners.presence = exports.default; return features.badges ? hookSelfPresenceStore(exports) : exports;
             case 9839: return features.cloneExpressions ? hookComponent(exports, cloneEmojiSheet) : exports;
             case 10078: return features.cloneExpressions ? hookComponent(exports, cloneStickerSheet) : exports;
             case 13511: return features.dndBanners ? hookExport(exports, "shouldNotify", dndShouldNotify) : exports;
             case 13523: return features.dndBanners ? hookExport(exports, "playInAppMessageSound", dndBannerSound) : exports;
+            case 5075: return features.landscapeFull ? hookExport(hookExport(exports, "default", landscapeChatLayoutHook), "getChatLayout", landscapeChatLayout) : exports;
             case 8590: if (features.badges && exports && exports.default) badgesAttachStore(exports.default); return exports;
             case 9978:
                 if (features.translate) exports = hookComponent(exports, translateSheet);
                 if (features.noDelete) exports = hookComponent(exports, noDeleteSheet);
+                if (features.localEdit) exports = hookComponent(exports, localEditSheet);
+                if (features.viewRaw) exports = hookComponent(exports, viewRawMessageSheet);
                 return features.bulkDelete ? hookComponent(exports, bulkDeleteSheet) : exports;
             case 9561: return features.splitMessages ? maxLengthModule(exports) : exports;
             case 17538: return (features.youBarSettings || features.accountSwitcher) ? hookComponent(exports, youBarButtons) : exports;
@@ -20626,7 +22545,7 @@
             case 1266: if (features.pastelize) pastelHash = typeof exports === "function" ? exports : exports.default; return exports;
             case 2128: if (features.pastelize) guildMembers = exports.default; if (features.timeoutDuration && exports && exports.default) timeoutTag.members = exports.default; return exports;
             case 8013:
-                if ((features.pastelize || features.noDelete || features.translate || features.messageHighlight || features.bulkDelete || features.staffTag || features.timeoutDuration || features.voiceDownload) && exports.default && exports.default.prototype)
+                if ((features.pastelize || features.noDelete || features.translate || features.messageHighlight || features.bulkDelete || features.staffTag || features.timeoutDuration || features.voiceDownload || features.localEdit) && exports.default && exports.default.prototype)
                     hookExport(exports.default.prototype, "generate", messageRow);
                 return exports;
             case 5207: if (features.platformIndicators || features.userNotif) { presenceStore = exports.default; if (features.userNotif) userNotifSeedStatuses(); } return exports;
@@ -20639,8 +22558,8 @@
             case 13788: return features.platformIndicators ? hookComponent(exports, platformHeader) : exports;
             case 17165: return features.platformIndicators ? hookComponent(exports, platformDmRow) : exports;
             // User list rows (UserRow, default export) and voice panel rows (FormComponents' named MemberRowItem).
-            case 10531: return features.platformIndicators ? hookComponent(exports, (orig, self, args) => platformPlacement(orig, self, args, "piUserList")) : exports;
-            case 9069: return features.platformIndicators ? hookComponent(exports, (orig, self, args) => platformPlacement(orig, self, args, "piUserList"), "MemberRowItem") : exports;
+            case 10531: return features.platformIndicators ? hookComponent(exports, platformPlacementHook("piUserList")) : exports;
+            case 9069: return features.platformIndicators ? hookComponent(exports, platformPlacementHook("piUserList"), "MemberRowItem") : exports;
             // Profile "in voice" users (UserProfileActivityVoiceChannelUsers): private UserRow rows.
             case 14076:
                 return features.platformIndicators ? hookComponent(exports, (orig, self, args) => {
@@ -20672,7 +22591,9 @@
             case 17433:
                 // Edit locally, then Server info, after Discord's own rows.
                 if (features.serverEdit) exports = hookExport(exports, "default", serverEditMenu);
-                return features.serverInfo ? hookExport(exports, "default", serverInfoMenu) : exports;
+                if (features.pauseInvites) exports = hookExport(exports, "default", pauseInvitesMenu);
+                if (features.serverInfo) exports = hookExport(exports, "default", serverInfoMenu);
+                return features.viewRaw ? hookExport(exports, "default", viewRawServerMenu) : exports;
             case 11024: if (features.reviewDB) oauthModal = exports.default; return exports;
             case 6542: if (features.reviewDB) nativeRowGroup = exports.TableRowGroup; return exports;
             case 7172: if (features.reviewDB) nativeSwitchRow = exports.TableSwitchRow; return exports;
@@ -20707,20 +22628,31 @@
             case 10036: return features.tenorGifs ? hookExport(exports, "getSearchPlaceholder", tenorPlaceholder) : exports;
             case 10035: return features.favouriteAnything ? hookExport(exports, "addFavoriteGIF", favouriteAdd) : exports;
             case 10038: return features.favouriteAnything ? hookExport(exports, "useFavoriteGIFsMobile", favouriteList) : exports;
+            case 14197: return features.mutualGroupDMs ? hookComponent(exports, mutualGroupsRow) : exports;
             case 2068: channelStore = exports.default; return exports;
             case 12849: return features.noTyping ? replaceValue(exports, "default", hookExport(hookExport(exports.default, "startTyping", typing), "stopTyping", typing)) : exports;
-            case 1128: if (features.quickDelete || features.noConfirmPin) locale = exports; return exports;
+            case 10596:
+                if (features.fastDeleteChannels) exports = hookComponent(exports, fastDeleteSheet);
+                return features.viewRaw ? hookComponent(exports, viewRawChannelMenu) : exports;
+            case 17245: return features.viewRaw ? hookComponent(exports, viewRawThreadMenu) : exports;
+            case 10780: return features.viewRaw ? hookComponent(exports, viewRawPostMenu) : exports;
+            case 14015: return features.viewRaw ? hookComponent(exports, viewRawProfileMenu) : exports;
+            case 7158: return features.viewRaw ? hookComponent(exports, viewRawRolesCard) : exports;
+            case 7167: return features.viewRaw ? hookExport(exports, "showSimpleActionSheet", viewRawSimpleSheet) : exports;
+            case 1128: if (features.quickDelete || features.noConfirmPin || features.fastDeleteChannels) locale = exports; return exports;
             case 14082: return features.listenAlong ? hookComponent(exports, listenAlongButton, "PlayOnSpotifyButton") : exports;
             case 9990: return features.quietReplies ? hookExport(hookExport(exports, "createPendingReply", quietReplyCreate), "createShallowPendingReply", quietReplyCreate) : exports;
-            case 5400: return features.quickDelete || features.noConfirmPin ? replaceValue(exports, "default", hookExport(exports.default, "show", quickConfirm)) : exports;
+            case 5400: return features.quickDelete || features.noConfirmPin || features.fastDeleteChannels ? replaceValue(exports, "default", hookExport(exports.default, "show", quickConfirm)) : exports;
             case 5534: if (features.noDelete) { messageRecords = exports; restoreDeleted(); } return exports;
+            case 14755: return features.fakeDeafen && exports && exports.default ? fakeDeafAttach(exports) : exports;
+            case 18341: return features.fakeDeafen ? hookComponent(exports, fakeDeafSwitch, "DeafenSwitch") : exports;
             case 1392:
-                if (exports && exports.default && (features.validUser || features.splitMessages || features.fixEmbeds || features.translate || features.userNotif || features.removedAlerts || features.accountSwitcher || features.appIcons || features.nitroThemes || features.messageHighlight || features.serverInfo || features.noDelete || features.reviewDB || features.platformIndicators || features.hiddenChannels || features.gestures || features.freeNitro || features.badges || features.bulkDelete || features.experiments || features.quietReplies))
+                if (exports && exports.default && (features.validUser || features.splitMessages || features.fixEmbeds || features.translate || features.userNotif || features.removedAlerts || features.accountSwitcher || features.appIcons || features.nitroThemes || features.messageHighlight || features.serverInfo || features.noDelete || features.reviewDB || features.platformIndicators || features.hiddenChannels || features.gestures || features.freeNitro || features.badges || features.bulkDelete || features.experiments || features.quietReplies || features.silentEdit || features.silentDelete || features.localEdit))
                     userStore = exports.default;
                 if (features.noDelete || features.reviewDB || features.platformIndicators || features.hiddenChannels) restoreDeleted();
                 return exports;
             case 5532:
-                if (features.jumpToTop || features.messageHighlight || features.noDelete || features.translate || features.hideBlocked || features.bulkDelete) msgStore = exports.default;
+                if (features.jumpToTop || features.messageHighlight || features.noDelete || features.translate || features.hideBlocked || features.bulkDelete || features.silentEdit || features.silentDelete || features.localEdit) msgStore = exports.default;
                 if (features.noDelete) {
                     exports = replaceValue(exports, "default", hookExport(hookExport(msgStore, "getMessage", retainedMessage), "getMessages", retainedMessages));
                     restoreDeleted();
@@ -20736,7 +22668,13 @@
             case 10006: return features.compressUploads ? hookExport(exports, "getPreCompressionFileSize", compressPreSize) : exports;
             case 13422: return features.guildLurk ? hookComponent(exports, invitePreviewDetails) : exports;
             case 7290: return features.silentLeave && exports && exports.default ? replaceValue(exports, "default", hookExport(exports.default, "closePrivateChannel", silentLeaveClose)) : exports;
-            case 12337: return features.clickableMentions && exports && exports.default ? replaceValue(exports, "default", propsComponent(exports.default, clickableMentionsProps)) : exports;
+            case 12337: {
+                if (features.clickableMentions && exports && exports.default) exports = replaceValue(exports, "default", propsComponent(exports.default, clickableMentionsProps));
+                return features.expandBar && exports && typeof exports.default === "function" ? replaceValue(exports, "default", expandBarWrap(exports.default)) : exports;
+            }
+            case 12338: return features.expandBar ? expandBarHeights(exports) : exports;
+            case 12887: return features.expandBar ? hookExport(exports, "default", expandBarHeightHook) : exports;
+            case 12818: return features.expandBar ? hookComponent(exports, expandBarPill) : exports;
             case 7293: return features.removedAlerts ? hookRemovedMine(exports, ["removeFriend", "removeRelationship"]) : exports;
             case 6377: return features.removedAlerts ? hookRemovedMine(exports, ["deleteGuild"]) : exports;
             case 8910: return features.removedAlerts ? hookRemovedMine(exports, ["leaveGuild", "deleteGuild"]) : exports;
@@ -20750,9 +22688,10 @@
                 if (features.badges && exports && exports.default) badgesInit(exports.default);
                 if ((features.nitroThemes || features.accountSwitcher) && exports && exports.default) nitroThemeAttach(exports.default);
                 if (features.bulkDelete && exports && exports.default) bulkDeleteInit(exports.default);
+                if (features.expandBar && exports && exports.default) expandBarInit(exports.default);
                 if (features.experiments && exports && exports.default) experimentsInit(exports.default);
                 if (features.voiceOptions && exports && exports.default) voiceOptionsInit(exports.default);
-                if ((features.messageHighlight || features.bulkDelete) && exports && exports.default && !dispatcher)
+                if ((features.messageHighlight || features.bulkDelete || features.localEdit) && exports && exports.default && !dispatcher)
                     dispatcher = exports.default.dispatch.bind(exports.default);
                 if ((features.noDelete || features.reviewDB || features.hiddenChannels) && id === 584) {
                     dispatcher = exports.default.dispatch.bind(exports.default);
@@ -20760,6 +22699,7 @@
                 }
                 return exports;
             case 1087: case 1098:
+                if (id === 1087 && features.customIdle) exports = customIdleApply(exports);
                 if (features.hiddenChannels && exports.Permissions) viewPermission = exports.Permissions.VIEW_CHANNEL;
                 if (features.bulkDelete && exports.Permissions && bulkDelete.managePermission === undefined)
                     bulkDelete.managePermission = exports.Permissions.MANAGE_MESSAGES;
@@ -20820,6 +22760,7 @@
                 let actions = exports.default;
                 if (!actions) return exports;
                 if (features.noDelete) actions = hookExport(actions, "deleteMessage", deleteMessage);
+                if (features.silentDelete) actions = hookExport(actions, "deleteMessage", silentDelete);
                 // Split Large Messages wraps FreeNitro's hook (added below), so every part still gets its emoji links.
                 const splitLater = features.splitMessages;
                 if (features.hiddenChannels) actions = hookExport(actions, "fetchMessages", hiddenFetch);
@@ -20832,6 +22773,8 @@
                     actions = hookExport(actions, "sendMessage", splitSend);
                     actions = hookExport(actions, "editMessage", splitEdit);
                 }
+                // Under the other edit hooks: it only ever sees the final text.
+                if (features.silentEdit) actions = hookExport(actions, "editMessage", silentEdit);
                 // Outermost, so Send long messages splits (and Nitro links converts) a message whose links are already fixed.
                 if (features.fixEmbeds) {
                     actions = hookExport(actions, "sendMessage", fixEmbedsSend);

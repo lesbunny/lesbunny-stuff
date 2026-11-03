@@ -112,7 +112,7 @@ fun main(args: Array<String>) {
     // A successful D8 build does not prove that an obfuscated host supplies Kotlin helper ABIs.
     // Check real definitions (including inherited methods), not the compiler's stock stdlib.
     val extensionClasses = allClasses.values.filter {
-        it.type.startsWith("Lapp/venus/extension/") || it.type.startsWith("Lapp/venus/chat/")
+        it.type.startsWith("Lapp/venus/extension/") || it.type.startsWith("Lapp/venus/chat/") || it.type.startsWith("Lapp/venus/media/")
     }
     val references = extensionClasses.flatMap { definition -> definition.methods.flatMap { method ->
         method.implementation?.instructions?.mapNotNull { (it as? ReferenceInstruction)?.reference }?.toList() ?: emptyList()
@@ -124,13 +124,21 @@ fun main(args: Array<String>) {
             ?: definition.superclass?.let { resolveField(reference, it, seen) }
             ?: definition.interfaces.firstNotNullOfOrNull { resolveField(reference, it, seen) }
     }
+    // A Venus class that extends an Android class (Keep media playing's MediaService extends android.app.Service) calls methods
+    // the platform supplies, which the APK's DEX doesn't contain. Its chain ends at an android.* or java.* type outside the APK.
+    fun inheritsPlatform(type: String, seen: MutableSet<String> = mutableSetOf()): Boolean {
+        if (!type.startsWith("Lapp/venus/") || !seen.add(type)) return false
+        val superclass = allClasses[type]?.superclass ?: return false
+        if (superclass !in allClasses) return superclass.startsWith("Landroid/") || superclass.startsWith("Ljava/")
+        return inheritsPlatform(superclass, seen)
+    }
     fun isHost(type: String) = type.startsWith("Lkotlin/") || type.startsWith("Lapp/venus/") ||
         type.startsWith("Lcom/facebook/react/")
     for (reference in references) {
         when (reference) {
             is MethodReference -> if (isHost(reference.definingClass)) {
                 val resolved = resolve(reference)
-                if (resolved == null) abiErrors.add("Unresolved extension dependency: $reference")
+                if (resolved == null) { if (!inheritsPlatform(reference.definingClass)) abiErrors.add("Unresolved extension dependency: $reference") }
                 else if (!reference.definingClass.startsWith("Lapp/venus/") && resolved.accessFlags and 0x1 == 0)
                     abiErrors.add("Non-public host dependency: $reference")
             }
@@ -219,7 +227,7 @@ fun main(args: Array<String>) {
     ZipFile(apk).use { zip -> checkPackaging(zip, some) }
     checkManifest(apk)
     // Every Venus extension the .mpp carries made it into the APK's DEX.
-    for (pkg in listOf("audio", "chat", "diag", "emoji", "extension", "font", "i18n", "monet"))
+    for (pkg in listOf("audio", "chat", "diag", "emoji", "extension", "font", "i18n", "media", "monet"))
         check(allClasses.keys.any { it.startsWith("Lapp/venus/$pkg/") }) { "No app.venus.$pkg classes in the APK" }
     if ("signed" in args.drop(1)) {
         val verification = ApkVerifier.Builder(apk).setMinCheckedPlatformVersion(26).build().verify()

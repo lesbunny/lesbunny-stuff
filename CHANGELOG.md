@@ -1,3 +1,9 @@
+## [1.21.1-dev.2a46edf2.4](https://github.com/lesbunny/lesbunny-stuff/compare/v1.21.1...v1.21.1-dev.2a46edf2.4) (2026-11-05)
+
+### 🔧 Improvements
+
+* **Discord:** Latest development snapshot
+
 ## [1.21.1](https://github.com/lesbunny/lesbunny-stuff/compare/v1.21.0...v1.21.1) (2026-11-03)
 
 ### 🐛 Bug Fixes

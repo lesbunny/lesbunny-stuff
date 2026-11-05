@@ -154,6 +154,8 @@ jobs:
           set -euo pipefail
           find . -type f -iname '*.md' -not -path './.git/*' -not -name 'CHANGELOG.md' -delete
           rm -f .github/workflows/build.yml
+          # Upstream keeps per-optimization benchmark scratch files only on PRs; they must not ship on main or release builds.
+          rm -rf tests/bench/scratch
           rm -rf .github/ISSUE_TEMPLATE .github/dependabot.yml
           mkdir -p .github/workflows
           python3 - <<'PY'
